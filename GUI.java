@@ -29,6 +29,7 @@ public class GUI extends JFrame{
 	frame.setSize(600,600);
 	frame.setLocationRelativeTo(null);
 	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+	frame.setForeground(new Color.red);
 	background = frame.getContentPane();
 	background.setLayout(new FlowLayout());
 

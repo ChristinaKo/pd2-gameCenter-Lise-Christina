@@ -1,0 +1,13 @@
+project details git logs- 1 commit per day per person
+
+README.md
+1. group member
+2. desctiption
+3. instruction
+4. what works
+5. what doesnt work
+6. data structures used.. highlights
+
+log.md
+
+what you did

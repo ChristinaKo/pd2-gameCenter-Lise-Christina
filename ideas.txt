@@ -1,0 +1,25 @@
+One of these needs to be included in this project:
+1. RECURSION
+   - maze recursion
+2. SORT
+   a. mergesort
+   b. quicksort
+   c. etc
+3. DATA STRUCTURES
+   a. stack
+   b. heaps (heapsort)
+   c. linked list (linked list iterator)
+   d. BST (binary search tree)
+   e. priority queues
+
+
+stack 
+heaps
+linked list
+BST
+priority queues
+
+
+
+
+  

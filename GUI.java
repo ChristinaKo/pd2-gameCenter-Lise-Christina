@@ -25,6 +25,7 @@ public class GUI extends JFrame{
 	}
     }
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
+    protected JButton t1,t2;
     protected JFrame frame;
     protected JMenuBar title;
     protected JPanelGradient panel;
@@ -63,13 +64,21 @@ public class GUI extends JFrame{
 	frame.setVisible(true);
     }
     public class Events implements ActionListener{
-	
 	public void actionPerformed(ActionEvent e1){
-	    if (e1.getSource() == startb){
-		try{
-		    startb.setVisible(false);
+	    try{
+		if (e1.getSource() == startb){
 		    mainscreen();
 		}
+		else if (e1.getSource() == b1){
+		    tictac();
+		}
+		else if (e1.getSource() == b2){
+
+		}
+		else if (e1.getSource() == b3){
+
+		}
+
 		catch(Exception e){
 		    e.printStackTrace();
 		}
@@ -78,6 +87,9 @@ public class GUI extends JFrame{
     }
     public void mainscreen(){
 	// screen where game options are given
+
+	/* turn off and turn on the buttons */
+	startb.setVisible(false);
 	
 	title.setBackground(Color.red);
 	panel.setBackground(new Color(0,2,123));
@@ -104,6 +116,12 @@ public class GUI extends JFrame{
 
     public void tictac(){
 	
+	/* turn off and turn on the buttons */
+	t1= new JButton("Restart");
+	t2= new JButton("Quit");
+
+	t1.setVisible(true);
+	t2.setVisible(true);
 	
     }
 

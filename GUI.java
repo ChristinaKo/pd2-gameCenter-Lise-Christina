@@ -29,6 +29,7 @@ public class GUI extends JFrame{
     protected JFrame frame;
     protected JMenuBar title;
     protected JPanelGradient panel;
+   
     public GUI(){
 	//initial state -> title page
 	frame = new JFrame("Game Center");
@@ -45,54 +46,79 @@ public class GUI extends JFrame{
 	panel.setOpaque(true);
 	panel.setBackground(new Color(0,2,123));
 	panel.setPreferredSize(new Dimension(400,380));
-	frame.add(panel);
+
 
 	startb = new JButton("Click here to start");
 
 	panel.add(startb);
-	startb.setEnabled(true);
+	//	startb.setEnabled(true);
+
+
 	Events e1 = new Events();
 	startb.addActionListener(e1);
 
-	//frame.setBackground(new Color(145,003,124));
+
 	//background = frame.getContentPane();
 	//background.setLayout(new FlowLayout());
 	frame.setJMenuBar(title);
 	frame.getContentPane().add(panel,BorderLayout.CENTER);
-
+	
 	frame.pack();
 	frame.setVisible(true);
+
+
+
     }
     public class Events implements ActionListener{
 	public void actionPerformed(ActionEvent e1){
 	    try{
 		if (e1.getSource() == startb){
+		    //  deactivate(startb);
+		    panel.remove(startb);
+		    panel.revalidate();
 		    mainscreen();
 		}
 		else if (e1.getSource() == b1){
+		    
 		    tictac();
 		}
 		else if (e1.getSource() == b2){
-
+		    connectfour();
 		}
 		else if (e1.getSource() == b3){
-
+		    deactivate(b1);
+		    deactivate(b2);
+		    deactivate(b3);
 		}
-
-		catch(Exception e){
-		    e.printStackTrace();
+		else if (e1.getSource() == t1){
+  
+		    
+		    
 		}
+		else if (e1.getSource() == t2){
+		    deactivate(t1);
+		    deactivate(t2);
+		    mainscreen();		    
+		}
+		//		else if (e1.getSource() == b3){
+		//		}
+
+	    }
+	    catch(Exception e){
+		e.printStackTrace();
 	    }
 	}
     }
     public void mainscreen(){
 	// screen where game options are given
-
-	/* turn off and turn on the buttons */
-	startb.setVisible(false);
 	
-	title.setBackground(Color.red);
-	panel.setBackground(new Color(0,2,123));
+	 JPanel gamep = new JPanel();
+	 gamep.setBackground(Color.yellow);
+	
+	 frame.getContentPane().add(gamep,BorderLayout.CENTER);
+	 title.setBackground(Color.red);
+	 //set text
+
 	
 	/*
 	ImageIcon buttonimg1 = createImageIcon("images/right.gif");
@@ -104,28 +130,55 @@ public class GUI extends JFrame{
 	b2 = new JButton("Game 2");
 	b3 = new JButton("Game 3");
 
-	panel.add(b1);
-	panel.add(b2);
-	panel.add(b3);
-	
-	b1.setVisible(true);
-	b2.setVisible(true);
-	b3.setVisible(true);
+	gamep.add(b1);
+	gamep.add(b2);
+	gamep.add(b3);
+
+	activate(b1);
+	activate(b2);
+	activate(b3);
     }
 
 
     public void tictac(){
-	
+	JPanel pt = new JPanel();
 	/* turn off and turn on the buttons */
+	deactivate(b1);
+	deactivate(b2);
+	deactivate(b3);
+
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
 
-	t1.setVisible(true);
-	t2.setVisible(true);
-	
+	pt.add(t1);
+	pt.add(t2);
+
+	activate(t1);
+	activate(t2);
+
     }
 
+    public void connectfour(){
+	deactivate(b1);
+	deactivate(b2);
+	deactivate(b3);
 
+
+    }
+
+    public void activate(JButton button){
+	button.setEnabled(true);
+	button.setVisible(true);
+	Events e1 = new Events();
+	button.addActionListener(e1);
+    }
+    public void deactivate(JButton button){
+
+	button.setVisible(false);
+	button.setEnabled(false);	
+
+    }
     public static void main(String[]args){
 	GUI x = new GUI();
 	

@@ -13,3 +13,6 @@ Lise: worked with Gui. Title screen completed besides title and buttons- searche
 June 6th
 Christina: completed tictactoe minigame
 Lise: added functional buttons
+
+June 9th:
+Lise: Addressed button glitch( buttons needed mouse to rollover to appear), and added several new Jpanels/screens

@@ -1,3 +1,5 @@
+// medium purple
+
 //Notes to self, we need to change jframe, jpanel, etc to private classes
 import java.util.*;
 import java.io.*;
@@ -23,108 +25,116 @@ public class GUI extends JFrame{
 		return;
 	    }
 	}
+
     }
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1,t2;
     protected JFrame frame;
     protected JMenuBar title;
     protected JPanelGradient panel;
-   
-    public GUI(){
-	//initial state -> title page
-	frame = new JFrame("Game Center");
-	frame.setSize(400,400);
-	frame.setLocationRelativeTo(null);
-	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+    protected JPanel gamep, pt,p; 
 
-	title= new JMenuBar();
-	title.setOpaque(true);
-	title.setBackground(Color.cyan);
-	title.setPreferredSize(new Dimension(400,20));
+     public GUI(){
+	 //initial state -> title page
+	 frame = new JFrame("Game Center");
+	 frame.setSize(400,400);
+	 frame.setLocationRelativeTo(null);
+	 frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
-	panel = new JPanelGradient();
-	panel.setOpaque(true);
-	panel.setBackground(new Color(0,2,123));
-	panel.setPreferredSize(new Dimension(400,380));
+	 title= new JMenuBar();
+	 title.setOpaque(true);
+	 title.setBackground(Color.cyan);
+	 title.setPreferredSize(new Dimension(400,20));
 
-
-	startb = new JButton("Click here to start");
-
-	panel.add(startb);
-	//	startb.setEnabled(true);
+	 panel = new JPanelGradient();
+	 panel.setOpaque(true);
+	 panel.setBackground(new Color(0,2,123));
+	 panel.setPreferredSize(new Dimension(400,380));
 
 
-	Events e1 = new Events();
-	startb.addActionListener(e1);
+	 startb = new JButton("Click here to start");
+
+	 panel.add(startb);
+	 //	startb.setEnabled(true);
 
 
-	//background = frame.getContentPane();
-	//background.setLayout(new FlowLayout());
-	frame.setJMenuBar(title);
-	frame.getContentPane().add(panel,BorderLayout.CENTER);
-	
-	frame.pack();
-	frame.setVisible(true);
+	 Events e1 = new Events();
+	 startb.addActionListener(e1);
 
 
+	 //background = frame.getContentPane();
+	 //background.setLayout(new FlowLayout());
+	 frame.setJMenuBar(title);
+	 frame.getContentPane().add(panel,BorderLayout.CENTER);
 
-    }
-    public class Events implements ActionListener{
-	public void actionPerformed(ActionEvent e1){
-	    try{
-		if (e1.getSource() == startb){
-		    //  deactivate(startb);
-		    panel.remove(startb);
-		    panel.revalidate();
-		    mainscreen();
-		}
-		else if (e1.getSource() == b1){
+	 frame.pack();
+	 frame.setVisible(true);
+     }
+     public class Events implements ActionListener{
+	 public void actionPerformed(ActionEvent e1){
+	     try{
+		 if (e1.getSource() == startb){
 		    
-		    tictac();
-		}
-		else if (e1.getSource() == b2){
-		    connectfour();
-		}
-		else if (e1.getSource() == b3){
-		    deactivate(b1);
-		    deactivate(b2);
-		    deactivate(b3);
-		}
-		else if (e1.getSource() == t1){
-  
-		    
-		    
-		}
-		else if (e1.getSource() == t2){
-		    deactivate(t1);
-		    deactivate(t2);
-		    mainscreen();		    
-		}
-		//		else if (e1.getSource() == b3){
-		//		}
+		     panel.removeAll();
+		     panel.revalidate();
+		     frame.remove(panel);
+		     mainscreen();
+		 }
+		 else if (e1.getSource() == b1){
+		     gamep.removeAll();
+		     gamep.revalidate();
+		     frame.remove(gamep);
+		     tictac();
+		 }
+		 else if (e1.getSource() == b2){
+		     gamep.removeAll();
+		     gamep.revalidate();
+		     frame.remove(gamep);
+		     connectfour();
+		 }
+		 else if (e1.getSource() == b3){
+		     gamep.removeAll();
+		     gamep.revalidate();
+		     frame.remove(gamep);
+		 
+		 }
+		 else if (e1.getSource() == t1){
 
-	    }
-	    catch(Exception e){
-		e.printStackTrace();
-	    }
-	}
-    }
-    public void mainscreen(){
-	// screen where game options are given
-	
-	 JPanel gamep = new JPanel();
+
+
+		 }
+		 else if (e1.getSource() == t2){
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+
+		     mainscreen();		    
+		 }
+		 //		else if (e1.getSource() == b3){
+		 //		}
+
+	     }
+	     catch(Exception e){
+		 e.printStackTrace();
+	     }
+	 }
+     }
+     public void mainscreen(){
+	 // screen where game options are given
+
+	 gamep = new JPanel();
 	 gamep.setBackground(Color.yellow);
-	
-	 frame.getContentPane().add(gamep,BorderLayout.CENTER);
+	 GridLayout grid = new GridLayout(2,2);
+	 gamep.setLayout(grid);
+	 frame.getContentPane().add(gamep);
 	 title.setBackground(Color.red);
 	 //set text
-
 	
 	/*
 	ImageIcon buttonimg1 = createImageIcon("images/right.gif");
 	ImageIcon buttonimg2 = createImageIcon("images/middle.gif");
 	ImageIcon buttonimg3 = createImageIcon("images/left.gif");
-	*/
+	*/ 
 
 	b1 = new JButton("Tic Tac Toe");
 	b2 = new JButton("Game 2");
@@ -141,11 +151,14 @@ public class GUI extends JFrame{
 
 
     public void tictac(){
-	JPanel pt = new JPanel();
+	pt = new JPanel();
 	/* turn off and turn on the buttons */
 	deactivate(b1);
 	deactivate(b2);
 	deactivate(b3);
+
+
+	pt.setBackground(Color.orange);
 
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
 	t1= new JButton("Restart");
@@ -160,9 +173,7 @@ public class GUI extends JFrame{
     }
 
     public void connectfour(){
-	deactivate(b1);
-	deactivate(b2);
-	deactivate(b3);
+
 
 
     }
@@ -179,11 +190,13 @@ public class GUI extends JFrame{
 	button.setEnabled(false);	
 
     }
+
+  
     public static void main(String[]args){
 	GUI x = new GUI();
 	
 	/*add algorithms above as GUI methods
-	  menu options above.
+	  meanu options above.
 	*/
 
     }

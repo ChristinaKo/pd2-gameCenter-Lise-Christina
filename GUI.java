@@ -8,6 +8,9 @@ public class GUI extends JFrame{
 
     //protected JButton n;
     protected Container background,contentPane;
+
+
+
     //  protected int actioncounter;
 
     //Actual Game buttons
@@ -23,22 +26,40 @@ public class GUI extends JFrame{
     }
 
     protected JFrame frame;
-
+    protected JMenuBar title;
+    protected JLabel label;
     public GUI(){
 	frame = new JFrame("Game Center");
-	frame.setSize(600,600);
+	frame.setSize(400,400);
 	frame.setLocationRelativeTo(null);
 	frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-	frame.setForeground(new Color.red);
-	background = frame.getContentPane();
-	background.setLayout(new FlowLayout());
 
-	
+	title= new JMenuBar();
+	title.setOpaque(true);
+	title.setBackground(new Color(123,143,023));
+	title.setPreferredSize(new Dimension(400,20));
+
+	label = new JLabel();
+	label.setOpaque(true);
+	label.setBackground(new Color(248,232,123));
+	label.setPreferredSize(new Dimension(400,380));
+
+
+	//frame.setBackground(new Color(145,003,124));
+	//background = frame.getContentPane();
+	//background.setLayout(new FlowLayout());
+	frame.setJMenuBar(title);
+	frame.getContentPane().add(label,BorderLayout.CENTER);
+
+
+
+	frame.pack();
+	frame.setVisible(true);
     }
 
     public static void main(String[]args){
 	GUI x = new GUI();
-	x.frame.setVisible(true);
+
 	
 
 

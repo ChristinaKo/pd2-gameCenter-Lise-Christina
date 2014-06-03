@@ -50,10 +50,13 @@ public class GUI extends JFrame{
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(0,2,123));
 	 panel.setPreferredSize(new Dimension(400,380));
-
-
+	
+	 JLabel label = new JLabel();
+	 label.setText(" stuff ");
+	 panel.add(label);
+	 
+	 
 	 startb = new JButton("Click here to start");
-
 	 panel.add(startb);
 	 //	startb.setEnabled(true);
 
@@ -170,10 +173,10 @@ public class GUI extends JFrame{
 	activate(t1);
 	activate(t2);
 
+
     }
 
     public void connectfour(){
-
 
 
     }

@@ -14,5 +14,9 @@ June 6th
 Christina: completed tictactoe minigame
 Lise: added functional buttons
 
-June 9th:
+June 8th:
 Lise: Addressed button glitch( buttons needed mouse to rollover to appear), and added several new Jpanels/screens
+
+June 9th:
+Christina: Finished Connect Four
+Lise: Finished buttons and started adding text to game

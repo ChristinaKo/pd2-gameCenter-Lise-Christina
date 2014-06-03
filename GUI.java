@@ -27,6 +27,12 @@ public class GUI extends JFrame{
 	}
 
     }
+    public class MyPanel extends JPanelGradient{
+	public void paintChildren(Graphics g){
+	    
+	}
+	
+    }
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1,t2;
     protected JFrame frame;
@@ -177,10 +183,36 @@ public class GUI extends JFrame{
     }
 
     public void connectfour(){
+	pt = new JPanel();
+	pt.setBackground(Color.orange);
+	
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
+	t1= new JButton("Restart");
+	t2= new JButton("Quit");
 
+	pt.add(t1);
+	pt.add(t2);
+
+	activate(t1);
+	activate(t2);
 
     }
 
+
+    public void gamethree(){
+	pt= new JPanel();
+	pt.setBackground(Color.orange);
+	
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
+	t1= new JButton("Restart");
+	t2= new JButton("Quit");
+	
+	pt.add(t1);
+	pt.add(t2);
+
+	activate(t1);
+	activate(t2);
+    }
     public void activate(JButton button){
 	button.setEnabled(true);
 	button.setVisible(true);

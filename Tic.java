@@ -3,17 +3,41 @@ import java.io.*;
 
 public class Tic{
     String name;
-    String chara;
-    String[][] board = new String[3][3];
-    public Tic(String n, String c){
+    char chara;
+    char[][] board = new char[3][3];
+    public Tic(String n, char c){
 	chara = c;
 	name = n;
     }
-
-    public void move(){
-	
+    public Char getChar(){
+	return chara;
     }
+    public void move(int x, int y){
+	if(board[x][y].equals('\0')){
+	    board[x][y] = getChar();
+	}
+	else{
+	    
+	    System.out.println("NO");
+	}	    
+    }
+    public boolean isChar(int i, int j){
+	if (board[i][j] == getChar){
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }
+    public boolean winner(){
+    }
+		    
+	
     public void play(){
+	while(!winner()){
+	    move();
+	}
+	    
     }
     public String toString(){
 	String s = "";

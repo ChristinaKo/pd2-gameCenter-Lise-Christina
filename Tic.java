@@ -22,10 +22,15 @@ public class Tic{
 	}	    
     }
     public boolean checkWinner(int x, int y){
-	if (board[x][y] == getChar()){
-	    return true;
+	try{
+	    if (board[x][y] == getChar()){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
 	}
-	else{
+	catch (ArrayIndexOutOfBoundsException e ){
 	    return false;
 	}
     }
@@ -38,24 +43,20 @@ public class Tic{
 	}
     }
     public boolean winner(){
-	int x = 0;
-	int y =0;
 	boolean ans = false;
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
-		if (board[i][j]==getChar()){
-		    x = i;
-		    y=j;
-		    if(checkWinner(x + 1, j) && checkWinner(x-1,j)){
+		if (board[i][j]==getChar()){  
+		    if(checkWinner(i + 1, j) && checkWinner(i-1,j)){
 			return true;
 		    }
-		    else if(checkWinner(x, j+1) && checkWinner(x, j-1)){
+		    else if(checkWinner(i, j+1) && checkWinner(i, j-1)){
 			return true;
 		    }
-		    else if(checkWinner(x+1, j+1) && checkWinner(x-1, j-1)){
+		    else if(checkWinner(i+1, j+1) && checkWinner(i-1, j-1)){
 			return true;
 		    }
-		    else if(checkWinner(x-1, j+1) && checkWinner(x+1, j-1)){
+		    else if(checkWinner(i-1, j+1) && checkWinner(i+1, j-1)){
 			return true;
 		    }
 		}

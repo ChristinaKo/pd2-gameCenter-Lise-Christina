@@ -6,3 +6,7 @@ Christina: created the basic Tic-Tac-Toe java class, The DriverTic class, and th
 Lise: worked with Gui, created working frame
 June 4
 Christina: continued working on Tic class. added methods move,isWinner, play and etc
+
+June 5th
+Lise: worked with Gui. Title screen completed besides title and buttons- searched up buttons and gradients (to improve background)- created new method for main game center screen
+

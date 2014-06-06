@@ -3,23 +3,67 @@ import java.io.*;
 
 public class Tic{
     String name;
-    String chara;
-    String[][] board = new String[3][3];
-    public Tic(String n, String c){
+    char chara;
+    char[][] board = new char[3][3];
+    public Tic(String n, char c){
 	chara = c;
 	name = n;
     }
+    public char getChar(){
+	return chara;
+    }
+    public void move(int x, int y){
+	if(board[x][y] ==  '\0' ){
+	    board[x][y] = getChar();
+	}
+	else{
+	    
+	    System.out.println("NO");
+	}	    
+    }
+    public boolean checkWinner(int x, int y){
+	if (board[x][y] == getChar()){
+	    return true;
+	}
+	else{
+	    return false;
+	}
+    }
+    public boolean winner(){
+	int x = 0;
+	int y =0;
+	boolean ans = false;
+	for(int i = 0; i < board.length; i++){
+	    for(int j = 0; j < board[i].length; j++){
+		if (board[i][j]==getChar()){
+		    x = i;
+		    y=j;
+		    if(checkWinner(x + 1, j) && checkWinner(x-1,j)){
+			return true;
+		    }
+		    else if(checkWinner(x, j+1) && checkWinner(x, j-1)){
+			return true;
+		    }
+		    else if(checkWinner(x+1, j+1) && checkWinner(x-1, j-1)){
+			return true;
+		    }
+		    else if(checkWinner(x-1, j+1) && checkWinner(x+1, j-1)){
+			return true;
+		    }
+		}
 
-    public void move(){
-	
+	    }
+
+	}
+	return false;
     }
-    public void play(){
-    }
+		    
+       
     public String toString(){
 	String s = "";
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
-		if(board[i][j] == null){
+		if(board[i][j] == '\0'){
 		    s = s + "* ";
 		}
 
@@ -30,5 +74,6 @@ public class Tic{
 	    s = s +"\n";
 	}
 	return s;
+
     }
 }

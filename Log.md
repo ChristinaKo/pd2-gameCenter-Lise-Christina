@@ -10,3 +10,6 @@ Christina: continued working on Tic class. added methods move,isWinner, play and
 June 5th
 Lise: worked with Gui. Title screen completed besides title and buttons- searched up buttons and gradients (to improve background)- created new method for main game center screen
 
+June 6th
+Christina: completed tictactoe minigame
+Lise: added functional buttons

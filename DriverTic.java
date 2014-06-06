@@ -8,7 +8,8 @@ public class DriverTic{
 	String n = sc.nextLine();
 	System.out.println("Welcome to our Tic-Tac-Toe game " + n);
 	System.out.println("Would you like to play X or O");
-	char c = sc.nextLine();
+	String ch = sc.nextLine();
+	char c = ch.charAt(0);
 	Tic newGame = new Tic(n, c);
 
 	System.out.println(newGame);

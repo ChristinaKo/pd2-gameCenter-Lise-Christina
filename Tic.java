@@ -29,6 +29,14 @@ public class Tic{
 	    return false;
 	}
     }
+    public void play(){
+	if(winner()){
+	    System.out.println("Congratulations!");
+	}
+	else{
+	    // add move method (if index chosen is already occupied prints no but you can edit that)
+	}
+    }
     public boolean winner(){
 	int x = 0;
 	int y =0;

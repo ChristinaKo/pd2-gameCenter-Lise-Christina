@@ -27,10 +27,10 @@ public class GUI extends JFrame{
 	    }
 	}
     }
-
+    protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JFrame frame;
     protected JMenuBar title;
-    protected JLabel label;
+    protected JPanel label;
     public GUI(){
 	//initial state -> title page
 	frame = new JFrame("Game Center");
@@ -43,11 +43,18 @@ public class GUI extends JFrame{
 	title.setBackground(Color.cyan);
 	title.setPreferredSize(new Dimension(400,20));
 
-	label = new JLabel();
+	label = new JPanel();
 	label.setOpaque(true);
 	label.setBackground(new Color(0,2,123));
 	label.setPreferredSize(new Dimension(400,380));
+	frame.add(label);
 
+	startb = new JButton("Click here to start");
+
+	label.add(startb);
+	startb.setEnabled(true);
+	Events e1 = new Events();
+	startb.addActionListener(e1);
 
 	//frame.setBackground(new Color(145,003,124));
 	//background = frame.getContentPane();
@@ -58,19 +65,42 @@ public class GUI extends JFrame{
 	frame.pack();
 	frame.setVisible(true);
     }
-    
+    public class Events implements ActionListener{
+	
+	public void actionPerformed(ActionEvent e1){
+	    if (e1.getSource() == startb){
+		try{
+		    startb.setVisible(false);
+		    mainscreen();
+		}
+		catch(Exception e){
+		    e.printStackTrace();
+		}
+	    }
+	}
+    }
     public void mainscreen(){
 
+	
+	title.setBackground(Color.red);
+	
+	label.setBackground(new Color(0,2,123));
+		
+	
+	/*
 	ImageIcon buttonimg1 = createImageIcon("images/right.gif");
 	ImageIcon buttonimg2 = createImageIcon("images/middle.gif");
 	ImageIcon buttonimg3 = createImageIcon("images/left.gif");
+	*/
 
-	b1 = new JButton("Game 1", buttonimg1);
-	b2 = new JButton("Game 2", buttonimg2);
-	b3 = new JButton("Game 3", buttonimg3);
+	b1 = new JButton("Tic Tac Toe");
+	b2 = new JButton("Game 2");
+	b3 = new JButton("Game 3");
+
+
 
     }
-)
+
 
 
     public static void main(String[]args){
@@ -79,9 +109,8 @@ public class GUI extends JFrame{
 	/*add algorithms above as GUI methods
 	  menu options above.
 	
-
+	*/
 
     }
-
-
 }
+	    

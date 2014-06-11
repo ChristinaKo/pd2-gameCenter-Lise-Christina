@@ -30,7 +30,7 @@ public class Tic{
 		return false;
 	    }
 	}
-	catch (ArrayIndexOutOfBoundsException e ){
+	catch (ArrayIndexOutOfBoundsException e){
 	    return false;
 	}
     }

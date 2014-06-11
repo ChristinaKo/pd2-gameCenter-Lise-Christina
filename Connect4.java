@@ -8,7 +8,7 @@ public class Connect4{
 	color = c;
     }
     public String getColor(){
-	if (color){
+	if (color ){
 	    return "red";
 	}
 	else{

@@ -6,6 +6,9 @@ import java.io.*;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.JPanel.*;
+
 public class GUI extends JFrame{
 
     //protected JButton n;
@@ -128,8 +131,8 @@ public class GUI extends JFrame{
 	     }
 	 }
      }
-     public void mainscreen(){
-	 // screen where game options are given
+    public void mainscreen(){
+	// screen where game options are given
 
 	 gamep = new JPanel();
 	 gamep.setBackground(Color.yellow);
@@ -146,7 +149,7 @@ public class GUI extends JFrame{
 	*/ 
 
 	b1 = new JButton("Tic Tac Toe");
-	b2 = new JButton("Game 2");
+	b2 = new JButton("Connect 4");
 	b3 = new JButton("Game 3");
 
 	gamep.add(b1);
@@ -156,6 +159,20 @@ public class GUI extends JFrame{
 	activate(b1);
 	activate(b2);
 	activate(b3);
+
+	JPanel gui = new JPanel(new BorderLayout(3,3));
+	JButton[][] boardsq = new JButton[3][3];
+	JPanel ticBoard;
+	
+	ticBoard = new JPanel(new GridLayout(0,9));
+	ticBoard.setBorder(new LineBorder(Color.BLACK));
+	
+	frame.add(gui);
+	gui.add(ticBoard);
+
+
+
+
     }
 
 

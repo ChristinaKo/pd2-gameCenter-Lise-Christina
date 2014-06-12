@@ -159,7 +159,7 @@ public class GUI extends JFrame{
 	activate(b1);
 	activate(b2);
 	activate(b3);
-
+	/*
 	JPanel gui = new JPanel(new BorderLayout(3,3));
 	JButton[][] boardsq = new JButton[3][3];
 	JPanel ticBoard;
@@ -169,7 +169,7 @@ public class GUI extends JFrame{
 	
 	frame.add(gui);
 	gui.add(ticBoard);
-
+	*/
 
 
 
@@ -178,6 +178,8 @@ public class GUI extends JFrame{
 
     public void tictac(){
 	pt = new JPanel();
+	board = new JPanel();
+	
 	/* turn off and turn on the buttons */
 	deactivate(b1);
 	deactivate(b2);
@@ -185,8 +187,11 @@ public class GUI extends JFrame{
 
 
 	pt.setBackground(Color.orange);
-
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
+
+	
+
+
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
 
@@ -237,10 +242,8 @@ public class GUI extends JFrame{
 	button.addActionListener(e1);
     }
     public void deactivate(JButton button){
-
 	button.setVisible(false);
 	button.setEnabled(false);	
-
     }
 
   

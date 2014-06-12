@@ -40,54 +40,63 @@ public class GUI extends JFrame{
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1,t2;
     protected JFrame frame;
-    protected JMenuBar title;
+
+    protected JPanel menu;
+    protected JMenuBar Title;
+    protected JLabel title;
+
     protected JPanelGradient panel;
+    protected JPanel bp;
     protected JPanel gamep, pt,p; 
 
      public GUI(){
 	 //initial state -> title page
 	 frame = new JFrame("Game Center");
-	 frame.setSize(650,650);
+	 frame.setSize(500,500);
 	 frame.setLocationRelativeTo(null);
 	 frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
-	 title= new JMenuBar();
-	 title.setOpaque(true);
-	 title.setBackground(Color.cyan);
-	 title.setPreferredSize(new Dimension(10,20));
-
+	 Title= new JMenuBar();
+	 Title.setOpaque(true);
+	 
+	 Title.setPreferredSize(new Dimension(10,20));
+	 
+	 title = new JLabel("Welcome to Game Center");
+	 title.setBackground(null);
+	 title.setHorizontalAlignment(SwingConstants.CENTER);
+	 Title.add(title);
+	
+	 
 	 panel = new JPanelGradient();
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(0,2,123));
-	 panel.setPreferredSize(new Dimension(400,380));
+	 //	 panel.setPreferredSize(new Dimension(200,380));
 	
-	 JLabel label = new JLabel();
-	 label.setText(" stuff ");
-	 panel.add(label);
-	 
-	 
+		
+	
 	 startb = new JButton("Click here to start");
-	 panel.add(startb);
-	 //	startb.setEnabled(true);
-
-
+	 
+	 startb.setEnabled(true);
+	 startb.setVisible(true);
 	 Events e1 = new Events();
 	 startb.addActionListener(e1);
+	 
+	 panel.add(startb);
+
 
 
 	 //background = frame.getContentPane();
 	 //background.setLayout(new FlowLayout());
-	 frame.setJMenuBar(title);
+	 frame.setJMenuBar(Title);
 	 frame.getContentPane().add(panel,BorderLayout.CENTER);
-
-	 frame.pack();
+	 //frame.pack();
 	 frame.setVisible(true);
      }
      public class Events implements ActionListener{
 	 public void actionPerformed(ActionEvent e1){
 	     try{
 		 if (e1.getSource() == startb){
-		    
+		     
 		     panel.removeAll();
 		     panel.revalidate();
 		     frame.remove(panel);
@@ -179,7 +188,7 @@ public class GUI extends JFrame{
 	
 	JTable board = new JTable(3,3);
 	
-	pt.setBackground(Color.violet);
+	pt.setBackground(Color.magenta.darker());
 	frame.getContentPane().add(board);
 	board.setGridColor(Color.black);
 	board.setRowHeight(100);
@@ -189,14 +198,15 @@ public class GUI extends JFrame{
 	    column.setPreferredWidth(100);
 	}
 			      
-	frame.getContentPane().add(pt,BorderLayout.CENTER);
-	pt.add(board);
-	pt.add(new Label("\n"));	
+	frame.getContentPane().add(pt);
+	pt.add(board, BorderLayout.CENTER);
+	pt.add(new Label("\n"));
+	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
 
-	pt.add(t1);
-	pt.add(t2);
+	pt.add(t1, BorderLayout.SOUTH);
+	pt.add(t2,BorderLayout.SOUTH);
 
 	activate(t1);
 	activate(t2);
@@ -241,6 +251,7 @@ public class GUI extends JFrame{
 	Events e1 = new Events();
 	button.addActionListener(e1);
     }
+
     public void deactivate(JButton button){
 	button.setVisible(false);
 	button.setEnabled(false);	

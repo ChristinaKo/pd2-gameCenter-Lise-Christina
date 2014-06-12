@@ -70,7 +70,7 @@ public class GUI extends JFrame{
 	 panel = new JPanelGradient();
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(0,2,123));
-	 //	 panel.setPreferredSize(new Dimension(200,380));
+	 panel.setPreferredSize(new Dimension(200,380));
 	
 		
 	

@@ -41,7 +41,7 @@ public class GUI extends JFrame{
     protected JButton t1,t2;
     protected JFrame frame;
 
-    protected JPanel menu;
+    protected JPanel menubar;
     protected JMenuBar Title;
     protected JLabel title;
 
@@ -58,13 +58,17 @@ public class GUI extends JFrame{
 
 	 Title= new JMenuBar();
 	 Title.setOpaque(true);
-	 
+	 Title.setBackground(Color.red);
 	 Title.setPreferredSize(new Dimension(10,20));
-	 
+
+	 menubar= new JPanel();
+	 menubar.setBackground(null);
 	 title = new JLabel("Welcome to Game Center");
 	 title.setBackground(null);
-	 title.setHorizontalAlignment(SwingConstants.CENTER);
-	 Title.add(title);
+	 title.setHorizontalTextPosition(SwingConstants.CENTER);
+	 title.setVerticalTextPosition(SwingConstants.CENTER);
+	 menubar.add(title);
+	 Title.add(menubar);
 	
 	 
 	 panel = new JPanelGradient();
@@ -95,8 +99,7 @@ public class GUI extends JFrame{
      public class Events implements ActionListener{
 	 public void actionPerformed(ActionEvent e1){
 	     try{
-		 if (e1.getSource() == startb){
-		     
+		 if (e1.getSource() == startb){		     
 		     panel.removeAll();
 		     panel.revalidate();
 		     frame.remove(panel);
@@ -129,7 +132,6 @@ public class GUI extends JFrame{
 		     pt.removeAll();
 		     pt.revalidate();
 		     frame.remove(pt);
-
 		     mainscreen();		    
 		 }
 		 //		else if (e1.getSource() == b3){
@@ -143,7 +145,8 @@ public class GUI extends JFrame{
      }
     public void mainscreen(){
 	// screen where game options are given
-
+	title.setText("GAME CENTER");
+	
 	 gamep = new JPanel();
 	 gamep.setBackground(Color.yellow);
 	 GridLayout grid = new GridLayout(2,2);
@@ -183,6 +186,7 @@ public class GUI extends JFrame{
 	deactivate(b2);
 	deactivate(b3);
 	*/
+	title.setText("Tic-Tac-Toe");
 	pt = new JPanel();
 	
 	

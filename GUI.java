@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.JPanel.*;
+import javax.swing.table.TableColumn;
 
 public class GUI extends JFrame{
 
@@ -46,14 +47,14 @@ public class GUI extends JFrame{
      public GUI(){
 	 //initial state -> title page
 	 frame = new JFrame("Game Center");
-	 frame.setSize(400,400);
+	 frame.setSize(650,650);
 	 frame.setLocationRelativeTo(null);
 	 frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
 	 title= new JMenuBar();
 	 title.setOpaque(true);
 	 title.setBackground(Color.cyan);
-	 title.setPreferredSize(new Dimension(400,20));
+	 title.setPreferredSize(new Dimension(10,20));
 
 	 panel = new JPanelGradient();
 	 panel.setOpaque(true);
@@ -142,56 +143,55 @@ public class GUI extends JFrame{
 	 title.setBackground(Color.red);
 	 //set text
 	
-	/*
-	ImageIcon buttonimg1 = createImageIcon("images/right.gif");
-	ImageIcon buttonimg2 = createImageIcon("images/middle.gif");
-	ImageIcon buttonimg3 = createImageIcon("images/left.gif");
-	*/ 
-
-	b1 = new JButton("Tic Tac Toe");
-	b2 = new JButton("Connect 4");
-	b3 = new JButton("Game 3");
-
-	gamep.add(b1);
-	gamep.add(b2);
-	gamep.add(b3);
-
-	activate(b1);
-	activate(b2);
-	activate(b3);
-	/*
-	JPanel gui = new JPanel(new BorderLayout(3,3));
-	JButton[][] boardsq = new JButton[3][3];
-	JPanel ticBoard;
+	 b1 = new JButton("Tic Tac Toe");
+	 b2 = new JButton("Connect 4");
+	 b3 = new JButton("Game 3");
+	 
+	 gamep.add(b1);
+	 gamep.add(b2);
+	 gamep.add(b3);
+	 
+	 activate(b1);
+	 activate(b2);
+	 activate(b3);
+	 /*
+	   JPanel gui = new JPanel(new BorderLayout(3,3));
+	   JButton[][] boardsq = new JButton[3][3];
+	   JPanel ticBoard;
 	
-	ticBoard = new JPanel(new GridLayout(0,9));
-	ticBoard.setBorder(new LineBorder(Color.BLACK));
+	   ticBoard = new JPanel(new GridLayout(0,9));
+	   ticBoard.setBorder(new LineBorder(Color.BLACK));
 	
-	frame.add(gui);
-	gui.add(ticBoard);
-	*/
-
-
-
+	   frame.add(gui);
+	   gui.add(ticBoard);
+	 */
     }
 
 
     public void tictac(){
-	pt = new JPanel();
-	board = new JPanel();
-	
-	/* turn off and turn on the buttons */
+	/* turn off and turn on the buttons 
 	deactivate(b1);
 	deactivate(b2);
 	deactivate(b3);
-
-
-	pt.setBackground(Color.orange);
-	frame.getContentPane().add(pt,BorderLayout.CENTER);
-
+	*/
+	pt = new JPanel();
 	
-
-
+	
+	JTable board = new JTable(3,3);
+	
+	pt.setBackground(Color.violet);
+	frame.getContentPane().add(board);
+	board.setGridColor(Color.black);
+	board.setRowHeight(100);
+	TableColumn column;
+	for (int i =0; i <3; i++){
+	    column=board.getColumnModel().getColumn(i);
+	    column.setPreferredWidth(100);
+	}
+			      
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
+	pt.add(board);
+	pt.add(new Label("\n"));	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
 

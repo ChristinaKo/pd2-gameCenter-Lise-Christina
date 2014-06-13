@@ -37,13 +37,14 @@ public class GUI extends JFrame{
 	}
 	
     }
+    private JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1,t2;
     protected JFrame frame;
 
-    protected JPanel menubar;
+    protected JPanel menubar, scorebox;
     protected JMenuBar Title;
-    protected JLabel title;
+    protected JLabel title, scorelabel;
 
     protected JPanelGradient panel;
     protected JPanel bp;
@@ -53,13 +54,14 @@ public class GUI extends JFrame{
 	 //initial state -> title page
 	 frame = new JFrame("Game Center");
 	 frame.setSize(500,500);
+
 	 frame.setLocationRelativeTo(null);
 	 frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
 
 	 Title= new JMenuBar();
 	 Title.setOpaque(true);
 	 Title.setBackground(Color.red);
-	 Title.setPreferredSize(new Dimension(10,20));
+	 Title.setPreferredSize(new Dimension(100,50));
 
 	 menubar= new JPanel();
 	 menubar.setBackground(null);
@@ -68,13 +70,23 @@ public class GUI extends JFrame{
 	 title.setHorizontalTextPosition(SwingConstants.CENTER);
 	 title.setVerticalTextPosition(SwingConstants.CENTER);
 	 menubar.add(title);
+	 
+
+	 scorebox = new JPanel();
+	 scorelabel = new JLabel("Welcome!!!");
+	 scorelabel.setBackground(null);
+	 scorebox.add(scorelabel);
+	 scorebox.add(spacelabel);
+	 
+	 menubar.add(scorebox, BorderLayout.LINE_END);
+		 
 	 Title.add(menubar);
 	
 	 
 	 panel = new JPanelGradient();
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(0,2,123));
-	 panel.setPreferredSize(new Dimension(200,380));
+	 panel.setPreferredSize(new Dimension(200,480));
 	
 		
 	
@@ -95,6 +107,10 @@ public class GUI extends JFrame{
 	 frame.getContentPane().add(panel,BorderLayout.CENTER);
 	 //frame.pack();
 	 frame.setVisible(true);
+	 
+	 //final variables
+	 spacelabel= new JLabel("                                  ");
+	 spacelabel.setBackground(null);
      }
      public class Events implements ActionListener{
 	 public void actionPerformed(ActionEvent e1){
@@ -265,13 +281,34 @@ public class GUI extends JFrame{
 	    column.setPreferredWidth(100);
 	}
 
-	pt.add(board);
 
 
-	t2= new JButton("Quit");
-	pt.add(t2);
+
+	t2= new JButton("Main Menu");
+	t1= new JButton("Change Profile");
 	activate(t2);
-	frame.getContentPane().add(pt,BoxLayout.Y_AXIS);
+	//activate change profile button
+	Box center = Box.createVerticalBox();
+
+	
+	center.add(Box.createVerticalGlue());
+	center.add(board);
+
+	center.add(Box.createVerticalGlue());
+	center.createVerticalStrut(100);
+	center.add(new JLabel(""));
+	center.add(Box.createVerticalGlue());
+	
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(t2);
+	h.add(t1);
+	
+	
+	
+	pt.add(center);
+	pt.add(h);
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
 
 
     }
@@ -282,17 +319,12 @@ public class GUI extends JFrame{
 	button.addActionListener(e1);
     }
 
-    public void deactivate(JButton button){
-	button.setVisible(false);
-	button.setEnabled(false);	
-    }
-
   
     public static void main(String[]args){
 	GUI x = new GUI();
 	
 	/*add algorithms above as GUI methods
-	  meanu options above.
+	  menu options above.
 	*/
 
     }

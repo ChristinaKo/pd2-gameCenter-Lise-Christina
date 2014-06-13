@@ -22,8 +22,13 @@ Christina: Finished Connect Four
 Lise: Finished buttons and started adding text to game
 
 June 10th:
-Added more buttons for other game screens
+Lise:Added more buttons for other game screens
 
 June 11th:
 Christina:Worked on game boards
 Lise: added checkwinner methods to tictactoe and connectfour
+
+June 12th:
+Christina: worked on tic-tac opponent
+Lise: added table for tictactoe, added labels for menubar for each screen
+

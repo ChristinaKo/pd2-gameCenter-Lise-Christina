@@ -123,6 +123,11 @@ public class GUI extends JFrame{
 		     frame.remove(gamep);
 		 
 		 }
+		 else if (e1.getSource() == b4){
+		     gamep.removeAll();
+		     gamep.revalidate();
+		     frame.remove(gamep);
+			 
 		 else if (e1.getSource() == t1){
 
 
@@ -134,8 +139,6 @@ public class GUI extends JFrame{
 		     frame.remove(pt);
 		     mainscreen();		    
 		 }
-		 //		else if (e1.getSource() == b3){
-		 //		}
 
 	     }
 	     catch(Exception e){
@@ -147,36 +150,39 @@ public class GUI extends JFrame{
 	// screen where game options are given
 	title.setText("GAME CENTER");
 	
-	 gamep = new JPanel();
-	 gamep.setBackground(Color.yellow);
-	 GridLayout grid = new GridLayout(2,2);
-	 gamep.setLayout(grid);
-	 frame.getContentPane().add(gamep);
-	 title.setBackground(Color.red);
-	 //set text
+	gamep = new JPanel();
+	gamep.setBackground(Color.yellow);
+	GridLayout grid = new GridLayout(2,2);
+	gamep.setLayout(grid);
+	frame.getContentPane().add(gamep);
+	title.setBackground(Color.red);
+	//set text
 	
-	 b1 = new JButton("Tic Tac Toe");
-	 b2 = new JButton("Connect 4");
-	 b3 = new JButton("Game 3");
+	b1 = new JButton("Tic Tac Toe");
+	b2 = new JButton("Connect 4");
+	b3 = new JButton("Game 3");
+	b4 = new JButton("HIGH SCORES");
 	 
-	 gamep.add(b1);
-	 gamep.add(b2);
-	 gamep.add(b3);
+	gamep.add(b1);
+	gamep.add(b2);
+	gamep.add(b3);
+	gamep.add(b4);
 	 
-	 activate(b1);
-	 activate(b2);
-	 activate(b3);
-	 /*
-	   JPanel gui = new JPanel(new BorderLayout(3,3));
-	   JButton[][] boardsq = new JButton[3][3];
-	   JPanel ticBoard;
+	activate(b1);
+	activate(b2);
+	activate(b3);
+	activate(b4);
+	/*
+	  JPanel gui = new JPanel(new BorderLayout(3,3));
+	  JButton[][] boardsq = new JButton[3][3];
+	  JPanel ticBoard;
 	
-	   ticBoard = new JPanel(new GridLayout(0,9));
-	   ticBoard.setBorder(new LineBorder(Color.BLACK));
+	  ticBoard = new JPanel(new GridLayout(0,9));
+	  ticBoard.setBorder(new LineBorder(Color.BLACK));
 	
-	   frame.add(gui);
-	   gui.add(ticBoard);
-	 */
+	  frame.add(gui);
+	  gui.add(ticBoard);
+	*/
     }
 
 
@@ -190,20 +196,12 @@ public class GUI extends JFrame{
 	pt = new JPanel();
 	
 	
-	JTable board = new JTable(3,3);
+
 	
 	pt.setBackground(Color.magenta.darker());
-	frame.getContentPane().add(board);
-	board.setGridColor(Color.black);
-	board.setRowHeight(100);
-	TableColumn column;
-	for (int i =0; i <3; i++){
-	    column=board.getColumnModel().getColumn(i);
-	    column.setPreferredWidth(100);
-	}
-			      
+				      
 	frame.getContentPane().add(pt);
-	pt.add(board, BorderLayout.CENTER);
+
 	pt.add(new Label("\n"));
 	
 	t1= new JButton("Restart");
@@ -248,6 +246,33 @@ public class GUI extends JFrame{
 
 	activate(t1);
 	activate(t2);
+    }
+    public void scores(){
+
+	pt= new JPanelGradient();
+	pt.setBackground(Color.pink.darker());
+
+	JTable board = new JTable(3,3);
+	frame.getContentPane().add(board);
+
+	board.setGridColor(Color.black);
+	board.setRowHeight(100);
+	TableColumn column;
+	for (int i =0; i <3; i++){
+	    column=board.getColumnModel().getColumn(i);
+	    column.setPreferredWidth(100);
+	}
+
+	t1= new JButton("Restart");
+	t2= new JButton("Quit");
+
+	pt.add(t1);
+	pt.add(t2);
+
+	activate(t1);
+	activate(t2);
+
+	frame.add(pt);
     }
     public void activate(JButton button){
 	button.setEnabled(true);

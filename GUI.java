@@ -121,13 +121,15 @@ public class GUI extends JFrame{
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
-		 
+		     trivia();
 		 }
 		 else if (e1.getSource() == b4){
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
-			 
+		     scores();
+		     
+		 }
 		 else if (e1.getSource() == t1){
 
 
@@ -196,8 +198,6 @@ public class GUI extends JFrame{
 	pt = new JPanel();
 	
 	
-
-	
 	pt.setBackground(Color.magenta.darker());
 				      
 	frame.getContentPane().add(pt);
@@ -217,6 +217,7 @@ public class GUI extends JFrame{
     }
 
     public void connectfour(){
+	title.setText("Connect Four");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
 	
@@ -233,7 +234,8 @@ public class GUI extends JFrame{
     }
 
 
-    public void gamethree(){
+    public void trivia(){
+	title.setText("Trivia");
 	pt= new JPanel();
 	pt.setBackground(Color.orange);
 	
@@ -248,31 +250,30 @@ public class GUI extends JFrame{
 	activate(t2);
     }
     public void scores(){
-
-	pt= new JPanelGradient();
+	title.setText("HIGH SCORES");
+	
+	pt= new JPanel();
 	pt.setBackground(Color.pink.darker());
+	
 
-	JTable board = new JTable(3,3);
-	frame.getContentPane().add(board);
-
+	JTable board = new JTable(10,3);
 	board.setGridColor(Color.black);
-	board.setRowHeight(100);
+	board.setRowHeight(10);
 	TableColumn column;
 	for (int i =0; i <3; i++){
 	    column=board.getColumnModel().getColumn(i);
 	    column.setPreferredWidth(100);
 	}
 
-	t1= new JButton("Restart");
+	pt.add(board);
+
+
 	t2= new JButton("Quit");
-
-	pt.add(t1);
 	pt.add(t2);
-
-	activate(t1);
 	activate(t2);
+	frame.getContentPane().add(pt,BoxLayout.Y_AXIS);
 
-	frame.add(pt);
+
     }
     public void activate(JButton button){
 	button.setEnabled(true);

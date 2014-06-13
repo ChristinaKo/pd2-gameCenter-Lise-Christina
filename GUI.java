@@ -12,32 +12,10 @@ import javax.swing.table.TableColumn;
 
 public class GUI extends JFrame{
 
-    //protected JButton n;
+    //GUI variables- front end//
     protected Container background,contentPane;
-    //  protected int actioncounter;
-
-    //Actual Game buttons
-    //protected JButton upgrades,quit;
-    //protected JProgressBar infectionRate, lethality, visibility;
-    // protected JTextArea notifications;
-    //protected JTextArea plz, instructions;
-
-    public class JPanelGradient extends JPanel{
-	public void paintChildren(Graphics g){
-	    if (!isOpaque()){
-		super.paintComponent(g);
-		return;
-	    }
-	}
-
-    }
-    public class MyPanel extends JPanelGradient{
-	public void paintChildren(Graphics g){
-	    
-	}
-	
-    }
-    private JLabel spacelabel;
+    
+    private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1,t2;
     protected JFrame frame;
@@ -46,10 +24,16 @@ public class GUI extends JFrame{
     protected JMenuBar Title;
     protected JLabel title, scorelabel;
 
-    protected JPanelGradient panel;
+    protected JPanel panel;
     protected JPanel bp;
     protected JPanel gamep, pt,p; 
 
+    protected JPanel tic, ticBoard;
+
+    //score variables
+    protected int ticscore,cfscore,qscore;
+
+    //back end variables//
      public GUI(){
 	 //initial state -> title page
 	 frame = new JFrame("Game Center");
@@ -61,7 +45,7 @@ public class GUI extends JFrame{
 	 Title= new JMenuBar();
 	 Title.setOpaque(true);
 	 Title.setBackground(Color.red);
-	 Title.setPreferredSize(new Dimension(100,50));
+	 Title.setPreferredSize(new Dimension(100,40));
 
 	 menubar= new JPanel();
 	 menubar.setBackground(null);
@@ -70,20 +54,23 @@ public class GUI extends JFrame{
 	 title.setHorizontalTextPosition(SwingConstants.CENTER);
 	 title.setVerticalTextPosition(SwingConstants.CENTER);
 	 menubar.add(title);
-	 
+	  
+	 spacelabel= new JLabel("                                            ");
+	 spacelabel.setBackground(null);
 
 	 scorebox = new JPanel();
-	 scorelabel = new JLabel("Welcome!!!");
+	 scorebox.setBackground(null);
+	 scorelabel = new JLabel("");
+	 scorelabel.setOpaque(true);
 	 scorelabel.setBackground(null);
-	 scorebox.add(scorelabel);
 	 scorebox.add(spacelabel);
+	 scorebox.add(scorelabel);
 	 
 	 menubar.add(scorebox, BorderLayout.LINE_END);
 		 
 	 Title.add(menubar);
-	
 	 
-	 panel = new JPanelGradient();
+	 panel = new JPanel();
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(0,2,123));
 	 panel.setPreferredSize(new Dimension(200,480));
@@ -99,8 +86,6 @@ public class GUI extends JFrame{
 	 
 	 panel.add(startb);
 
-
-
 	 //background = frame.getContentPane();
 	 //background.setLayout(new FlowLayout());
 	 frame.setJMenuBar(Title);
@@ -109,8 +94,7 @@ public class GUI extends JFrame{
 	 frame.setVisible(true);
 	 
 	 //final variables
-	 spacelabel= new JLabel("                                  ");
-	 spacelabel.setBackground(null);
+	
      }
      public class Events implements ActionListener{
 	 public void actionPerformed(ActionEvent e1){
@@ -190,40 +174,45 @@ public class GUI extends JFrame{
 	activate(b2);
 	activate(b3);
 	activate(b4);
-	/*
-	  JPanel gui = new JPanel(new BorderLayout(3,3));
-	  JButton[][] boardsq = new JButton[3][3];
-	  JPanel ticBoard;
-	
-	  ticBoard = new JPanel(new GridLayout(0,9));
-	  ticBoard.setBorder(new LineBorder(Color.BLACK));
-	
-	  frame.add(gui);
-	  gui.add(ticBoard);
-	*/
+
+
+
     }
 
 
     public void tictac(){
-	/* turn off and turn on the buttons 
-	deactivate(b1);
-	deactivate(b2);
-	deactivate(b3);
-	*/
+
 	title.setText("Tic-Tac-Toe");
+	scorelabel.setText(ticscore);
 	pt = new JPanel();
+	tic= new JPanel(new BorderLayout(3,3));
+	tic.setBackground(Color.green);
+	tic.setPreferredSize(new Dimension(300, 300));
+	JButton[][] boardsq = new JButton[3][3];
+
+	ticBoard = new JPanel(new GridLayout(3,3));
+	ticBoard.setBackground(null);
+	ticBoard.setBorder(new LineBorder(Color.BLACK));
+	for (int i = 0; i < 3; i++){
+	    for (JButton x : boardsq[i]){
+		x = new JButton("");
+		x.setBorder(new LineBorder(Color.BLACK));
+		x.setBackground(Color.blue);
+		activate(x);
+		ticBoard.add(x);
+	    }
+	}
 	
+
+	tic.add(ticBoard);	
+	pt.add(tic);
 	
 	pt.setBackground(Color.magenta.darker());
-				      
 	frame.getContentPane().add(pt);
 
-	pt.add(new Label("\n"));
-	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
-
-	pt.add(t1, BorderLayout.SOUTH);
+	pt.add(t1,BorderLayout.SOUTH);
 	pt.add(t2,BorderLayout.SOUTH);
 
 	activate(t1);
@@ -281,19 +270,13 @@ public class GUI extends JFrame{
 	    column.setPreferredWidth(100);
 	}
 
-
-
-
 	t2= new JButton("Main Menu");
 	t1= new JButton("Change Profile");
 	activate(t2);
 	//activate change profile button
 	Box center = Box.createVerticalBox();
-
-	
 	center.add(Box.createVerticalGlue());
 	center.add(board);
-
 	center.add(Box.createVerticalGlue());
 	center.createVerticalStrut(100);
 	center.add(new JLabel(""));
@@ -301,11 +284,9 @@ public class GUI extends JFrame{
 	
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
-	h.add(t2);
+
 	h.add(t1);
-	
-	
-	
+ 
 	pt.add(center);
 	pt.add(h);
 	frame.getContentPane().add(pt,BorderLayout.CENTER);

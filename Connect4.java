@@ -3,9 +3,13 @@ import java.util.*;
 
 public class Connect4{
     boolean color;
+    int score;
+    String name;
     String[][] board= new String[7][10];
-    public Connect4(String c){
+    public Connect4(String n,String c){
 	color = c;
+	name = n;
+	score = 0;
     }
     public String getColor(){
 	if (color ){
@@ -46,6 +50,7 @@ public class Connect4{
 	    }
 
 	}
+	// add score componentscore = score + ; 
 	return false;
     }
 

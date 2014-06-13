@@ -4,10 +4,12 @@ import java.io.*;
 public class Tic{
     String name;
     char charP, charO;
+    int score;
     char[][] board = new char[3][3];
     public Tic(String n, char c){
 	chara = c;
 	name = n;
+	score = 0;
     }
     public char getCharP(){
 	return charP;
@@ -100,7 +102,7 @@ public class Tic{
 	    System.out.println("Congratulations!");
 	}
 	else{
-	    // add move method (if index chosen is already occupied prints no but you can edit that)
+
 	    Scanner sc = new Scanner(System.in);
 	    System.out.println("Choose your X-coordinate"); // change
 	    String locx = sc.nextLine();
@@ -132,6 +134,7 @@ public class Tic{
 	    }
 
 	}
+	//add score component
 	return false;
     }
 		    

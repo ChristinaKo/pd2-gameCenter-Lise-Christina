@@ -32,6 +32,7 @@ public class GUI extends JFrame{
 
     //score variables
     protected PriorityQueue ticscore,cfscore,qscore;
+    //maxheaps of the high scores of each game
 
     //back end variables//
 
@@ -103,6 +104,11 @@ public class GUI extends JFrame{
 	 ticscore = new PriorityQueue();
 	 cfscore = new PriorityQueue();
 	 qscore = new PriorityQueue();
+	 for (int i = 0; i < 9; i++){
+	     ticscore.add(new Profile("Anonymous",0));
+	     cfscore.add(new Profile("Anonymous",0));
+	     qscore.add(new Profile("Anonymous",0));
+	 }
 	
      }
      public class Events implements ActionListener{
@@ -309,7 +315,7 @@ public class GUI extends JFrame{
 	button.addActionListener(e1);
     }
 
-  
+
     public static void main(String[]args){
 	GUI x = new GUI();
 	

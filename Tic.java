@@ -7,7 +7,7 @@ public class Tic{
     int score;
     char[][] board = new char[3][3];
     public Tic(String n, char c){
-	chara = c;
+	charP = c;
 	name = n;
 	score = 0;
     }
@@ -34,15 +34,26 @@ public class Tic{
 	    System.out.println("NO");
 	}	    
     }
+    public void OMoveEasy(){
+	for(int i = 0; i <board.length; i ++){
+	    for (int j = 0; j < board[i].length; j++){
+		if(board[i][j] == '\0'){
+		    board[i][j] = getCharO();
+		}
+	    }
+	}
+    }
     public void Omove(){
-	for (int i = 0; i < board.length(); i++){
-	    for(int j = 0; j <board[i].length(); j ++){
+	boolean moved = false;
+	for (int i = 0; i < board.length; i++){
+	    for(int j = 0; j <board[i].length; j++){
 		if(board[i][j] == getCharP()){
 		    if(i + 1 < board.length){
-			if(board[i +1][j] == getChar()){
+			if(board[i +1][j] == getCharP()){
 			    if( i - 1 >=0){
 				if(board[i-1][j] == '\0'){
 				    board[i-1][j] = getCharO();
+				    moved = true;
 				    break;
 				}
 			    }
@@ -51,15 +62,35 @@ public class Tic{
 			    }
 			}
 			if( j + 1 <board[i].length){
-			    if(board[i + 1][j+1] == getChar()){
+			    if(board[i + 1][j+1] == getCharP()){
 				if( i-1 >= 0 && j -1 >= 0){
 				    if(board[i-1][j-1] == '\0'){
 					board[i-1][j-1] = getCharO();
+					moved = true;
 					break;
 				    }
 				}
 				else{
-				    board[i+2][j+2] = getChar0();
+				    if(board[i+2][j+2] == '\0'){
+					board[i+2][j+2] = getCharO();
+					moved = true;
+					break;
+				    }
+				}
+			    }
+			    else if(j-1 == 0){
+				if(board[i][j-1] == '\0'){
+				    board[i][j-1] = getCharO();
+				    moved = true;
+				    break;
+				}
+				else{
+				    if(board[i][j+2] == '\0'){
+					board[i][j+2] = getCharO();
+					moved = true;
+					break;
+				    
+				    }
 				}
 			    }
 			}
@@ -67,9 +98,16 @@ public class Tic{
 		}
 	    }
 	}
-	//continue
-			    
-		    
+	if(!moved){
+	    for(int i = 0; i <board.length; i++){
+		for(int j = 0; j <board[i].length; j ++){
+		    if(board[i][j] =='\0'){
+			board[i][j] = getCharO();
+			break;
+		    }
+		}
+	    }
+	}
     }
     public boolean checkWinner(int x, int y){
 	try{
@@ -100,6 +138,7 @@ public class Tic{
     public void play(){
 	if(winner()){
 	    System.out.println("Congratulations!");
+	    System.exit(0);
 	}
 	else{
 
@@ -109,14 +148,16 @@ public class Tic{
 	    System.out.println("Choose your Y-coordinate");
 	    String locy = sc.nextLine();
 	    Pmove(Integer.parseInt(locx), Integer.parseInt(locy));
-	    Omove();
+	    System.out.println(this);
+	    OMoveEasy();
+	    System.out.println(this);
 	}
     }
     public boolean winner(){
 	boolean ans = false;
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
-		if (board[i][j]==getChar()){  
+		if (board[i][j]==getCharP()){  
 		    if(checkWinner(i + 1, j) && checkWinner(i-1,j)){
 			return true;
 		    }

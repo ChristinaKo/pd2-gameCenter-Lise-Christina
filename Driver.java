@@ -11,7 +11,9 @@ public class Driver{
 	String ch = sc.nextLine();
 	char c = ch.charAt(0);
 	Tic newGame = new Tic(n, c);
-	
+	while(1==1){
+	    newGame.play();
+	}	
 
 	//	Connect4 newGame = new Connect4("blue");
 	//System.out.println(newGame);

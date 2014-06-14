@@ -31,7 +31,7 @@ public class GUI extends JFrame{
     protected JPanel tic, ticBoard;
 
     //score variables
-    protected PriorityQueue ticscore,cfscore,qscore;
+    protected PriorityQueue<Profile> ticscore,cfscore,qscore;
     //maxheaps of the high scores of each game
 
     //back end variables//
@@ -101,9 +101,9 @@ public class GUI extends JFrame{
 	 frame.setVisible(true);
 	 
 	 //back end initializations
-	 ticscore = new PriorityQueue();
-	 cfscore = new PriorityQueue();
-	 qscore = new PriorityQueue();
+	 ticscore = new PriorityQueue<Profile>();
+	 cfscore = new PriorityQueue<Profile>();
+	 qscore = new PriorityQueue<Profile>(1,);
 	 for (int i = 0; i < 9; i++){
 	     ticscore.add(new Profile("Anonymous",0));
 	     cfscore.add(new Profile("Anonymous",0));

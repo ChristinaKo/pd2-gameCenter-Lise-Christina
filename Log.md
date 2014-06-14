@@ -32,3 +32,10 @@ June 12th:
 Christina: worked on tic-tac opponent
 Lise: added table for tictactoe, added labels for menubar for each screen
 
+June 13th:
+Christina: worked on trivia stuff
+Lise: added score page and worked on tic table
+
+June 14th:
+Lise: worked on tic table and started implementing score feature and tic game
+

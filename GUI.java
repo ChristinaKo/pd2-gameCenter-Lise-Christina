@@ -12,7 +12,7 @@ import javax.swing.table.TableColumn;
 
 public class GUI extends JFrame{
 
-    //GUI variables- front end//
+    //GUI variables- front end
     protected Container background,contentPane;
     
     private final JLabel spacelabel;
@@ -31,10 +31,16 @@ public class GUI extends JFrame{
     protected JPanel tic, ticBoard;
 
     //score variables
-    protected int ticscore,cfscore,qscore;
+    protected PriorityQueue ticscore,cfscore,qscore;
 
     //back end variables//
+
+
+
+
+
      public GUI(){
+	 //GUI
 	 //initial state -> title page
 	 frame = new JFrame("Game Center");
 	 frame.setSize(500,500);
@@ -93,7 +99,10 @@ public class GUI extends JFrame{
 	 //frame.pack();
 	 frame.setVisible(true);
 	 
-	 //final variables
+	 //back end initializations
+	 ticscore = new PriorityQueue();
+	 cfscore = new PriorityQueue();
+	 qscore = new PriorityQueue();
 	
      }
      public class Events implements ActionListener{

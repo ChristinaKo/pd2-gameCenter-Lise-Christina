@@ -1,4 +1,4 @@
-// medium purple
+// 
 
 //Notes to self, we need to change jframe, jpanel, etc to private classes
 import java.util.*;
@@ -29,7 +29,7 @@ public class GUI extends JFrame{
     protected JPanel bp;
     protected JPanel gamep, pt,p; 
 
-    protected JPanel tic, ticBoard;
+    protected JPanel Board,tic,connect4;
 
     protected JTextArea newline;
     //score variables
@@ -205,14 +205,10 @@ public class GUI extends JFrame{
 	gamep.add(b2);
 	gamep.add(b3);
 	gamep.add(b4);
-	 
 	activate(b1);
 	activate(b2);
 	activate(b3);
 	activate(b4);
-
-
-
     }
 
 
@@ -225,20 +221,20 @@ public class GUI extends JFrame{
 	tic.setPreferredSize(new Dimension(300, 300));
 	JButton[][] boardsq = new JButton[3][3];
 
-	ticBoard = new JPanel(new GridLayout(3,3));
-	ticBoard.setBackground(null);
-	ticBoard.setBorder(new LineBorder(Color.BLACK));
+	Board = new JPanel(new GridLayout(3,3));
+	Board.setBackground(null);
+	Board.setBorder(new LineBorder(Color.BLACK));
 	for (int i = 0; i < 3; i++){
 	    for (JButton x : boardsq[i]){
 		x = new JButton("");
 		x.setBorder(new LineBorder(Color.BLACK));
 		x.setBackground(Color.blue);
 		activate(x);
-		ticBoard.add(x);
+		Board.add(x);
 	    }
 	}
 	
-	tic.add(ticBoard);	
+	tic.add(Board);	
 	pt.add(tic);
 	
 	pt.setBackground(Color.magenta.darker());
@@ -251,8 +247,6 @@ public class GUI extends JFrame{
 
 	activate(t1);
 	activate(t2);
-
-
     }
 
     public void connectfour(){
@@ -261,13 +255,32 @@ public class GUI extends JFrame{
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
 	
+	connect4= new JPanel(new BorderLayout(3,3));
+	connect4.setBackground(Color.black);
+	connect4.setPreferredSize(new Dimension(300, 300));
+	JButton[][] boardsq = new JButton[3][3];
+
+	Board = new JPanel(new GridLayout(3,3));
+	Board.setBackground(null);
+	Board.setBorder(new LineBorder(Color.BLACK));
+	for (int i = 0; i < 3; i++){
+	    for (JButton x : boardsq[i]){
+		x = new JButton("");
+		x.setBorder(new LineBorder(Color.BLACK));
+		x.setBackground(Color.blue);
+		activate(x);
+		Board.add(x);
+	    }
+	}
+	
+	connect4.add(Board);	
+
+
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
-
 	pt.add(t1);
 	pt.add(t2);
-
 	activate(t1);
 	activate(t2);
 
@@ -286,7 +299,6 @@ public class GUI extends JFrame{
 	
 	pt.add(t1);
 	pt.add(t2);
-
 	activate(t1);
 	activate(t2);
     }
@@ -295,7 +307,6 @@ public class GUI extends JFrame{
 	
 	pt= new JPanel();
 	pt.setBackground(Color.pink.darker());
-	
 
 	JTable board = new JTable(10,3);
 	board.setGridColor(Color.black);
@@ -305,11 +316,10 @@ public class GUI extends JFrame{
 	    column=board.getColumnModel().getColumn(i);
 	    column.setPreferredWidth(100);
 	}
-
 	t2= new JButton("Main Menu");
 	prof= new JButton("Change Profile");
 	activate(t2);
-	//activate change profile button
+	activate(prof);
 	Box center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
 	center.add(board);
@@ -327,8 +337,6 @@ public class GUI extends JFrame{
 	pt.add(center);
 	pt.add(h);
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
-
-
     }
     public void activate(JButton button){
 	button.setEnabled(true);
@@ -350,8 +358,6 @@ public class GUI extends JFrame{
 	center.add(Box.createVerticalGlue());
 	
 	center.add(Box.createVerticalGlue());
-	
-
 
 	
 	frame.add(pt);

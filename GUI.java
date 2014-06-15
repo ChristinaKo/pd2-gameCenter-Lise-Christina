@@ -17,7 +17,8 @@ public class GUI extends JFrame{
     
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
-    protected JButton t1,t2;
+    protected JButton t1;
+    protected JButton t2, prof; // return to mainscreen buttons
     protected JFrame frame;
 
     protected JPanel menubar, scorebox;
@@ -30,8 +31,10 @@ public class GUI extends JFrame{
 
     protected JPanel tic, ticBoard;
 
+    protected JTextArea newline;
     //score variables
     protected PriorityQueue<Profile> ticscore,cfscore,qscore;
+    private int tempscore;
     //maxheaps of the high scores of each game
 
     //back end variables//
@@ -72,6 +75,7 @@ public class GUI extends JFrame{
 	 scorelabel.setBackground(null);
 	 scorebox.add(spacelabel);
 	 scorebox.add(scorelabel);
+
 	 
 	 menubar.add(scorebox, BorderLayout.LINE_END);
 		 
@@ -79,11 +83,15 @@ public class GUI extends JFrame{
 	 
 	 panel = new JPanel();
 	 panel.setOpaque(true);
-	 panel.setBackground(new Color(0,2,123));
+	 panel.setBackground(new Color(202,224,255));
 	 panel.setPreferredSize(new Dimension(200,480));
-	
-		
-	
+       
+	 JTextArea startblurb = new JTextArea("Welcome to Game Center!!! Game Center is a place where you can play some of those games you used to play over and over again with your friends as a kids in middle. We have tic-tac-toe, connect four, and a thematic trivia game for you to enjoy. So find the start button on this screen to start playing those games right now!!!                                                                                                                                                                                          ");
+	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/username.");
+	 
+	 activate(startblurb);	
+	 activate(note);
+
 	 startb = new JButton("Click here to start");
 	 
 	 startb.setEnabled(true);
@@ -91,7 +99,10 @@ public class GUI extends JFrame{
 	 Events e1 = new Events();
 	 startb.addActionListener(e1);
 	 
+	
+	 panel.add(startblurb);
 	 panel.add(startb);
+	 panel.add(note);
 
 	 //background = frame.getContentPane();
 	 //background.setLayout(new FlowLayout());
@@ -101,9 +112,9 @@ public class GUI extends JFrame{
 	 frame.setVisible(true);
 	 
 	 //back end initializations
-	 ticscore = new PriorityQueue<Profile>();
-	 cfscore = new PriorityQueue<Profile>();
-	 qscore = new PriorityQueue<Profile>(1,);
+	 ticscore = new PriorityQueue<Profile>(1,new maxtomin());
+	 cfscore = new PriorityQueue<Profile>(1,new maxtomin());
+	 qscore = new PriorityQueue<Profile>(1,new maxtomin());
 	 for (int i = 0; i < 9; i++){
 	     ticscore.add(new Profile("Anonymous",0));
 	     cfscore.add(new Profile("Anonymous",0));
@@ -121,24 +132,28 @@ public class GUI extends JFrame{
 		     mainscreen();
 		 }
 		 else if (e1.getSource() == b1){
+		     tempscore = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     tictac();
 		 }
 		 else if (e1.getSource() == b2){
+		     tempscore = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     connectfour();
 		 }
 		 else if (e1.getSource() == b3){
+		     tempscore = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     trivia();
 		 }
 		 else if (e1.getSource() == b4){
+		    
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
@@ -155,6 +170,12 @@ public class GUI extends JFrame{
 		     pt.revalidate();
 		     frame.remove(pt);
 		     mainscreen();		    
+		 }
+		 else if (e1.getSource() == prof){
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+		     changeprofile();
 		 }
 
 	     }
@@ -177,7 +198,7 @@ public class GUI extends JFrame{
 	
 	b1 = new JButton("Tic Tac Toe");
 	b2 = new JButton("Connect 4");
-	b3 = new JButton("Game 3");
+	b3 = new JButton("Trivia Questions");
 	b4 = new JButton("HIGH SCORES");
 	 
 	gamep.add(b1);
@@ -196,12 +217,11 @@ public class GUI extends JFrame{
 
 
     public void tictac(){
-
 	title.setText("Tic-Tac-Toe");
-	scorelabel.setText(ticscore);
+	scorelabel.setText("SCORE: "+ tempscore + "  ");
 	pt = new JPanel();
 	tic= new JPanel(new BorderLayout(3,3));
-	tic.setBackground(Color.green);
+	tic.setBackground(Color.black);
 	tic.setPreferredSize(new Dimension(300, 300));
 	JButton[][] boardsq = new JButton[3][3];
 
@@ -218,7 +238,6 @@ public class GUI extends JFrame{
 	    }
 	}
 	
-
 	tic.add(ticBoard);	
 	pt.add(tic);
 	
@@ -238,6 +257,7 @@ public class GUI extends JFrame{
 
     public void connectfour(){
 	title.setText("Connect Four");
+	scorelabel.setText("SCORE: " + tempscore + " ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
 	
@@ -256,6 +276,7 @@ public class GUI extends JFrame{
 
     public void trivia(){
 	title.setText("Trivia");
+	scorelabel.setText("SCORE: " + tempscore + " ");
 	pt= new JPanel();
 	pt.setBackground(Color.orange);
 	
@@ -286,7 +307,7 @@ public class GUI extends JFrame{
 	}
 
 	t2= new JButton("Main Menu");
-	t1= new JButton("Change Profile");
+	prof= new JButton("Change Profile");
 	activate(t2);
 	//activate change profile button
 	Box center = Box.createVerticalBox();
@@ -299,8 +320,9 @@ public class GUI extends JFrame{
 	
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
-
-	h.add(t1);
+	
+	h.add(t2);
+	h.add(prof);
  
 	pt.add(center);
 	pt.add(h);
@@ -315,6 +337,27 @@ public class GUI extends JFrame{
 	button.addActionListener(e1);
     }
 
+    public void activate(JTextArea text){
+	text.setFont(new Font("Serif", Font.BOLD, 14));
+	text.setLineWrap(true);
+	text.setWrapStyleWord(true);
+	text.setEditable(false);
+	text.setBackground(null);
+    }
+    public void changeprofile(){
+	pt = new JPanel();
+	Box center = Box.createVerticalBox();
+	center.add(Box.createVerticalGlue());
+	
+	center.add(Box.createVerticalGlue());
+	
+
+
+	
+	frame.add(pt);
+    }
+
+   
 
     public static void main(String[]args){
 	GUI x = new GUI();

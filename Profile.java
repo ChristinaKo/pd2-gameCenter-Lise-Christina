@@ -17,14 +17,7 @@ public class Profile implements Comparable<Profile> {
     public String toString(){
 	return name;
     }
-    public static class maxtomin implements Comparator<Profile>{ 
-	public int compare(Profile o1,Profile o2){
-	    return -1 * o1.compareTo(o2);
-	}
-	public boolean equals(Object o1){
-	    return this==o1;//compare(this,o1) == 0;
-	}
-    }
+
     public static void main(String[]args){
 	PriorityQueue<Profile> x = new PriorityQueue<Profile>(1, new maxtomin());
 	x.add(new Profile());

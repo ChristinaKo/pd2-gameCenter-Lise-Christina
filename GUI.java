@@ -257,7 +257,7 @@ public class GUI extends JFrame{
 	Board.setBorder(new LineBorder(Color.BLACK));
 	for (int i = 0; i < 3; i++){
 	    for (JButton x : boardsq[i]){
-		x = new TicButton("");
+		x = new TicButton();
 		x.setBorder(new LineBorder(Color.BLACK));
 		x.setBackground(Color.blue);
 		activate(x);
@@ -300,19 +300,28 @@ public class GUI extends JFrame{
 	
 	connect4= new JPanel(new BorderLayout(3,3));
 	connect4.setBackground(Color.black);
-	connect4.setPreferredSize(new Dimension(400,300));
-	JButton[][] boardsq = new JButton[8][6];
+	connect4.setPreferredSize(new Dimension(500,300));
+	JButton[][] boardsq = new JButton[6][7];
 
-	Board = new JPanel(new GridLayout(8,6));
+	Board = new JPanel(new GridLayout(6,7));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
-	for (int i = 0; i < 8; i++){
+	
+	for (int i = 0; i < 6; i++){
 	    for (JButton x : boardsq[i]){
 		x = new JButton("");
 		x.setBorder(new LineBorder(Color.BLACK));
 		x.setBackground(Color.blue);
-		activate(x);
 		Board.add(x);
+		if (i ==0){
+		    x.setBackground(Color.yellow);
+		    activate(x);
+		}
+		else{
+		    x.setEnabled(false);
+		}
+	
+	
 	    }
 	}
 	
@@ -488,8 +497,9 @@ public class GUI extends JFrame{
 
     private class TicButton extends JButton{
 	private	char symbol;
-	private ImageIcon X = new ImageIcon(x.png);
-	private ImageIcon O = new ImageIcon(o.jpg);
+	private boolean pressed;
+	private ImageIcon X = new ImageIcon("x.png");
+	private ImageIcon O = new ImageIcon("o.jpg");
 	public TicButton(){
 	    pressed = false;
 	}

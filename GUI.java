@@ -35,9 +35,11 @@ public class GUI extends JFrame{
     protected String username;
     protected Box center;
    
+    
     //score variables
     protected PriorityQueue<Profile> ticscore,cfscore,qscore;
     private int tempscore;
+    
     //maxheaps of the high scores of each game
 
     //back end variables//
@@ -249,28 +251,24 @@ public class GUI extends JFrame{
 	tic= new JPanel(new BorderLayout(3,3));
 	tic.setBackground(Color.black);
 	tic.setPreferredSize(new Dimension(300, 300));
-	JButton[][] boardsq = new JButton[3][3];
+	TicButton[][] boardsq = new TicButton[3][3];
 	Board = new JPanel(new GridLayout(3,3));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
 	for (int i = 0; i < 3; i++){
 	    for (JButton x : boardsq[i]){
-		x = new JButton("");
+		x = new TicButton("");
 		x.setBorder(new LineBorder(Color.BLACK));
 		x.setBackground(Color.blue);
 		activate(x);
 		Board.add(x);
 	    }
 	}
-	
 	tic.add(Board);	
-
-	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
 	activate(t1);
 	activate(t2);
-
 	center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
 	center.add(tic);
@@ -289,6 +287,9 @@ public class GUI extends JFrame{
 
 	pt.setBackground(Color.magenta.darker());
 	frame.getContentPane().add(pt);
+	
+	//backend tic
+	
     }
 
     public void connectfour(){
@@ -483,7 +484,31 @@ public class GUI extends JFrame{
 	    this.setEditable(false);
 	    this.setFont(new Font("Serif", Font.BOLD, 20));
 	}
+    } 
+
+    private class TicButton extends JButton{
+	private	char symbol;
+	private ImageIcon X = new ImageIcon(x.png);
+	private ImageIcon O = new ImageIcon(o.jpg);
+	public TicButton(){
+	    pressed = false;
+	}
+	
+	public TicButton(char x){
+	    pressed = false;
+	}
+	public void setsign(char x){
+	    if (x =='x' || x=='X'){
+		symbol = 'X';
+		this.setIcon(X);
+	    }
+	    else{
+		symbol = 'O';
+		this.setIcon(O);
+	    }
+	}
     }
+		
    
     public static void main(String[]args){
 	GUI x = new GUI();

@@ -39,3 +39,5 @@ Lise: added score page and worked on tic table
 June 14th:
 Lise: worked on tic table and started implementing score feature and tic game
 
+June 15th:
+Lise: updated GUI interface, completed profile screens

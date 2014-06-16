@@ -18,7 +18,8 @@ public class GUI extends JFrame{
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1;
-    protected JButton t2, prof; // return to mainscreen buttons
+    protected JButton t2, prof; // return to mainscreen button
+    protected JButton submit; // submitting namex
     protected JFrame frame;
 
     protected JPanel menubar, scorebox;
@@ -31,7 +32,7 @@ public class GUI extends JFrame{
 
     protected JPanel Board,tic,connect4;
 
-    protected JTextArea newline;
+   
     //score variables
     protected PriorityQueue<Profile> ticscore,cfscore,qscore;
     private int tempscore;
@@ -84,12 +85,11 @@ public class GUI extends JFrame{
 	 panel.setOpaque(true);
 	 panel.setBackground(new Color(202,224,255));
 	 panel.setPreferredSize(new Dimension(200,480));
-       
-	 JTextArea startblurb = new JTextArea("Welcome to Game Center!!! Game Center is a place where you can play some of those games you used to play over and over again with your friends as a kids in middle. We have tic-tac-toe, connect four, and a thematic trivia game for you to enjoy. So find the start button on this screen to start playing those games right now!!!                                                                                                                                                                                          ");
-	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/username.");
-	 newline= new JTextArea(" ");
-	 newline.setBackground(null);
 	 
+	 JTextArea startblurb = new JTextArea("Welcome to Game Center!!! Game Center is a place where you can play some of those games you used to play over and over again with your friends as a kids in middle. We have tic-tac-toe, connect four, and a thematic trivia game for you to enjoy. So find the start button on this screen to start playing those games right now!!!");
+	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/username.");
+
+
 	 activate(startblurb);	
 	 activate(note);
 
@@ -100,10 +100,14 @@ public class GUI extends JFrame{
 	 Events e1 = new Events();
 	 startb.addActionListener(e1);
 	 
-	
-	 panel.add(startblurb);
-	 panel.add(startb);
-	 panel.add(note);
+	 Box center = Box.createVerticalBox();
+	 
+	 center.add(startblurb);
+	 center.add(new newline());
+	 center.add(note);
+	 center.add(new newline());	
+	 center.add(startb);
+	 panel.add(center);
 
 	 //background = frame.getContentPane();
 	 //background.setLayout(new FlowLayout());
@@ -247,7 +251,7 @@ public class GUI extends JFrame{
 	center.add(tic);
 	center.add(Box.createVerticalGlue());
 	center.createVerticalStrut(100);
-	center.add(newline);
+	center.add(new newline());
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
@@ -299,7 +303,7 @@ public class GUI extends JFrame{
 	center.add(connect4);
 	center.add(Box.createVerticalGlue());
 	center.createVerticalStrut(100);
-	center.add(newline);
+	center.add(new newline());
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
@@ -382,15 +386,24 @@ public class GUI extends JFrame{
     }
     public void changeprofile(){
 	pt = new JPanel();
+
 	Box center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
-	
+	//username	
 	center.add(Box.createVerticalGlue());
-
+	submit = new JButton("Submit");
+	center.add(submit);
 	
-	frame.add(pt);
+	frame.add(pt, BorderLayout.CENTER);
     }
-
+    private class newline extends JTextArea{
+	public newline(){
+	    this.setText("");
+	    this.setBackground(null);
+	    this.setEditable(false);
+	    this.setFont(new Font("Serif", Font.BOLD, 20));
+	}
+    }
    
     public static void main(String[]args){
 	GUI x = new GUI();

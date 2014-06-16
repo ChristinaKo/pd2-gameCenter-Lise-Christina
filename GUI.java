@@ -76,7 +76,6 @@ public class GUI extends JFrame{
 	 scorebox.add(spacelabel);
 	 scorebox.add(scorelabel);
 
-	 
 	 menubar.add(scorebox, BorderLayout.LINE_END);
 		 
 	 Title.add(menubar);
@@ -88,6 +87,8 @@ public class GUI extends JFrame{
        
 	 JTextArea startblurb = new JTextArea("Welcome to Game Center!!! Game Center is a place where you can play some of those games you used to play over and over again with your friends as a kids in middle. We have tic-tac-toe, connect four, and a thematic trivia game for you to enjoy. So find the start button on this screen to start playing those games right now!!!                                                                                                                                                                                          ");
 	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/username.");
+	 newline= new JTextArea(" ");
+	 newline.setBackground(null);
 	 
 	 activate(startblurb);	
 	 activate(note);
@@ -220,7 +221,6 @@ public class GUI extends JFrame{
 	tic.setBackground(Color.black);
 	tic.setPreferredSize(new Dimension(300, 300));
 	JButton[][] boardsq = new JButton[3][3];
-
 	Board = new JPanel(new GridLayout(3,3));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
@@ -235,18 +235,31 @@ public class GUI extends JFrame{
 	}
 	
 	tic.add(Board);	
-	pt.add(tic);
-	
-	pt.setBackground(Color.magenta.darker());
-	frame.getContentPane().add(pt);
 
+	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
-	pt.add(t1,BorderLayout.SOUTH);
-	pt.add(t2,BorderLayout.SOUTH);
-
 	activate(t1);
 	activate(t2);
+
+	Box center = Box.createVerticalBox();
+	center.add(Box.createVerticalGlue());
+	center.add(tic);
+	center.add(Box.createVerticalGlue());
+	center.createVerticalStrut(100);
+	center.add(newline);
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
+	h.add(t1);
+	h.add(t2);
+	h.add(Box.createHorizontalGlue());
+	center.add(h);
+	center.add(Box.createVerticalGlue());
+	pt.add(center);
+
+	pt.setBackground(Color.magenta.darker());
+	frame.getContentPane().add(pt);
     }
 
     public void connectfour(){
@@ -257,13 +270,13 @@ public class GUI extends JFrame{
 	
 	connect4= new JPanel(new BorderLayout(3,3));
 	connect4.setBackground(Color.black);
-	connect4.setPreferredSize(new Dimension(300, 300));
-	JButton[][] boardsq = new JButton[3][3];
+	connect4.setPreferredSize(new Dimension(400,300));
+	JButton[][] boardsq = new JButton[8][6];
 
-	Board = new JPanel(new GridLayout(3,3));
+	Board = new JPanel(new GridLayout(8,6));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
-	for (int i = 0; i < 3; i++){
+	for (int i = 0; i < 8; i++){
 	    for (JButton x : boardsq[i]){
 		x = new JButton("");
 		x.setBorder(new LineBorder(Color.BLACK));
@@ -273,17 +286,32 @@ public class GUI extends JFrame{
 	    }
 	}
 	
-	connect4.add(Board);	
 
-
-	frame.getContentPane().add(pt,BorderLayout.CENTER);
+	//buttons for connect4 screen
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
-	pt.add(t1);
-	pt.add(t2);
 	activate(t1);
 	activate(t2);
+	connect4.add(Board);	
+	pt.add(connect4);
+	Box center = Box.createVerticalBox();
+	center.add(Box.createVerticalGlue());
+	center.add(connect4);
+	center.add(Box.createVerticalGlue());
+	center.createVerticalStrut(100);
+	center.add(newline);
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
+	h.add(t1);
+	h.add(t2);
+	h.add(Box.createHorizontalGlue());
+	center.add(h);
+	center.add(Box.createVerticalGlue());
+	pt.add(center);
 
+	frame.getContentPane().add(pt,BorderLayout.CENTER);
+	
     }
 
 
@@ -364,7 +392,6 @@ public class GUI extends JFrame{
     }
 
    
-
     public static void main(String[]args){
 	GUI x = new GUI();
 	

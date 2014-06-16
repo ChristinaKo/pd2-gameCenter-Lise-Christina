@@ -11,7 +11,7 @@ public class Connect4{
 	name = n;
 	score = 0;
     }
-    public String getColor(){
+    public String getPColor(){
 	if (color ){
 	    return "red";
 	}
@@ -20,19 +20,37 @@ public class Connect4{
 	}
 	
     }
-    public void move(int x, int y){
+    public String getOColor(){
+	if(getPColor.equals("red")){
+	    return "black";
+	}
+	else{
+	    return "red";
+	}
+    }
+		  
+    public void Pmove(int x, int y){
 	if(board[x][y] == null){
-	    board[x][y] = getColor();
+	    board[x][y] = getPColor();
 	}
 	else{
 	    System.out.println("Please try again");
 	}
     }
-  
+    public void Omove(){
+	for(int i = 0; i < board.length; i++){
+	    for(int j = 0; j < board[i].length; j++){
+		if(board[i][j]== null){
+		    board[i][j] = getOColor();
+		    break;
+		}
+	    }
+	}
+    }
     public boolean winner(){
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
-		if (board[i][j]==getColor()){
+		if (board[i][j]==getPColor()){
 		    //add the check winner methods that would decide if you had won or not
 		    if (checkWinner(x+2, j) && checkWinner(x+1,j) && checkWinner(x-1, j)){
 			return true;
@@ -56,7 +74,20 @@ public class Connect4{
 
     public boolean checkWinner(int x, int y){
 	try{
-	    if (board[x][y] == getColor()){
+	    if (board[x][y] == getPColor()){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+	}
+	catch(ArrayIndexOutOfBounds e){
+	    return false;	    
+	}
+    }
+  public boolean checkLoser(int x, int y){
+	try{
+	    if (board[x][y] == getOColor()){
 		return true;
 	    }
 	    else{

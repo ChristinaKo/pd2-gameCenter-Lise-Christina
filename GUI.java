@@ -38,7 +38,7 @@ public class GUI extends JFrame{
     
     //score variables
     protected PriorityQueue<Profile> ticscore,cfscore,qscore;
-    private int tempscore;
+    private int ticscore, c4score, triviascore;
     
     //maxheaps of the high scores of each game
 
@@ -164,21 +164,21 @@ public class GUI extends JFrame{
 		     }
 		 }
 		 else if (e1.getSource() == b1){
-		     tempscore = 0;
+		     ticscore = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     tictac();
 		 }
 		 else if (e1.getSource() == b2){
-		     tempscore = 0;
+		     c4score = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     connectfour();
 		 }
 		 else if (e1.getSource() == b3){
-		     tempscore = 0;
+		     triviascore = 0;
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
@@ -246,7 +246,7 @@ public class GUI extends JFrame{
 
     public void tictac(){
 	title.setText("Tic-Tac-Toe");
-	scorelabel.setText("Player: " + username +"        SCORE: "+ tempscore + "  ");
+	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
 	pt = new JPanel();
 	tic= new JPanel(new BorderLayout(3,3));
 	tic.setBackground(Color.black);
@@ -294,7 +294,7 @@ public class GUI extends JFrame{
 
     public void connectfour(){
 	title.setText("Connect Four");
-	scorelabel.setText("Player: " + username +"        SCORE: "+ tempscore + "  ");
+	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
 	
@@ -357,7 +357,7 @@ public class GUI extends JFrame{
     public void trivia(){
 	title.setText("Trivia");
 
-	scorelabel.setText("Player: " + username +"        SCORE: "+ tempscore + "  ");
+	scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
 	pt= new JPanel();
 	pt.setBackground(new Color(32,178,170));
 	

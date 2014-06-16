@@ -55,7 +55,7 @@ public class GUI extends JFrame{
 
 	 Title= new JMenuBar();
 	 Title.setOpaque(true);
-	 Title.setBackground(Color.red);
+	 Title.setBackground(new Color(238,130,238));
 	 Title.setPreferredSize(new Dimension(100,40));
 
 	 menubar= new JPanel();
@@ -323,7 +323,7 @@ public class GUI extends JFrame{
 	title.setText("Trivia");
 	scorelabel.setText("SCORE: " + tempscore + " ");
 	pt= new JPanel();
-	pt.setBackground(Color.orange);
+	pt.setBackground(new Color(32,178,170));
 	
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
 	t1= new JButton("Restart");

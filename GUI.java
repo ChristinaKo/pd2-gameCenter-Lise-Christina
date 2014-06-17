@@ -14,7 +14,8 @@ public class GUI extends JFrame{
     
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
-    protected JButton t1, c1;
+    protected JButton t1, c1, cq2, p2;
+    protected JButton ct1,ct2,ct3,ct4,ct5,ct6,ct7;
     protected JButton t2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
     protected JButton tac1,tac2,tac3,tac4,tac5,tac6,tac7,tac8, tac9;
@@ -52,6 +53,7 @@ public class GUI extends JFrame{
     //back end variables//
     private char sym, opp;
     protected char[][] board;
+    protected String[][] cboard;
     protected boolean easy;
 
     protected TrueOrFalse tf;
@@ -117,7 +119,8 @@ public class GUI extends JFrame{
 	 startb.addActionListener(e1);
 	 
 	 center = Box.createVerticalBox();
-	 
+	 center.add(new newline());
+	 center.add(new newline());
 	 center.add(startblurb);
 	 center.add(new newline());
 	 center.add(note);
@@ -225,7 +228,9 @@ public class GUI extends JFrame{
 		     pt.removeAll();
 		     pt.revalidate();
 		     frame.remove(pt);
-		     mainscreen();		    
+		     mainscreen();	
+		     tichs.add(new Profile (username,ticscore));
+		     ticscore=0;
 		 }
 		 else if (e1.getSource() == prof){
 		     pt.removeAll();
@@ -369,10 +374,23 @@ public class GUI extends JFrame{
 		    if (tr.isSelected()){
 			if (tf.checkAnswer(tr.getText())){
 			    triviascore += 5;
+			    scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
 			}
 			else {
 			    qhs.add(new Profile(username,triviascore));
 			    triviascore = 0;
+			    scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
+			}
+		    }
+		    else if (fa.isSelected()){
+			if (tf.checkAnswer(fa.getText())){
+			    triviascore += 5;
+			    scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
+			}
+			else {
+			    qhs.add(new Profile(username,triviascore));
+			    triviascore = 0;
+			    scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
 			}
 		    }
 		    pt.removeAll();
@@ -380,6 +398,34 @@ public class GUI extends JFrame{
 		    frame.remove(pt);
 		    trivia();
 		}
+		else if (e1.getSource() == p2){
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    mainscreen();		    
+		}
+		else if (e1.getSource() == cq2){
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    mainscreen();	
+		    c4hs.add(new Profile(username,c4score));
+		    c4score =0;
+		}
+		 /*	else if (e1.getSource() = ct1 || e1.getSource()= ct2  || e1.getSource()= ct3  || e1.getSource()= ct4  || e1.getSource()= ct5  || e1.getSource()= ct6  || e1.getSource()= ct7  || e1.getSource()= ct8  || e1.getSource()= ct9){
+		    if (filled()){
+			center.add(new newline());
+			center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
+			pt.revalidate();
+		    }
+		    else if(cwinner()){
+			cwinAction();
+		    }
+		    else if (closer()){
+			closeAction();
+		    }
+		   
+		    }*/
 	     }
 	     catch(Exception e){
 		 e.printStackTrace();
@@ -532,7 +578,13 @@ public class GUI extends JFrame{
 	JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
 	activate(z);
 	center.add(z);
-	    
+	if (easy){
+	    ticscore += 5;
+	}
+	else{
+	    ticscore += 10;
+	} 
+	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
     }
     public void loseAction(){
 	for (int i =0; i<3; i++){
@@ -551,7 +603,9 @@ public class GUI extends JFrame{
 	center.add(z);
 	center.add(a);
 	center.add(q);
-			
+	tichs.add(new Profile(username,ticscore));
+	ticscore=0;	
+	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
     }
 
     public boolean filled(){
@@ -597,13 +651,15 @@ public class GUI extends JFrame{
 				}
 			    }
 			    else{
-				board[i+2][j] = opp;
-				ans[0] = i+2;
-				ans[1] = j;
-				return ans;
+				if (i+2<board.length && board[i+2][j] =='\0'){
+				    board[i+2][j] = opp;
+				    ans[0] = i+2;
+				    ans[1] = j;
+				    return ans;
+				}
 			    }
 			}
-			else if( j + 1 <board[i].length){
+			else if( j + 1 <board[i].length && i+1 < board.length){
 			    if(board[i + 1][j+1] == sym){
 				if( i-1 >= 0 && j -1 >= 0){
 				    if(board[i-1][j-1] == '\0'){
@@ -663,10 +719,12 @@ public class GUI extends JFrame{
 			    }
 			    else{
 				if (i+2<board.length){
-				    board[i+2][j] = opp;
-				    ans[0] = i+2;
-				    ans[1] = j;
-				    return ans;
+				    if (board[i+2][j] =='\0'){
+					board[i+2][j] = opp;
+					ans[0] = i+2;
+					ans[1] = j;
+					return ans;
+				    }
 				}
 			    }
 			}
@@ -776,7 +834,6 @@ public class GUI extends JFrame{
 		}
 	    }
 	}
-	//add score component
 	return false;
     }
 		
@@ -802,45 +859,61 @@ public class GUI extends JFrame{
 	}
 	return false;
     }
+	 
     public void connectfour(){
-	title.setText("Connect Four");
+	title.setText("Number Guessing");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
 	
 	connect4= new JPanel(new BorderLayout(3,3));
-	connect4.setBackground(Color.black);
+	connect4.setBackground(Color.yellow);
 	connect4.setPreferredSize(new Dimension(500,300));
 	JButton[][] boardsq = new JButton[6][7];
 
 	Board = new JPanel(new GridLayout(6,7));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
-	
-	for (int i = 0; i < 6; i++){
-	    for (JButton x : boardsq[i]){
-		x = new JButton("");
+	cboard = new String[6][7];
+
+
+	boardsq[0][0] =ct1;
+	boardsq[0][1] = ct2;
+	boardsq[0][2] = ct3;
+	boardsq[0][3] = ct4;
+	boardsq[0][4] = ct5;
+	boardsq[0][5] = ct6;
+	boardsq[0][6] = ct7;
+	boardsq[0][7] = ct8;
+	boardsq[0][8] = ct9;
+	for (int j =0; j<9; j++){
+	    boardsq[0][j].setBorder(new LineBorder(Color.BLACK));
+	    boardsq[0][j].setBackground(Color.yellow.darker());
+	    Board.add(boardsq[0][j]);
+    	    board[0][j].setEnabled(true);
+	}	
+    
+	for (int i = 1; i < 6; i++){
+	    for (int j =0; j<7; j++){
+	        cboard[i][j] = "";
+		JButton x = new JButton("");
 		x.setBorder(new LineBorder(Color.BLACK));
-		x.setBackground(Color.blue);
+		x.setBackground(Color.yellow);
 		Board.add(x);
-		if (i ==0){
-		    x.setBackground(Color.yellow);
-		    activate(x);
-		}
-		else{
-		    x.setEnabled(false);
-		}
 	
+		x.setEnabled(false);
+		boardsq[i][j] = x;
 	
 	    }
 	}
 	
+    
 
 	//buttons for connect4 screen
 	c1= new JButton("Restart");
-	t2= new JButton("Quit");
-	activate(t1);
-	activate(t2);
+	cq2= new JButton("Quit");
+	activate(c1);
+	activate(cq2);
 	connect4.add(Board);	
 	pt.add(connect4);
 	center = Box.createVerticalBox();
@@ -852,8 +925,8 @@ public class GUI extends JFrame{
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
-	h.add(t1);
-	h.add(t2);
+	h.add(c1);
+	h.add(cq2);
 	h.add(Box.createHorizontalGlue());
 	center.add(h);
 	center.add(Box.createVerticalGlue());
@@ -931,13 +1004,11 @@ public class GUI extends JFrame{
 	tf.setQuestions();
 	JTextArea q = new JTextArea(tf.askQuestion());
 	activate(q);
-	q.setFont(new Font("Serif", Font.BOLD, 17));
+	q.setFont(new Font("Arial", Font.BOLD, 17));
 
 	center = Box.createVerticalBox();
 	center.add(new newline());    
 	center.add(new newline());    
-	center.add(new newline());
-	center.add(new JLabel("Question:"));
 	center.add(new newline());
 	center.add(new newline());
 	center.add(q);
@@ -946,14 +1017,17 @@ public class GUI extends JFrame{
 	center.add(fa);
 	center.add(new newline()); 
 	submit= new JButton("Submit");
-	t2= new JButton("Quit");
+	p2= new JButton("Quit");
 	activate(submit);
 	activate(t2);
 	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
 	h.add(submit);
+	h.add(Box.createHorizontalGlue());
 	h.add(t2);
+	h.add(Box.createHorizontalGlue());
 	center.add(h);
-	pt.add(center);
+	pt.add(center, BorderLayout.CENTER);
 	center.add(new newline());
 	frame.add(pt,BorderLayout.CENTER);
 	
@@ -968,17 +1042,44 @@ public class GUI extends JFrame{
 	pt= new JPanel();
 	pt.setBackground(Color.pink.darker());
 
-	JTable board = new JTable(10,3){
-		public boolean isCellEditable(int row, int column){
-		    return false;
-		}
-	    };
-	board.setGridColor(Color.black);
-	board.setRowHeight(10);
-	TableColumn column;
-	for (int i =0; i <3; i++){
-	    column=board.getColumnModel().getColumn(i);
-	    column.setPreferredWidth(100);
+	JPanel hsboard = new JPanel(new GridLayout(10,3));
+	
+	Profile[] ttt = new Profile[7];
+	Profile[] cf = new Profile[7];
+	Profile[] tq = new Profile[7];
+	PriorityQueue<Profile> e =  tichs;
+	PriorityQueue<Profile> w =  c4hs;
+	PriorityQueue<Profile> q =  qhs;
+	
+	for (int i = 0; i < 9; i++){
+	    tichs.add(new Profile("Anonymous",0));
+	    c4hs.add(new Profile("Anonymous",0));
+	    qhs.add(new Profile("Anonymous",0));
+	 }
+	for (int i =0; i < 7; i++){
+	    ttt[i] = tichs.poll();
+	    cf[i]= c4hs.poll();
+	    tq[i] = qhs.poll();
+	}
+	for (int i =0; i < 7; i++){
+	    tichs.add(ttt[i]);
+	    c4hs.add(cf[i]);
+	    qhs.add(tq[i]);
+	}
+	
+	JLabel l =new JLabel("Tic-Tac-Toe");
+	JLabel k = new JLabel("Connect4");
+	JLabel j = new JLabel("Trivia Questions");
+	hsboard.add(l);
+	hsboard.add(k);
+	hsboard.add(j);
+	l.setFont(new Font("Arial", Font.BOLD, 17));
+	k.setFont(new Font("Arial", Font.BOLD, 17));
+	j.setFont(new Font("Arial", Font.BOLD, 17));
+	for (int i = 0; i < 6; i++){
+	    hsboard.add(new JLabel(ttt[i].toString()));
+	    hsboard.add(new JLabel(cf[i].toString()));
+	    hsboard.add(new JLabel(tq[i].toString()));
 	}
 	t2= new JButton("Main Menu");
 	prof= new JButton("Change Profile");
@@ -986,7 +1087,8 @@ public class GUI extends JFrame{
 	activate(prof);
 	center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
-	center.add(board);
+	center.add(new newline());
+	center.add(hsboard);
 	center.add(Box.createVerticalGlue());
 	center.createVerticalStrut(100);
 	center.add(new newline());

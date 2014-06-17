@@ -5,7 +5,7 @@ public class Connect4{
     boolean color;
     int score;
     String name;
-    String[][] board= new String[6][7];
+    String[][] cboard= new String[6][7];
     public Connect4(String n,boolean c){
 	color = c;
 	name = n;
@@ -30,14 +30,14 @@ public class Connect4{
     }
 		  
     public boolean PMove(int x, int y){
-	if(board[x][y] == null){
+	if(cboard[x][y] == null){
 	    if(x == 0){
-	    board[x][y] = getPColor();
+	    cboard[x][y] = getPColor();
 	    return true;
 	    }
 	    
-	    else if(x>0 && board[x-1][y]!=null){
-		board[x][y] = getPColor();
+	    else if(x>0 && cboard[x-1][y]!=null){
+		cboard[x][y] = getPColor();
 		return true;
 	    }
 	    else{
@@ -54,19 +54,19 @@ public class Connect4{
 
     }
     public void OMove(){
-	for(int i = 0; i < board.length; i++){
-	    for(int j = 0; j < board[i].length; j++){
-		if(board[i][j]== null){
-		    board[i][j] = getOColor();
+	for(int i = 0; i < cboard.length; i++){
+	    for(int j = 0; j < cboard[i].length; j++){
+		if(cboard[i][j]== null){
+		    cboard[i][j] = getOColor();
 		    return;
 		}
 	    }
 	}
     }
-    public boolean winner(){
-	for(int i = 0; i < board.length; i++){
-	    for(int j = 0; j < board[i].length; j++){
-		if (board[i][j]==getPColor()){
+    public boolean cwinner(){
+	for(int i = 0; i < cboard.length; i++){
+	    for(int j = 0; j < cboard[i].length; j++){
+		if (cboard[i][j]==getPColor()){
 		    //add the check winner methods that would decide if you had won or not
 		    if (checkWinner(i+2, j) && checkWinner(i+1,j) && checkWinner(i-1, j)){
 			return true;
@@ -84,24 +84,23 @@ public class Connect4{
 	    }
 
 	}
-	// add score componentscore = score + ; 
 	return false;
     }
-    public boolean loser(){
-	for(int i = 0; i < board.length; i++){
-	    for(int j = 0; j < board[i].length; j++){
-		if (board[i][j]==getPColor()){
+    public boolean closer(){
+	for(int i = 0; i < cboard.length; i++){
+	    for(int j = 0; j < cboard[i].length; j++){
+		if (cboard[i][j]==getPColor()){
 		    //add the check winner methods that would decide if you had won or not
-		    if (checkLoser(i+2, j) && checkLoser(i+1,j) && checkLoser(i-1, j)){
+		    if (checkCloser(i+2, j) && checkCloser(i+1,j) && checkCloser(i-1, j)){
 			return true;
 		    }
-		    else if (checkLoser(i, j+2) && checkLoser(i, j+1) && checkLoser(i, j-1)){
+		    else if (checkCloser(i, j+2) && checkCloser(i, j+1) && checkCloser(i, j-1)){
 			return true;
 		    }
-		    else if (checkLoser(i+2, j+2) && checkLoser(i+1, j+1) && checkLoser(i-1, j-1)){
+		    else if (checkCloser(i+2, j+2) && checkCloser(i+1, j+1) && checkCloser(i-1, j-1)){
 			return true;
 		    }
-		    else if (checkLoser(i-2, j+2) && checkLoser(i-1, j+1) && checkLoser(i+1,j-1)){
+		    else if (checkCloser(i-2, j+2) && checkCloser(i-1, j+1) && checkCloser(i+1,j-1)){
 			return true;
 		    }
 		}
@@ -114,7 +113,7 @@ public class Connect4{
 
     public boolean checkWinner(int x, int y){
 	try{
-	    if (board[x][y] == getPColor()){
+	    if (cboard[x][y] == getPColor()){
 		return true;
 	    }
 	    else{
@@ -125,9 +124,9 @@ public class Connect4{
 	    return false;	    
 	}
     }
-  public boolean checkLoser(int x, int y){
+  public boolean checkCloser(int x, int y){
 	try{
-	    if (board[x][y] == getOColor()){
+	    if (cboard[x][y] == getOColor()){
 		return true;
 	    }
 	    else{
@@ -140,11 +139,11 @@ public class Connect4{
     }
 
     public void play(){
-	if(winner()){
+	if(cwinner!()){
 	    System.out.println("Congratulations");
 	    System.exit(0);
 	}
-	else if(loser()){
+	else if(closer()){
 	    System.out.println("sorry");
 	    System.exit(0);
 	}
@@ -166,14 +165,14 @@ public class Connect4{
     }
     public String toString(){
 	String s = "";
-	for(int i= board.length-1; i>=0; i--){
-	    for(int j = board[i].length-1; j>=0; j--){
-		if(board[i][j] == null){
+	for(int i= cboard.length-1; i>=0; i--){
+	    for(int j = cboard[i].length-1; j>=0; j--){
+		if(cboard[i][j] == null){
 		    s = s + "  *   ";
 		}
 
 		else{
-		    s = s + board[i][j] + " ";
+		    s = s + cboard[i][j] + " ";
 		}
 	    }
 	    s = s +"\n";

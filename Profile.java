@@ -15,7 +15,7 @@ public class Profile implements Comparable<Profile> {
 	return this.score - o1.score;
     }
     public String toString(){
-	return name;
+	return name + "- " + score;
     }
 
     public static void main(String[]args){

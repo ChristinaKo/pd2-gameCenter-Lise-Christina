@@ -2,13 +2,9 @@ import java.io.*;
 import java.util.*;
 
 public class TrueOrFalse{
-    String name;
     String qans;
     String quest;
     ArrayList <String> questions = new ArrayList<String>();
-    public TrueOrFalse(String n){
-	name = n;
-    }
     public TrueOrFalse(){
     }
     public void  setQuestions(){

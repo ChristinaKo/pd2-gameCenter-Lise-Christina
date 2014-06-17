@@ -283,57 +283,60 @@ public class GUI extends JFrame{
 			loseAction();			
 		    }
 		    if (e1.getSource()==tac1){
-			
-			tac1.setPressedIcon(pla);
-			tac1.setEnabled(false);
+			tac1.setIcon(pla);
+	tac1.setDisabledIcon(pla);
+	tac1.setPressedIcon(pla);
+	tac1.setSelectedIcon(pla);
+	tac1.setIcon(pla);
+			tac1.setEnabled(false);			
 			board[0][0]=sym; 
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac2){
-			tac2.setPressedIcon(pla);
+			tac2.setIcon(pla);
 			tac2.setEnabled(false);
 			board[0][1]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac3){
-			tac3.setDisabledIcon(pla);
+			tac3.setIcon(pla);
 			tac3.setEnabled(false);
 			board[0][2]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac4){
-			tac4.setDisabledIcon(pla);
+			tac4.setIcon(pla);
 			tac4.setEnabled(false);
 			board[1][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac5){
-			tac5.setDisabledIcon(pla);
+			tac5.setIcon(pla);
 			tac5.setEnabled(false);
 			board[1][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac6){
-			tac6.setDisabledIcon(pla);
+			tac6.setIcon(pla);
 			tac6.setEnabled(false);
 			board[1][2]=sym;
 			ticmove();		    
 		    
 		    }
 		    else if (e1.getSource() ==tac7){
-			tac7.setDisabledIcon(pla);
+			tac7.setIcon(pla);
 			tac7.setEnabled(false);
 			board[2][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac8){
-			tac8.setDisabledIcon(pla);
+			tac8.setIcon(pla);
 			tac8.setEnabled(false);
 			board[2][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac9){
-			tac9.setDisabledIcon(pla);
+			tac9.setIcon(pla);
 			tac9.setEnabled(false);
 			board[2][2]=sym;
 			ticmove();		    
@@ -468,7 +471,7 @@ public class GUI extends JFrame{
 		x = OMove();
 	    }
 	    if (x != null){
-		boardsq[x[0]][x[1]].setDisabledIcon(oppo);
+		boardsq[x[0]][x[1]].setIcon(oppo);
 		boardsq[x[0]][x[1]].setEnabled(false);
 		board[x[0]][x[1]]=opp;
 		if (loser()){
@@ -716,6 +719,19 @@ public class GUI extends JFrame{
 		    else if(checkWinner(i-1, j+1) && checkWinner(i+1, j-1)){
 			return true;
 		    }
+		    else if(checkWinner(i-2, j+2) && checkWinner(i-1, j+1)){
+			return true;
+		    }
+		    else if(checkWinner(i-1, j-1) && checkWinner(i-2, j-2)){
+			return true;
+		    }
+		    else if(checkWinner(i+2, j+2) && checkWinner(i+1, j+1)){
+			return true;
+		    }
+		    else if(checkWinner(i-1, j+1) && checkWinner(i+2, j-2)){
+			return true;
+		    }
+		   
 		}
 	    }
 	}

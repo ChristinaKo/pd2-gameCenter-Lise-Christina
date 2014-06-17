@@ -412,20 +412,26 @@ public class GUI extends JFrame{
 		    c4hs.add(new Profile(username,c4score));
 		    c4score =0;
 		}
-		 /*	else if (e1.getSource() = ct1 || e1.getSource()= ct2  || e1.getSource()= ct3  || e1.getSource()= ct4  || e1.getSource()= ct5  || e1.getSource()= ct6  || e1.getSource()= ct7  || e1.getSource()= ct8  || e1.getSource()= ct9){
-		    if (filled()){
-			center.add(new newline());
-			center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
+		else if (e1.getSource() == ct1 || e1.getSource()== ct2  || e1.getSource()== ct3  || e1.getSource()== ct4  || e1.getSource()==ct5  || e1.getSource()== ct6  || e1.getSource()== ct7 ){
+		  
+			int d = (int)(Math.random() *6);
+			int j = (int)(Math.random() *7);
+			boardsq[d][j] = new JButton();
+			boardsq[d][j].setBackground(new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
 			pt.revalidate();
-		    }
-		    else if(cwinner()){
+		  
+		}
+		      
+		 
+		 /* else if(cwinner()){
 			cwinAction();
 		    }
 		    else if (closer()){
 			closeAction();
 		    }
+		 */
 		   
-		    }*/
+		    
 	     }
 	     catch(Exception e){
 		 e.printStackTrace();
@@ -861,7 +867,7 @@ public class GUI extends JFrame{
     }
 	 
     public void connectfour(){
-	title.setText("Simplified ");
+	title.setText("Simplified ConnectFour");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
@@ -876,6 +882,21 @@ public class GUI extends JFrame{
 	Board.setBorder(new LineBorder(Color.BLACK));
 	cboard = new String[6][7];
 
+	
+	ct1= new JButton();
+	ct2= new JButton();
+	ct3= new JButton();
+	ct4= new JButton();
+	ct5= new JButton();
+	ct6= new JButton();
+	ct7= new JButton();
+	activate(ct1);
+	activate(ct2);
+	activate(ct3);
+	activate(ct4);
+	activate(ct5);
+	activate(ct6);
+	activate(ct7);
 	boardsq[0][0] =ct1;
 	boardsq[0][1] = ct2;
 	boardsq[0][2] = ct3;
@@ -883,13 +904,11 @@ public class GUI extends JFrame{
 	boardsq[0][4] = ct5;
 	boardsq[0][5] = ct6;
 	boardsq[0][6] = ct7;
-	boardsq[0][7] = ct8;
-	boardsq[0][8] = ct9;
-	for (int j =0; j<9; j++){
+	for (int j =0; j<7; j++){
 	    boardsq[0][j].setBorder(new LineBorder(Color.BLACK));
 	    boardsq[0][j].setBackground(Color.yellow.darker());
 	    Board.add(boardsq[0][j]);
-    	    board[0][j].setEnabled(true);
+    	    boardsq[0][j].setEnabled(true);
 	}	
     
 	for (int i = 1; i < 6; i++){

@@ -582,72 +582,7 @@ public class GUI extends JFrame{
     }
     public int[] OMove(){
 	int[] ans = new int[2];
-	for (int i = 0; i < board.length; i++){
-	    for(int j = 0; j <board[i].length; j++){
-		if(board[i][j] == opp){
-		    if(i + 1 < board.length){
-			if(board[i +1][j] == opp){
-			    if(i - 1 ==0){
-				if(board[i-1][j] == '\0'){
-				    board[i-1][j] = opp;
-				    ans[0] = i-1;
-				    ans[1] = j;
-				    return ans;
-				}
-			    }
-			    else{
-				if (i+2<board.length){
-				    board[i+2][j] = opp;
-				    ans[0] = i+2;
-				    ans[1] = j;
-				    return ans;
-				}
-			    }
-			}
-			else if( j + 1 <board[i].length){
-			    if(board[i + 1][j+1] == opp){
-				if( i-1 >= 0 && j -1 >= 0){
-				    if(board[i-1][j-1] == '\0'){
-					board[i-1][j-1] = opp;
-					ans[0] = i-1;
-					ans[1] = j-1;
-					return ans;
-				    }
-				}
-				else{
-				    if(i+2< board.length && j+2<board.length){
-					if(board[i+2][j+2] == '\0'){
-					    board[i+2][j+2] =opp;
-					    ans[0] = i+2;
-					    ans[1] = j+2;
-					    return ans;
-					}
-				    }
-				}
-			    }
-			}
-			else if(j-1 == 0){
-			    if(board[i][j-1] == '\0'){
-				board[i][j-1] = opp;
-				ans[0] = i;
-				ans[1] = j-1;
-				return ans;
-			    }
-			}
-			else{
-			    if (i+2<board.length){
-				if(board[i][j+2] == '\0'){
-				    board[i][j+2] = opp;
-				    ans[0] = i;
-				    ans[1] = j+2;
-				    return ans;
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}
+	
 	for (int i = 0; i < board.length; i++){
 	    for(int j = 0; j <board[i].length; j++){
 		if(board[i][j] == sym){
@@ -701,6 +636,72 @@ public class GUI extends JFrame{
 			}
 			else{
 			    if (j+2<3){
+				if(board[i][j+2] == '\0'){
+				    board[i][j+2] = opp;
+				    ans[0] = i;
+				    ans[1] = j+2;
+				    return ans;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	for (int i = 0; i < board.length; i++){
+	    for(int j = 0; j <board[i].length; j++){
+		if(board[i][j] == opp){
+		    if(i + 1 < board.length){
+			if(board[i +1][j] == opp){
+			    if(i - 1 ==0){
+				if(board[i-1][j] == '\0'){
+				    board[i-1][j] = opp;
+				    ans[0] = i-1;
+				    ans[1] = j;
+				    return ans;
+				}
+			    }
+			    else{
+				if (i+2<board.length){
+				    board[i+2][j] = opp;
+				    ans[0] = i+2;
+				    ans[1] = j;
+				    return ans;
+				}
+			    }
+			}
+			else if( j + 1 <board[i].length){
+			    if(board[i + 1][j+1] == opp){
+				if( i-1 >= 0 && j -1 >= 0){
+				    if(board[i-1][j-1] == '\0'){
+					board[i-1][j-1] = opp;
+					ans[0] = i-1;
+					ans[1] = j-1;
+					return ans;
+				    }
+				}
+				else{
+				    if(i+2< board.length && j+2<board.length){
+					if(board[i+2][j+2] == '\0'){
+					    board[i+2][j+2] =opp;
+					    ans[0] = i+2;
+					    ans[1] = j+2;
+					    return ans;
+					}
+				    }
+				}
+			    }
+			}
+			else if(j-1 == 0){
+			    if(board[i][j-1] == '\0'){
+				board[i][j-1] = opp;
+				ans[0] = i;
+				ans[1] = j-1;
+				return ans;
+			    }
+			}
+			else{
+			    if (j+2<board.length){
 				if(board[i][j+2] == '\0'){
 				    board[i][j+2] = opp;
 				    ans[0] = i;

@@ -23,7 +23,7 @@ public class TrueOrFalse{
     }
     public String askQuestion(){
 	Random r = new Random();
-	int queNum = r.nextInt();
+	int queNum = r.nextInt(questions.size());
 	String[] parts = questions.get(queNum).split(",");
 	quest = parts[0];
 	qans = parts[1];

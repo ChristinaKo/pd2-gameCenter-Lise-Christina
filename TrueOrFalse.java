@@ -6,16 +6,16 @@ public class TrueOrFalse{
     String qans;
     String quest;
     ArrayList <String> questions = new ArrayList<String>();
-     public TrueOrFalse(String n){
+    public TrueOrFalse(String n){
 	name = n;
     }
     public TrueOrFalse(){
     }
     public void  setQuestions(){
 	try{
-	    Scanner sc = new Scanner(new File("test.csv"));
+	    Scanner sc = new Scanner(new File("test.txt"));
 	    while(sc.hasNext()){
-		questions.add(sc.next());
+		questions.add(sc.nextLine());
 	    }
 	}
 	catch(FileNotFoundException e){
@@ -23,7 +23,8 @@ public class TrueOrFalse{
     }
     public String askQuestion(){
 	Random r = new Random();
-	int queNum = r.nextInt();
+	setQuestions();
+	int queNum = r.nextInt(questions.size());
 	String[] parts = questions.get(queNum).split(",");
 	quest = parts[0];
 	qans = parts[1];
@@ -53,5 +54,11 @@ public class TrueOrFalse{
 		System.out.println("Incorrect");
 	    }
 	}
-    }    
+    } 
+    public static void main(String[] args){
+	TrueOrFalse n = new TrueOrFalse();
+	while(1==1){
+	    n.play();
+	}
+    }
 }

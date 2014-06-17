@@ -265,50 +265,88 @@ public class GUI extends JFrame{
 		    tictac();
 		}
 		else if (e1.getSource() == tac1 || e1.getSource() == tac2 || e1.getSource() == tac3 || e1.getSource() == tac4 || e1.getSource() == tac5 || e1.getSource() == tac6 || e1.getSource() == tac7 || e1.getSource() == tac8 || e1.getSource() == tac9){
+		    if (winner()){
+			for (int i =0; i<3; i++){
+			    for (JButton x: boardsq[i]){
+				x.setEnabled(false);
+			    }
+			}
+			center.add(new newline());
+			JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
+			activate(z);
+			center.add(z);
+		    }
+		    else if (loser()){
+			for (int i =0; i<3; i++){
+			    for (JButton x: boardsq[i]){
+				x.setEnabled(false);
+			    }
+			}
+			center.add(new newline());
+			JTextArea z = new JTextArea("YOU LOSE!!");
+			JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
+			JTextArea q = new JTextArea("Press 'Restart' to play again");
+			activate(z);
+			activate(a);
+			activate(q);
+			center.add(z);
+			center.add(a);
+			center.add(q);
+			
+		    }
 		    if (e1.getSource()==tac1){
 			tac1.setIcon(pla);
 			tac1.setEnabled(false);
+			board[0][0]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac2){
 			tac2.setIcon(pla);
 			tac2.setEnabled(false);
+			board[0][1]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac3){
 			tac3.setIcon(pla);
 			tac3.setEnabled(false);
+			board[0][2]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac4){
 			tac4.setIcon(pla);
 			tac4.setEnabled(false);
+			board[1][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac5){
 			tac5.setIcon(pla);
 			tac5.setEnabled(false);
+			board[1][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac6){
 			tac6.setIcon(pla);
 			tac6.setEnabled(false);
+			board[1][2]=sym;
 			ticmove();		    
 		    
 		    }
 		    else if (e1.getSource() ==tac7){
 			tac7.setIcon(pla);
 			tac7.setEnabled(false);
+			board[2][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac8){
 			tac8.setIcon(pla);
 			tac8.setEnabled(false);
+			board[2][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac9){
 			tac9.setIcon(pla);
 			tac9.setEnabled(false);
+			board[2][2]=sym;
 			ticmove();		    
 		    }
 
@@ -427,7 +465,11 @@ public class GUI extends JFrame{
 	}
     }
     public void ticmove(){
-	if (checkWinner && checkLoser){
+	if (filled()){
+	    center.add(new newline());
+	    center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
+	    pt.revalidate();
+	}else if (!winner() && !loser()){
 	    int[] x;  // 2 item array is for row index and column for tictac
 	    if (easy){
 		x= OMoveEasy();
@@ -439,12 +481,51 @@ public class GUI extends JFrame{
 		boardsq[x[0]][x[1]].setIcon(oppo);
 		boardsq[x[0]][x[1]].setEnabled(false);
 	    }
-	    else{
-		center.add(new newline());
-		center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
-		pt.revalidate();
+	}else if (winner()){
+	    for (int i =0; i<3; i++){
+		for (JButton x: boardsq[i]){
+		    x.setEnabled(false);
+		}
+	    }
+	    center.add(new newline());
+	    JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
+	    activate(z);
+	    center.add(z);
+	    
+	}
+	else if (loser()){
+	    for (int i =0; i<3; i++){
+		for (JButton x: boardsq[i]){
+		    x.setEnabled(false);
+		}
+	    }
+	    JTextArea z = new JTextArea("YOU LOSE!!");
+	    JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
+	    JTextArea q = new JTextArea("Press 'Restart' to play again");
+	    activate(z);
+	    activate(a);
+	    activate(q);
+	    center.add(z);
+	    center.add(a);
+	    center.add(q);
+	}
+	
+	    
+	
+	
+    }
+    
+    public boolean filled(){
+	boolean ans = true;
+	for(int i = 0; i <board.length; i ++){
+	    for (int j = 0; j < board[i].length; j++){
+		if(board[i][j] == '\0'){
+		    ans = false;
+		}
 	    }
 	}
+	return ans;
+
     }
     public int[] OMoveEasy(){
 	int[] ans = new int[2];
@@ -582,9 +663,7 @@ public class GUI extends JFrame{
 			return true;
 		    }
 		}
-
 	    }
-
 	}
 	//add score component
 	return false;

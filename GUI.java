@@ -247,8 +247,8 @@ public class GUI extends JFrame{
 		    else {
 			sym = 'O';
 			opp = 'X';
-			pla =X;
-			oppo=O;
+			pla =O;
+			oppo=X;
 		    }
 		    pt.removeAll();
 		    pt.revalidate();

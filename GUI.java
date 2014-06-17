@@ -29,7 +29,7 @@ public class GUI extends JFrame{
     protected JPanel panel;
     protected JPanel bp;
     protected JPanel gamep, pt,p; 
-
+    
     protected JPanel Board,tic,connect4;
     protected JTextField uname;
     protected String username;
@@ -53,7 +53,6 @@ public class GUI extends JFrame{
 
     //back end variables//
     private char sym, opp;
-    protected Tic game;
     protected char[][] board;
     protected boolean easy;
 
@@ -103,8 +102,9 @@ public class GUI extends JFrame{
 	 panel.setBackground(new Color(202,224,255));
 	 panel.setPreferredSize(new Dimension(200,480));
 	 
-	 JTextArea startblurb = new JTextArea("Welcome to Game Center!!! Game Center is a place where you can play some of those games you used to play over and over again with your friends as a kids in middle. We have tic-tac-toe, connect four, and a thematic trivia game for you to enjoy. So find the start button on this screen to start playing those games right now!!!");
-	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/uname.");
+	 JTextArea startblurb = new JTextArea("Welcome to Lise and Christina’s Game Center. Our Game Center allows you to play some games you played as a child. Currently our Game Center holds three games: Tic-Tac-Toe, Connect Four, and a True-or-False trivia game. To get started, find the start button on the screen and click!");
+	 
+	 JTextArea note = new JTextArea("Note: You will be asked to create a new profile so that any high scores can be attached to your name/username.");
 
 
 	 activate(startblurb);	
@@ -284,40 +284,54 @@ public class GUI extends JFrame{
 		    }
 		    if (e1.getSource()==tac1){
 			tac1.setIcon(pla);
-	tac1.setDisabledIcon(pla);
-	tac1.setPressedIcon(pla);
-	tac1.setSelectedIcon(pla);
-	tac1.setIcon(pla);
+			tac1.setDisabledIcon(pla);
+			tac1.setPressedIcon(pla);
+			tac1.setSelectedIcon(pla);
 			tac1.setEnabled(false);			
 			board[0][0]=sym; 
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac2){
 			tac2.setIcon(pla);
+			tac2.setDisabledIcon(pla);
+			tac2.setPressedIcon(pla);
+			tac2.setSelectedIcon(pla);
 			tac2.setEnabled(false);
 			board[0][1]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac3){
 			tac3.setIcon(pla);
+			tac3.setDisabledIcon(pla);
+			tac3.setPressedIcon(pla);
+			tac3.setSelectedIcon(pla);
 			tac3.setEnabled(false);
 			board[0][2]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac4){
 			tac4.setIcon(pla);
+			tac4.setDisabledIcon(pla);
+			tac4.setPressedIcon(pla);
+			tac4.setSelectedIcon(pla);
 			tac4.setEnabled(false);
 			board[1][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac5){
 			tac5.setIcon(pla);
+			tac5.setDisabledIcon(pla);
+			tac5.setPressedIcon(pla);
+			tac5.setSelectedIcon(pla);
 			tac5.setEnabled(false);
 			board[1][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac6){
 			tac6.setIcon(pla);
+			tac6.setDisabledIcon(pla);
+			tac6.setPressedIcon(pla);
+			tac6.setSelectedIcon(pla);
 			tac6.setEnabled(false);
 			board[1][2]=sym;
 			ticmove();		    
@@ -325,19 +339,27 @@ public class GUI extends JFrame{
 		    }
 		    else if (e1.getSource() ==tac7){
 			tac7.setIcon(pla);
+			tac7.setDisabledIcon(pla);
+			tac7.setPressedIcon(pla);
+			tac7.setSelectedIcon(pla);
 			tac7.setEnabled(false);
 			board[2][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac8){
 			tac8.setIcon(pla);
+			tac8.setDisabledIcon(pla);
+			tac8.setPressedIcon(pla);
+			tac8.setSelectedIcon(pla);
 			tac8.setEnabled(false);
 			board[2][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac9){
 			tac9.setIcon(pla);
-			tac9.setEnabled(false);
+			tac9.setDisabledIcon(pla);
+			tac9.setPressedIcon(pla);
+			tac9.setSelectedIcon(pla);tac9.setEnabled(false);
 			board[2][2]=sym;
 			ticmove();		    
 		    }
@@ -640,7 +662,7 @@ public class GUI extends JFrame{
 				    }
 				}
 				else{
-				    if(i+2< board.length){
+				    if(i+2< board.length && j+2 < 3){
 					if(board[i+2][j+2] == '\0'){
 					    board[i+2][j+2] = opp;
 					    ans[0] = i+2;
@@ -661,12 +683,13 @@ public class GUI extends JFrame{
 			    }
 			}
 			else{
-			    if(board[i][j+2] == '\0'){
-				board[i][j+2] = opp;
-				ans[0] = i;
-				ans[1] = j+2;
-				return ans;
-				
+			    if (j+2<3){
+				if(board[i][j+2] == '\0'){
+				    board[i][j+2] = opp;
+				    ans[0] = i;
+				    ans[1] = j+2;
+				    return ans;
+				}
 			    }
 			}
 		    }
@@ -958,13 +981,16 @@ public class GUI extends JFrame{
 	center = Box.createVerticalBox();
 	center.add(new newline());
 	center.add(new newline());
-	
+	JTextArea startblurb= new JTextArea("Please create a profile by entering a valid username. A profile is needed in order for you to use our Game Center. This profile will allow you to claim high scores as your own.");
+	activate(startblurb);	
 	uname = new JTextField("Enter Username", 14);
 	activate(uname);
 	uname.setBorder(new LineBorder(Color.BLACK));
 	JTextArea u = new JTextArea("UserName: ");
 	activate(u);
 	u.setLineWrap(false);
+	center.add(startblurb);
+	center.add(new newline());
 	center.add(u);
 	center.add(uname);
 	center.add(new newline());
@@ -988,13 +1014,16 @@ public class GUI extends JFrame{
 	center = Box.createVerticalBox();
 	center.add(new newline());
 	center.add(new newline());
-	
+	JTextArea startblurb= new JTextArea("Please create a profile by entering a valid username. A profile is needed in order for you to use our Game Center. This profile will allow you to claim high scores as your own.");
+	activate(startblurb);	
 	uname = new JTextField("", 14);
 	activate(uname);
 	uname.setBorder(new LineBorder(Color.BLACK));
 	JTextArea u = new JTextArea("UserName: ");
 	activate(u);
 	u.setLineWrap(false);
+	center.add(startblurb);
+	center.add(new newline());
 	center.add(u);
 	center.add(uname);
 	center.add(new newline());

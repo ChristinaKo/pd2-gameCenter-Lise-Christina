@@ -3,12 +3,10 @@ import java.util.*;
 
 public class TrueOrFalse{
     String name;
-    int score;
     String qans;
     String quest;
     ArrayList <String> questions = new ArrayList<String>();
     public TrueOrFalse(String n){
-	score = 0;
 	name = n;
     }
     public void  setQuestions(){
@@ -46,7 +44,7 @@ public class TrueOrFalse{
 	    System.out.println("True or False");
 	    String ans = sc.nextLine();
 	    if(checkAnswer(ans)){
-		score = score +10;
+		
 		System.out.println("Correct");
 	    }
 	    else{

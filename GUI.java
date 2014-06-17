@@ -45,8 +45,8 @@ public class GUI extends JFrame{
     //score variables
     protected PriorityQueue<Profile> tichs,c4hs,qhs;
     private int ticscore, c4score, triviascore;
-    private final ImageIcon X = new ImageIcon("x.png");
-    private final ImageIcon O = new ImageIcon("o.jpg");
+    private final ImageIcon X = new ImageIcon("X.png");
+    private final ImageIcon O = new ImageIcon("o.gif");
     private ImageIcon pla,oppo;
       
     //maxheaps of the high scores of each game

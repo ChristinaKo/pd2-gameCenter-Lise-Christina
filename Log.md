@@ -42,3 +42,8 @@ Lise: worked on tic table and started implementing score feature and tic game
 June 15th:
 Lise: updated GUI interface, completed profile screens
 Christina: finished opponent for tic tac toe and connect four and also finished the true or false game
+
+June 16th:
+Both worked on debugging GUI
+Christina: fixed some minor errors in COnnect4.java
+Lise: Made games work

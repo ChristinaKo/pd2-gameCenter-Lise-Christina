@@ -19,9 +19,9 @@ public class GUI extends JFrame{
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
     protected JButton t1;
     protected JButton t2, prof; // return to mainscreen button
-    protected JButton createprof; // submitting new profile/name
+    protected JButton createprof, submit; // submitting new profile/name and trivia answer
+    protected JButton tac1,tac2,tac3,tac4,tac5,tac6,tac7,tac8, tac9;
     protected JFrame frame;
-
     protected JPanel menubar, scorebox;
     protected JMenuBar Title;
     protected JLabel title, scorelabel;
@@ -34,16 +34,27 @@ public class GUI extends JFrame{
     protected JTextField uname;
     protected String username;
     protected Box center;
+    protected JRadioButton tr, fa;
+    protected JRadioButton tic1, tic2, tic3;
+    protected JRadioButton c41,c42; //choosing colors for tic and c4 games
+    protected JButton tsubmit, easystuff, csubmit;
+    protected ButtonGroup XO;
+    protected ButtonGroup trfa;
    
-    
     //score variables
-    protected PriorityQueue<Profile> ticscore,cfscore,qscore;
+    protected PriorityQueue<Profile> tichs,c4hs,qhs;
     private int ticscore, c4score, triviascore;
-    
+    private final ImageIcon X = new ImageIcon("x.png");
+    private final ImageIcon O = new ImageIcon("o.jpg");
+    private ImageIcon pla,oppo;
+      
     //maxheaps of the high scores of each game
 
     //back end variables//
-
+    private char sym, opp;
+    protected Tic game;
+    protected char[][] board;
+    protected boolean easy;
 
 
 
@@ -122,13 +133,13 @@ public class GUI extends JFrame{
 	 frame.setVisible(true);
 	 
 	 //back end initializations
-	 ticscore = new PriorityQueue<Profile>(1,new maxtomin());
-	 cfscore = new PriorityQueue<Profile>(1,new maxtomin());
-	 qscore = new PriorityQueue<Profile>(1,new maxtomin());
+	 tichs = new PriorityQueue<Profile>(1,new maxtomin());
+	 c4hs = new PriorityQueue<Profile>(1,new maxtomin());
+	 qhs = new PriorityQueue<Profile>(1,new maxtomin());
 	 for (int i = 0; i < 9; i++){
-	     ticscore.add(new Profile("Anonymous",0));
-	     cfscore.add(new Profile("Anonymous",0));
-	     qscore.add(new Profile("Anonymous",0));
+	     tichs.add(new Profile("Anonymous",0));
+	     c4hs.add(new Profile("Anonymous",0));
+	     qhs.add(new Profile("Anonymous",0));
 	 }
 	
      }
@@ -168,8 +179,10 @@ public class GUI extends JFrame{
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
-		     tictac();
+		     choosetic();
 		 }
+
+	
 		 else if (e1.getSource() == b2){
 		     c4score = 0;
 		     gamep.removeAll();
@@ -209,6 +222,95 @@ public class GUI extends JFrame{
 		     frame.remove(pt);
 		     changeprofile();
 		 }
+	
+     
+		else if(e1.getSource() == tsubmit){
+		    easy =false;
+		    if(tic1.isSelected()){
+			sym= 'X';
+			opp = 'O';
+			pla = X;
+			oppo=O;
+		    }
+		    else {
+			sym = 'O';
+			opp = 'X';
+			pla =X;
+			oppo=O;
+		    }
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    tictac();
+		 }
+		 
+		else if(e1.getSource() == easystuff){
+		    easy =true;
+		    if(tic1.isSelected()){
+			sym= 'X';
+			opp = 'O';
+			pla = X;
+			oppo=O;
+		    }
+		    else {
+			sym = 'O';
+			opp = 'X';
+			pla =X;
+			oppo=O;
+		    }
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		}
+		else if (e1.getSource() == tac1 || e1.getSource() == tac2 || e1.getSource() == tac3 || e1.getSource() == tac4 || e1.getSource() == tac5 || e1.getSource() == tac6 || e1.getSource() == tac7 || e1.getSource() == tac8 || e1.getSource() == tac9){
+		    if (e1.getSource()==tac1){
+			tac1.setIcon(pla);
+			tac1.setEnabled(false);
+			ticmove();
+		    }
+		    else if (e1.getSource() ==tac2){
+			tac2.setIcon(pla);
+			tac2.setEnabled(false);
+			ticmove();
+		    }
+		    else if (e1.getSource() ==tac3){
+			tac3.setIcon(pla);
+			tac3.setEnabled(false);
+			ticmove();
+		    }
+		    else if (e1.getSource() ==tac4){
+			tac4.setIcon(pla);
+			tac4.setEnabled(false);
+			ticmove();		    
+		    }
+		    else if (e1.getSource() ==tac5){
+			tac5.setIcon(pla);
+			tac5.setEnabled(false);
+			ticmove();		    
+		    }
+		    else if (e1.getSource() ==tac6){
+			tac6.setIcon(pla);
+			tac6.setEnabled(false);
+			ticmove();		    
+		    
+		    }
+		    else if (e1.getSource() ==tac7){
+			tac7.setIcon(pla);
+			tac7.setEnabled(false);
+			ticmove();		    
+		    }
+		    else if (e1.getSource() ==tac8){
+			tac8.setIcon(pla);
+			tac8.setEnabled(false);
+			ticmove();		    
+		    }
+		    else if (e1.getSource() ==tac9){
+			tac9.setIcon(pla);
+			tac9.setEnabled(false);
+			ticmove();		    
+		    }
+
+		}
 
 	     }
 	     catch(Exception e){
@@ -216,6 +318,7 @@ public class GUI extends JFrame{
 	     }
 	 }
      }
+ 
     public void mainscreen(){
 	// screen where game options are given
 	title.setText("GAME CENTER");
@@ -251,19 +354,24 @@ public class GUI extends JFrame{
 	tic= new JPanel(new BorderLayout(3,3));
 	tic.setBackground(Color.black);
 	tic.setPreferredSize(new Dimension(300, 300));
-	TicButton[][] boardsq = new TicButton[3][3];
+	JButton[][] boardsq = new JButton[3][3];
+	board = new char[3][3];
 	Board = new JPanel(new GridLayout(3,3));
+
+	tac1 = new JButton();
+	tac2 = new JButton();
+	tac3 = new JButton();
+	tac4 = new JButton();
+	tac5 = new JButton();
+	tac6 = new JButton();
+	tac7 = new JButton();
+	tac8 = new JButton();
+	tac9 = new JButton();
+	updatetic(boardsq);
+
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
-	for (int i = 0; i < 3; i++){
-	    for (JButton x : boardsq[i]){
-		x = new TicButton();
-		x.setBorder(new LineBorder(Color.BLACK));
-		x.setBackground(Color.blue);
-		activate(x);
-		Board.add(x);
-	    }
-	}
+	    
 	tic.add(Board);	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
@@ -271,6 +379,10 @@ public class GUI extends JFrame{
 	activate(t2);
 	center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
+	JTextArea y = new JTextArea("You are " + sym + ".");
+	activate(y);
+	center.add(y);
+	center.add(new newline());
 	center.add(tic);
 	center.add(Box.createVerticalGlue());
 	center.createVerticalStrut(100);
@@ -287,11 +399,202 @@ public class GUI extends JFrame{
 
 	pt.setBackground(Color.magenta.darker());
 	frame.getContentPane().add(pt);
-	
-	//backend tic
-	
-    }
 
+	//backend tic
+	//	ticgame();
+	game = new Tic(username, sym);
+	    
+    }
+    public void updatetic(JButton[][] boardsq){
+	// to be only used in tictac
+	boardsq[0][0] = tac1;
+	boardsq[0][1] = tac2;
+	boardsq[0][2] = tac3;
+	boardsq[1][0] = tac4;
+	boardsq[1][1] = tac5;
+	boardsq[1][2] = tac6;
+	boardsq[2][0] = tac7;
+	boardsq[2][1] = tac8;
+	boardsq[2][2] = tac9;
+	for (int i = 0; i<3; i++){
+	    for (int j=0; j<3; j++){
+		boardsq[i][j].setBorder(new LineBorder(Color.BLACK));
+		boardsq[i][j].setBackground(Color.blue);
+		activate(boardsq[i][j]);
+		Board.add(boardsq[i][j]);
+	    }
+	}
+    }
+    public void ticmove(){
+	if (easy){
+	    OMoveEasy();
+	}
+	else{
+	    OMove();
+	}
+    }
+    public void OMoveEasy(){
+	for(int i = 0; i <board.length; i ++){
+	    for (int j = 0; j < board[i].length; j++){
+		if(board[i][j] == '\0'){
+		    board[i][j] = getCharO();
+		    break;
+		}
+	    }
+	}
+    }
+    public int[] OMove(){
+	int[] ans = new int[2];
+	boolean moved = false;
+	for (int i = 0; i < board.length; i++){
+	    for(int j = 0; j <board[i].length; j++){
+		if(board[i][j] == sym){
+		    if(i + 1 < board.length){
+			if(board[i +1][j] == sym){
+			    if(i - 1 ==0){
+				if(board[i-1][j] == '\0'){
+				    board[i-1][j] = getCharO();
+				    moved = true;
+				    ans[0] = i-1;
+				    ans[1] = j;
+				    return ans;
+				}
+			    }
+			    else{
+				board[i+2][j] = getCharO();
+				moved = true;
+				ans[0] = i+2;
+				ans[1] = j;
+				return ans;
+			    }
+			}
+			else if( j + 1 <board[i].length){
+			    if(board[i + 1][j+1] == sym){
+				if( i-1 >= 0 && j -1 >= 0){
+				    if(board[i-1][j-1] == '\0'){
+					board[i-1][j-1] = getCharO();
+					moved = true;
+					ans[0] = i-1;
+					ans[1] = j-1;
+					return ans;
+				    }
+				}
+				else{
+				    if(i+2< board.length){
+					if(board[i+2][j+2] == '\0'){
+					    board[i+2][j+2] = getCharO();
+					    moved = true;
+					    ans[0] = i+2;
+					    ans[1] = j+2;
+					    return ans;
+					}
+				    }
+				}
+			    }
+			}
+			else if(j-1 == 0){
+			    if(board[i][j-1] == '\0'){
+				board[i][j-1] = getCharO();
+				moved = true;
+				ans[0] = i;
+				ans[1] = j-1;
+				return ans;
+				
+			    }
+			}
+			else{
+			    if(board[i][j+2] == '\0'){
+				board[i][j+2] = getCharO();
+				moved = true;
+				ans[0] = i;
+				ans[1] = j+2;
+				return ans;
+				
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	//	return ans;
+    }
+    public char getCharO(){
+	return opp;
+    }
+    public boolean checkWinner(int x, int y){
+	try{
+	    if (board[x][y] == sym){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+	}
+	catch (ArrayIndexOutOfBoundsException e){
+	    return false;
+	}
+    }
+    public boolean checkLoser(int x, int y){
+	try{
+	    if (board[x][y] == getCharO()){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+	}
+	catch (ArrayIndexOutOfBoundsException e){
+	    return false;
+	}
+    }
+    public boolean winner(){
+	boolean ans = false;
+	for(int i = 0; i < board.length; i++){
+	    for(int j = 0; j < board[i].length; j++){
+		if (board[i][j]==sym){  
+		    if(checkWinner(i + 1, j) && checkWinner(i-1,j)){
+			return true;
+		    }
+		    else if(checkWinner(i, j+1) && checkWinner(i, j-1)){
+			return true;
+		    }
+		    else if(checkWinner(i+1, j+1) && checkWinner(i-1, j-1)){
+			return true;
+		    }
+		    else if(checkWinner(i-1, j+1) && checkWinner(i+1, j-1)){
+			return true;
+		    }
+		}
+
+	    }
+
+	}
+	//add score component
+	return false;
+    }
+		
+    public boolean loser(){
+	boolean ans = false;
+	for (int i = 0; i < board.length; i ++){
+	    for (int j = 0; j < board[i].length; j++){
+		if(board[i][j]==getCharO()){
+		    if(checkLoser(i+1, j) && checkLoser(i-1,j)){
+			return true;
+		    }
+		    else if(checkLoser(i, j+1) && checkLoser(i, j-1)){
+			return true;
+		    }
+		    else if(checkLoser(i+1,j+1) && checkWinner(i-1, j-1)){
+			return true;
+		    }
+		    else if(checkLoser(i-1, j+1) && checkWinner(i+1,j-1)){
+			return true;
+		    }
+		}
+	    }
+	}
+	return false;
+    }
     public void connectfour(){
 	title.setText("Connect Four");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
@@ -337,7 +640,7 @@ public class GUI extends JFrame{
 	center.add(Box.createVerticalGlue());
 	center.add(connect4);
 	center.add(Box.createVerticalGlue());
-	center.createVerticalStrut(100);
+
 	center.add(new newline());
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
@@ -350,25 +653,96 @@ public class GUI extends JFrame{
 	pt.add(center);
 
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
-	
+      
     }
 
+    public void choosetic(){
+	pt = new JPanel();
+	pt.setBackground(new Color(32,178,170));
+	tic1 = new JRadioButton("X");
+	tic2 = new JRadioButton("O");
+	tic3 = new JRadioButton("I don't care.");
+	XO = new ButtonGroup();
+	XO.add(tic1);
+	XO.add(tic2);
+	XO.add(tic3);
+	center = Box.createVerticalBox();
 
+	JTextArea blurb = new JTextArea("Choose your symbol: X or O.");
+	JTextArea blurb2 = new JTextArea("Whichever button you do not click will be the symbol of your opponent.");
+	activate(blurb);
+	blurb.setLineWrap(false);
+	activate(blurb2);
+	blurb2.setLineWrap(false);
+	center.add(new newline());    
+	center.add(blurb);
+	center.add(new newline()); 
+	center.add(blurb2);
+	center.add(new newline()); 
+	blurb.setFont(new Font("Serif", Font.BOLD, 15));
+	blurb2.setFont(new Font("Serif", Font.BOLD, 15));
+
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
+	activate(tic1);
+	activate(tic2);
+	activate(tic3);
+	tic3.setSelected(true);
+	h.add(tic1);
+	h.add(tic2);
+	h.add(tic3);
+	h.add(Box.createHorizontalGlue());
+	center.add(h);
+	h.setBackground(null);
+	center.add(new newline()); 
+	center.add(new newline()); 
+	easystuff = new JButton("Easy");
+	tsubmit = new JButton("Hard");
+	activate(easystuff);
+	center.add(easystuff);
+	activate(tsubmit);
+	center.add(tsubmit);
+	pt.add(center);
+	frame.add(pt, BorderLayout.CENTER);
+
+    }
     public void trivia(){
 	title.setText("Trivia");
-
+	trfa = new ButtonGroup();
+	tr= new JRadioButton("True");
+	tr.setBackground(null);
+	fa = new JRadioButton("False");
+	fa.setBackground(null);
+	trfa.add(tr);
+	trfa.add(fa);
 	scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
 	pt= new JPanel();
 	pt.setBackground(new Color(32,178,170));
+	center = Box.createVerticalBox();
+	center.add(new newline());    
+	center.add(new newline());    
+	center.add(new newline());
+	center.add(new JLabel("QUestion"));
+		   
+	center.add(new newline());
+	center.add(tr);
+	center.add(fa);
+	center.add(new newline()); 
+	submit= new JButton("Submit");
+	t2= new JButton("Quit");
+	activate(submit);
+	activate(t2);
+	Box h = Box.createHorizontalBox();
+	h.add(submit);
+	h.add(t2);
+	center.add(h);
+	pt.add(center);
+	center.add(new newline());
+	frame.add(pt,BorderLayout.CENTER);
 	
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
-	t1= new JButton("Restart");
-	t2= new JButton("Quit");
-	
-	pt.add(t1);
-	pt.add(t2);
-	activate(t1);
-	activate(t2);
+
     }
     public void scores(){
 	title.setText("HIGH SCORES");
@@ -465,6 +839,9 @@ public class GUI extends JFrame{
 	pt.add(center);
 	frame.add(pt, BorderLayout.CENTER);
     }
+
+
+
     public void activate(JButton button){
 	button.setEnabled(true);
 	button.setVisible(true);
@@ -485,8 +862,12 @@ public class GUI extends JFrame{
 	Events e1 = new Events();
 	txtfield.addActionListener(e1);
     }	
-
-    private class newline extends JTextArea{
+    private void activate(JRadioButton x){
+	x.setEnabled(true);
+	Events e1 = new Events();
+	x.addActionListener(e1);
+    }
+    public class newline extends JTextArea{
 	public newline(){
 	    this.setText("");
 	    this.setBackground(null);
@@ -494,30 +875,8 @@ public class GUI extends JFrame{
 	    this.setFont(new Font("Serif", Font.BOLD, 20));
 	}
     } 
+    
 
-    private class TicButton extends JButton{
-	private	char symbol;
-	private boolean pressed;
-	private ImageIcon X = new ImageIcon("x.png");
-	private ImageIcon O = new ImageIcon("o.jpg");
-	public TicButton(){
-	    pressed = false;
-	}
-	
-	public TicButton(char x){
-	    pressed = false;
-	}
-	public void setsign(char x){
-	    if (x =='x' || x=='X'){
-		symbol = 'X';
-		this.setIcon(X);
-	    }
-	    else{
-		symbol = 'O';
-		this.setIcon(O);
-	    }
-	}
-    }
 		
    
     public static void main(String[]args){

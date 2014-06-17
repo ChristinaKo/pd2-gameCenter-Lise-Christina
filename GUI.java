@@ -284,14 +284,13 @@ public class GUI extends JFrame{
 		    }
 		    if (e1.getSource()==tac1){
 			
-			tac1.setIcon(pla);
-			tac1.setDisabledIcon(pla);
+			tac1.setPressedIcon(pla);
 			tac1.setEnabled(false);
 			board[0][0]=sym; 
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac2){
-			tac2.setIcon(pla);
+			tac2.setPressedIcon(pla);
 			tac2.setEnabled(false);
 			board[0][1]=sym;
 			ticmove();
@@ -445,6 +444,7 @@ public class GUI extends JFrame{
 	boardsq[2][0] = tac7;
 	boardsq[2][1] = tac8;
 	boardsq[2][2] = tac9;
+	
 	for (int i = 0; i<3; i++){
 	    for (int j=0; j<3; j++){
 		boardsq[i][j].setBorder(new LineBorder(Color.BLACK));

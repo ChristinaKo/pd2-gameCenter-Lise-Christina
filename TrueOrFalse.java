@@ -6,8 +6,10 @@ public class TrueOrFalse{
     String qans;
     String quest;
     ArrayList <String> questions = new ArrayList<String>();
-    public TrueOrFalse(String n){
+     public TrueOrFalse(String n){
 	name = n;
+    }
+    public TrueOrFalse(){
     }
     public void  setQuestions(){
 	try{
@@ -34,7 +36,7 @@ public class TrueOrFalse{
 	return false;
     }
     public void play(){
-	if(score == 100){
+	if(/*score*/ 1 == 100){
 	    System.out.println("COngratulations");
 	    System.exit(0);
 	}

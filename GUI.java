@@ -45,6 +45,7 @@ public class GUI extends JFrame{
     private final ImageIcon X = createImageIcon("X.png");
     private final ImageIcon O = createImageIcon("o.gif");
     private ImageIcon pla,oppo;
+ 
       
     //maxheaps of the high scores of each game
 
@@ -53,6 +54,7 @@ public class GUI extends JFrame{
     protected char[][] board;
     protected boolean easy;
 
+    protected TrueOrFalse tf;
 
 
 
@@ -363,6 +365,21 @@ public class GUI extends JFrame{
 
 		}
 
+		else if (e1.getSource() == submit){
+		    if (tr.isSelected()){
+			if (tf.checkAnswer(tr.getText())){
+			    triviascore += 5;
+			}
+			else {
+			    qhs.add(new Profile(username,triviascore));
+			    triviascore = 0;
+			}
+		    }
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    trivia();
+		}
 	     }
 	     catch(Exception e){
 		 e.printStackTrace();
@@ -579,10 +596,12 @@ public class GUI extends JFrame{
 				}
 			    }
 			    else{
-				board[i+2][j] = opp;
-				ans[0] = i+2;
-				ans[1] = j;
-				return ans;
+				if (i+2<board.length){
+				    board[i+2][j] = opp;
+				    ans[0] = i+2;
+				    ans[1] = j;
+				    return ans;
+				}
 			    }
 			}
 			else if( j + 1 <board[i].length){
@@ -596,7 +615,7 @@ public class GUI extends JFrame{
 				    }
 				}
 				else{
-				    if(i+2< board.length){
+				    if(i+2< board.length && j+2<board.length){
 					if(board[i+2][j+2] == '\0'){
 					    board[i+2][j+2] =opp;
 					    ans[0] = i+2;
@@ -616,12 +635,13 @@ public class GUI extends JFrame{
 			    }
 			}
 			else{
-			    if(board[i][j+2] == '\0'){
-				board[i][j+2] = opp;
-				ans[0] = i;
-				ans[1] = j+2;
-				return ans;
-				
+			    if (i+2<board.length){
+				if(board[i][j+2] == '\0'){
+				    board[i][j+2] = opp;
+				    ans[0] = i;
+				    ans[1] = j+2;
+				    return ans;
+				}
 			    }
 			}
 		    }
@@ -905,12 +925,21 @@ public class GUI extends JFrame{
 	scorelabel.setText("Player: " + username +"        SCORE: "+ triviascore + "  ");
 	pt= new JPanel();
 	pt.setBackground(new Color(32,178,170));
+	
+	tf = new TrueOrFalse();
+	tf.setQuestions();
+	JTextArea q = new JTextArea(tf.askQuestion());
+	activate(q);
+	q.setFont(new Font("Serif", Font.BOLD, 17));
+
 	center = Box.createVerticalBox();
 	center.add(new newline());    
 	center.add(new newline());    
 	center.add(new newline());
-	center.add(new JLabel("QUestion"));
-		   
+	center.add(new JLabel("Question:"));
+	center.add(new newline());
+	center.add(new newline());
+	center.add(q);
 	center.add(new newline());
 	center.add(tr);
 	center.add(fa);
@@ -928,7 +957,9 @@ public class GUI extends JFrame{
 	frame.add(pt,BorderLayout.CENTER);
 	
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
-
+	
+	
+	
     }
     public void scores(){
 	title.setText("HIGH SCORES");

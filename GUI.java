@@ -861,7 +861,7 @@ public class GUI extends JFrame{
     }
 	 
     public void connectfour(){
-	title.setText("Number Guessing");
+	title.setText("Simplified ");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
@@ -875,7 +875,6 @@ public class GUI extends JFrame{
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
 	cboard = new String[6][7];
-
 
 	boardsq[0][0] =ct1;
 	boardsq[0][1] = ct2;
@@ -1068,7 +1067,7 @@ public class GUI extends JFrame{
 	}
 	
 	JLabel l =new JLabel("Tic-Tac-Toe");
-	JLabel k = new JLabel("Connect4");
+	JLabel k = new JLabel("Simplified Connect4");
 	JLabel j = new JLabel("Trivia Questions");
 	hsboard.add(l);
 	hsboard.add(k);

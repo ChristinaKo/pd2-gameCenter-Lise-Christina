@@ -295,44 +295,44 @@ public class GUI extends JFrame{
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac3){
-			tac3.setIcon(pla);
+			tac3.setDisabledIcon(pla);
 			tac3.setEnabled(false);
 			board[0][2]=sym;
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac4){
-			tac4.setIcon(pla);
+			tac4.setDisabledIcon(pla);
 			tac4.setEnabled(false);
 			board[1][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac5){
-			tac5.setIcon(pla);
+			tac5.setDisabledIcon(pla);
 			tac5.setEnabled(false);
 			board[1][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac6){
-			tac6.setIcon(pla);
+			tac6.setDisabledIcon(pla);
 			tac6.setEnabled(false);
 			board[1][2]=sym;
 			ticmove();		    
 		    
 		    }
 		    else if (e1.getSource() ==tac7){
-			tac7.setIcon(pla);
+			tac7.setDisabledIcon(pla);
 			tac7.setEnabled(false);
 			board[2][0]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac8){
-			tac8.setIcon(pla);
+			tac8.setDisabledIcon(pla);
 			tac8.setEnabled(false);
 			board[2][1]=sym;
 			ticmove();		    
 		    }
 		    else if (e1.getSource() ==tac9){
-			tac9.setIcon(pla);
+			tac9.setDisabledIcon(pla);
 			tac9.setEnabled(false);
 			board[2][2]=sym;
 			ticmove();		    
@@ -466,11 +466,12 @@ public class GUI extends JFrame{
 		x = OMove();
 	    }
 	    if (x != null){
-		boardsq[x[0]][x[1]].setIcon(oppo);
+		boardsq[x[0]][x[1]].setDisabledIcon(oppo);
 		boardsq[x[0]][x[1]].setEnabled(false);
 		board[x[0]][x[1]]=opp;
 		if (loser()){
-		    loseAction();}
+		    loseAction();
+		}
 	    }
 	    
 	}else if (winner()){
@@ -529,7 +530,7 @@ public class GUI extends JFrame{
 	for(int i = 0; i <board.length; i ++){
 	    for (int j = 0; j < board[i].length; j++){
 		if(board[i][j] == '\0'){
-		    board[i][j] = getCharO();
+		    board[i][j] = opp;
 		    ans[0] = i;
 		    ans[1]=j;
 		    return ans;
@@ -540,35 +541,31 @@ public class GUI extends JFrame{
     }
     public int[] OMove(){
 	int[] ans = new int[2];
-	boolean moved = false;
 	for (int i = 0; i < board.length; i++){
 	    for(int j = 0; j <board[i].length; j++){
-		if(board[i][j] == sym){
+		if(board[i][j] == opp){
 		    if(i + 1 < board.length){
-			if(board[i +1][j] == sym){
+			if(board[i +1][j] == opp){
 			    if(i - 1 ==0){
 				if(board[i-1][j] == '\0'){
-				    board[i-1][j] = getCharO();
-				    moved = true;
+				    board[i-1][j] = opp;
 				    ans[0] = i-1;
 				    ans[1] = j;
 				    return ans;
 				}
 			    }
 			    else{
-				board[i+2][j] = getCharO();
-				moved = true;
+				board[i+2][j] = opp;
 				ans[0] = i+2;
 				ans[1] = j;
 				return ans;
 			    }
 			}
 			else if( j + 1 <board[i].length){
-			    if(board[i + 1][j+1] == sym){
+			    if(board[i + 1][j+1] == opp){
 				if( i-1 >= 0 && j -1 >= 0){
 				    if(board[i-1][j-1] == '\0'){
-					board[i-1][j-1] = getCharO();
-					moved = true;
+					board[i-1][j-1] = opp;
 					ans[0] = i-1;
 					ans[1] = j-1;
 					return ans;
@@ -577,8 +574,7 @@ public class GUI extends JFrame{
 				else{
 				    if(i+2< board.length){
 					if(board[i+2][j+2] == '\0'){
-					    board[i+2][j+2] = getCharO();
-					    moved = true;
+					    board[i+2][j+2] =opp;
 					    ans[0] = i+2;
 					    ans[1] = j+2;
 					    return ans;
@@ -589,18 +585,15 @@ public class GUI extends JFrame{
 			}
 			else if(j-1 == 0){
 			    if(board[i][j-1] == '\0'){
-				board[i][j-1] = getCharO();
-				moved = true;
+				board[i][j-1] = opp;
 				ans[0] = i;
 				ans[1] = j-1;
 				return ans;
-				
 			    }
 			}
 			else{
 			    if(board[i][j+2] == '\0'){
-				board[i][j+2] = getCharO();
-				moved = true;
+				board[i][j+2] = opp;
 				ans[0] = i;
 				ans[1] = j+2;
 				return ans;
@@ -611,11 +604,73 @@ public class GUI extends JFrame{
 		}
 	    }
 	}
-	return null;
+	for (int i = 0; i < board.length; i++){
+	    for(int j = 0; j <board[i].length; j++){
+		if(board[i][j] == sym){
+		    if(i + 1 < board.length){
+			if(board[i +1][j] == sym){
+			    if(i - 1 ==0){
+				if(board[i-1][j] == '\0'){
+				    board[i-1][j] = opp;
+				    ans[0] = i-1;
+				    ans[1] = j;
+				    return ans;
+				}
+			    }
+			    else{
+				board[i+2][j] = opp;
+				ans[0] = i+2;
+				ans[1] = j;
+				return ans;
+			    }
+			}
+			else if( j + 1 <board[i].length){
+			    if(board[i + 1][j+1] == sym){
+				if( i-1 >= 0 && j -1 >= 0){
+				    if(board[i-1][j-1] == '\0'){
+					board[i-1][j-1] = opp;
+					ans[0] = i-1;
+					ans[1] = j-1;
+					return ans;
+				    }
+				}
+				else{
+				    if(i+2< board.length){
+					if(board[i+2][j+2] == '\0'){
+					    board[i+2][j+2] = opp;
+					    ans[0] = i+2;
+					    ans[1] = j+2;
+					    return ans;
+					}
+				    }
+				}
+			    }
+			}
+			else if(j-1 == 0){
+			    if(board[i][j-1] == '\0'){
+				board[i][j-1] = opp;
+				ans[0] = i;
+				ans[1] = j-1;
+				return ans;
+				
+			    }
+			}
+			else{
+			    if(board[i][j+2] == '\0'){
+				board[i][j+2] = opp;
+				ans[0] = i;
+				ans[1] = j+2;
+				return ans;
+				
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	return OMoveEasy();
     }
-    public char getCharO(){
-	return opp;
-    }
+
     public boolean checkWinner(int x, int y){
 	try{
 	    if (board[x][y] == sym){
@@ -631,7 +686,7 @@ public class GUI extends JFrame{
     }
     public boolean checkLoser(int x, int y){
 	try{
-	    if (board[x][y] == getCharO()){
+	    if (board[x][y] == opp){
 		return true;
 	    }
 	    else{
@@ -670,7 +725,7 @@ public class GUI extends JFrame{
 	boolean ans = false;
 	for (int i = 0; i < board.length; i ++){
 	    for (int j = 0; j < board[i].length; j++){
-		if(board[i][j]==getCharO()){
+		if(board[i][j]==opp){
 		    if(checkLoser(i+1, j) && checkLoser(i-1,j)){
 			return true;
 		    }

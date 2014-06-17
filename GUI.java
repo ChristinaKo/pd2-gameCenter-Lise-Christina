@@ -283,7 +283,9 @@ public class GUI extends JFrame{
 			loseAction();			
 		    }
 		    if (e1.getSource()==tac1){
+			
 			tac1.setIcon(pla);
+			tac1.setDisabledIcon(pla);
 			tac1.setEnabled(false);
 			board[0][0]=sym; 
 			ticmove();

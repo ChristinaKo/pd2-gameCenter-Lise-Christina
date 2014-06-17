@@ -47,3 +47,4 @@ June 16th:
 Both worked on debugging GUI
 Christina: fixed some minor errors in COnnect4.java
 Lise: Made games work
+CONNECT FOUR DOES NOT WORK PROPERLY

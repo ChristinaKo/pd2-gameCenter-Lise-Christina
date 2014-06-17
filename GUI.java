@@ -17,7 +17,7 @@ public class GUI extends JFrame{
     
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
-    protected JButton t1;
+    protected JButton t1, c1;
     protected JButton t2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
     protected JButton tac1,tac2,tac3,tac4,tac5,tac6,tac7,tac8, tac9;
@@ -45,8 +45,8 @@ public class GUI extends JFrame{
     //score variables
     protected PriorityQueue<Profile> tichs,c4hs,qhs;
     private int ticscore, c4score, triviascore;
-    private final ImageIcon X = new ImageIcon("X.png");
-    private final ImageIcon O = new ImageIcon("o.gif");
+    private final ImageIcon X = createImageIcon("X.png");
+    private final ImageIcon O = createImageIcon("o.gif");
     private ImageIcon pla,oppo;
       
     //maxheaps of the high scores of each game
@@ -208,7 +208,18 @@ public class GUI extends JFrame{
 		 }
 		 else if (e1.getSource() == t1){
 		     //restart games
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+		     tictac();
 
+		 }
+		  else if (e1.getSource() == c1){
+		     //restart connect4
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+		     connectfour();
 
 		 }
 		 else if (e1.getSource() == t2){
@@ -266,38 +277,15 @@ public class GUI extends JFrame{
 		}
 		else if (e1.getSource() == tac1 || e1.getSource() == tac2 || e1.getSource() == tac3 || e1.getSource() == tac4 || e1.getSource() == tac5 || e1.getSource() == tac6 || e1.getSource() == tac7 || e1.getSource() == tac8 || e1.getSource() == tac9){
 		    if (winner()){
-			for (int i =0; i<3; i++){
-			    for (JButton x: boardsq[i]){
-				x.setEnabled(false);
-			    }
-			}
-			center.add(new newline());
-			JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
-			activate(z);
-			center.add(z);
+			winAction();
 		    }
 		    else if (loser()){
-			for (int i =0; i<3; i++){
-			    for (JButton x: boardsq[i]){
-				x.setEnabled(false);
-			    }
-			}
-			center.add(new newline());
-			JTextArea z = new JTextArea("YOU LOSE!!");
-			JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
-			JTextArea q = new JTextArea("Press 'Restart' to play again");
-			activate(z);
-			activate(a);
-			activate(q);
-			center.add(z);
-			center.add(a);
-			center.add(q);
-			
+			loseAction();			
 		    }
 		    if (e1.getSource()==tac1){
 			tac1.setIcon(pla);
 			tac1.setEnabled(false);
-			board[0][0]=sym;
+			board[0][0]=sym; 
 			ticmove();
 		    }
 		    else if (e1.getSource() ==tac2){
@@ -392,7 +380,7 @@ public class GUI extends JFrame{
 	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
 	pt = new JPanel();
 	tic= new JPanel(new BorderLayout(3,3));
-	tic.setBackground(Color.black);
+	tic.setBackground(Color.blue);
 	tic.setPreferredSize(new Dimension(300, 300));
 	boardsq = new JButton[3][3];
 	board = new char[3][3];
@@ -475,46 +463,55 @@ public class GUI extends JFrame{
 		x= OMoveEasy();
 	    }
 	    else{
-	    x = OMove();
+		x = OMove();
 	    }
 	    if (x != null){
 		boardsq[x[0]][x[1]].setIcon(oppo);
 		boardsq[x[0]][x[1]].setEnabled(false);
+		board[x[0]][x[1]]=opp;
+		if (loser()){
+		    loseAction();}
 	    }
-	}else if (winner()){
-	    for (int i =0; i<3; i++){
-		for (JButton x: boardsq[i]){
-		    x.setEnabled(false);
-		}
-	    }
-	    center.add(new newline());
-	    JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
-	    activate(z);
-	    center.add(z);
 	    
+	}else if (winner()){
+	    winAction();
 	}
 	else if (loser()){
-	    for (int i =0; i<3; i++){
-		for (JButton x: boardsq[i]){
-		    x.setEnabled(false);
-		}
-	    }
-	    JTextArea z = new JTextArea("YOU LOSE!!");
-	    JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
-	    JTextArea q = new JTextArea("Press 'Restart' to play again");
-	    activate(z);
-	    activate(a);
-	    activate(q);
-	    center.add(z);
-	    center.add(a);
-	    center.add(q);
-	}
-	
-	    
-	
-	
+	    loseAction();
+	}	
     }
-    
+    public void winAction(){
+	for (int i =0; i<3; i++){
+	    for (JButton x: boardsq[i]){
+		x.setEnabled(false);
+	    }
+	}
+	center.add(new newline());
+	JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
+	activate(z);
+	center.add(z);
+	    
+    }
+    public void loseAction(){
+	for (int i =0; i<3; i++){
+	    for (JButton x: boardsq[i]){
+		x.setEnabled(false);
+	    }
+	}
+	center.add(new newline());
+	JTextArea z = new JTextArea("YOU LOSE!!");
+	JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
+	JTextArea q = new JTextArea("Press 'Restart' to play again");
+	activate(z);
+	activate(a);
+	activate(q);
+			
+	center.add(z);
+	center.add(a);
+	center.add(q);
+			
+    }
+
     public boolean filled(){
 	boolean ans = true;
 	for(int i = 0; i <board.length; i ++){
@@ -726,7 +723,7 @@ public class GUI extends JFrame{
 	
 
 	//buttons for connect4 screen
-	t1= new JButton("Restart");
+	c1= new JButton("Restart");
 	t2= new JButton("Quit");
 	activate(t1);
 	activate(t2);
@@ -971,7 +968,15 @@ public class GUI extends JFrame{
 	    this.setFont(new Font("Serif", Font.BOLD, 20));
 	}
     } 
-    
+    public static ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = GUI.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
 
 		
    

@@ -1,6 +1,3 @@
-// 
-
-//Notes to self, we need to change jframe, jpanel, etc to private classes
 import java.util.*;
 import java.io.*;
 import java.awt.event.*;
@@ -247,8 +244,8 @@ public class GUI extends JFrame{
 		    else {
 			sym = 'O';
 			opp = 'X';
-			pla =O;
-			oppo=X;
+			pla = O;
+			oppo= X;
 		    }
 		    pt.removeAll();
 		    pt.revalidate();
@@ -267,8 +264,8 @@ public class GUI extends JFrame{
 		    else {
 			sym = 'O';
 			opp = 'X';
-			pla =X;
-			oppo=O;
+			pla =O;
+			oppo=X;
 		    }
 		    pt.removeAll();
 		    pt.revalidate();

@@ -477,7 +477,7 @@ public class GUI extends JFrame{
 	}
     }
     public void ticmove(){
-	if (filled()){
+	if (!winner() && !loser() && filled()){
 	    center.add(new newline());
 	    center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
 	    pt.revalidate();

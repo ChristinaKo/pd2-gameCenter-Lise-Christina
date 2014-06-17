@@ -40,6 +40,7 @@ public class GUI extends JFrame{
     protected JButton tsubmit, easystuff, csubmit;
     protected ButtonGroup XO;
     protected ButtonGroup trfa;
+    protected JButton[][] boardsq;
    
     //score variables
     protected PriorityQueue<Profile> tichs,c4hs,qhs;
@@ -261,6 +262,7 @@ public class GUI extends JFrame{
 		    pt.removeAll();
 		    pt.revalidate();
 		    frame.remove(pt);
+		    tictac();
 		}
 		else if (e1.getSource() == tac1 || e1.getSource() == tac2 || e1.getSource() == tac3 || e1.getSource() == tac4 || e1.getSource() == tac5 || e1.getSource() == tac6 || e1.getSource() == tac7 || e1.getSource() == tac8 || e1.getSource() == tac9){
 		    if (e1.getSource()==tac1){
@@ -354,7 +356,7 @@ public class GUI extends JFrame{
 	tic= new JPanel(new BorderLayout(3,3));
 	tic.setBackground(Color.black);
 	tic.setPreferredSize(new Dimension(300, 300));
-	JButton[][] boardsq = new JButton[3][3];
+	boardsq = new JButton[3][3];
 	board = new char[3][3];
 	Board = new JPanel(new GridLayout(3,3));
 
@@ -402,8 +404,7 @@ public class GUI extends JFrame{
 
 	//backend tic
 	//	ticgame();
-	game = new Tic(username, sym);
-	    
+	
     }
     public void updatetic(JButton[][] boardsq){
 	// to be only used in tictac
@@ -426,22 +427,38 @@ public class GUI extends JFrame{
 	}
     }
     public void ticmove(){
-	if (easy){
-	    OMoveEasy();
-	}
-	else{
-	    OMove();
+	if (checkWinner && checkLoser){
+	    int[] x;  // 2 item array is for row index and column for tictac
+	    if (easy){
+		x= OMoveEasy();
+	    }
+	    else{
+	    x = OMove();
+	    }
+	    if (x != null){
+		boardsq[x[0]][x[1]].setIcon(oppo);
+		boardsq[x[0]][x[1]].setEnabled(false);
+	    }
+	    else{
+		center.add(new newline());
+		center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
+		pt.revalidate();
+	    }
 	}
     }
-    public void OMoveEasy(){
+    public int[] OMoveEasy(){
+	int[] ans = new int[2];
 	for(int i = 0; i <board.length; i ++){
 	    for (int j = 0; j < board[i].length; j++){
 		if(board[i][j] == '\0'){
 		    board[i][j] = getCharO();
-		    break;
+		    ans[0] = i;
+		    ans[1]=j;
+		    return ans;
 		}
 	    }
 	}
+	return null;
     }
     public int[] OMove(){
 	int[] ans = new int[2];
@@ -516,7 +533,7 @@ public class GUI extends JFrame{
 		}
 	    }
 	}
-	//	return ans;
+	return null;
     }
     public char getCharO(){
 	return opp;

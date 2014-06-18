@@ -21,7 +21,7 @@ The first Jack O'Lanterns were made from turnips.,true
 Christmas is the second highest grossing commercial holiday.,false
 Samhainophobia is the fear of Halloween.,true
 Iran banned Valentine items in 2011.,true
-Carl Bernstein, one of the Washington Post writers who uncovered the Watergate Scandal, was born on Valentine's Day.,true
+Carl Bernstein who was one of the two Washington Post reporters who uncovered the Watergate Scandal was born on Valentine's Day.,true
 A FBI agent dubbed Deep Throat helped two Washington Post reporters uncover the Watergate Scandal.,true
 Green and red are the only traditional colors of Christmas.,false
 President Theodore Roosevelt banned Christmas trees in the White House.,true

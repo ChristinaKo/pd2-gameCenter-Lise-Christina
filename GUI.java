@@ -1301,6 +1301,7 @@ public class GUI extends JFrame{
 	center.add(h);
 	center.add(Box.createVerticalGlue());
 	pt.add(center);
+	Board.revalidate();
 	pt.revalidate();
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
       

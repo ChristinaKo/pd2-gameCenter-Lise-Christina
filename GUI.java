@@ -191,6 +191,12 @@ public class GUI extends JFrame{
 		     gamep.removeAll();
 		     gamep.revalidate();
 		     frame.remove(gamep);
+		     c4screen();
+		 }
+		 else if (e1.getSource() == b9){
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
 		     connectfour();
 		 }
 		 else if (e1.getSource() == b3){
@@ -466,7 +472,57 @@ public class GUI extends JFrame{
 	activate(b4);
     }
 
+    public void choosetic(){
+	pt = new JPanel();
+	pt.setBackground(new Color(32,178,170));
+	tic1 = new JRadioButton("X");
+	tic2 = new JRadioButton("O");
+	tic3 = new JRadioButton("I don't care.");
+	XO = new ButtonGroup();
+	XO.add(tic1);
+	XO.add(tic2);
+	XO.add(tic3);
+	center = Box.createVerticalBox();
 
+	JTextArea blurb = new JTextArea("Choose your symbol: X or O.");
+	JTextArea blurb2 = new JTextArea("Whichever button you do not click will be the symbol of your opponent.");
+	activate(blurb);
+	blurb.setLineWrap(false);
+	activate(blurb2);
+	blurb2.setLineWrap(false);
+	center.add(new newline());    
+	center.add(blurb);
+	center.add(new newline()); 
+	center.add(blurb2);
+	center.add(new newline()); 
+	blurb.setFont(new Font("Serif", Font.BOLD, 15));
+	blurb2.setFont(new Font("Serif", Font.BOLD, 15));
+
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
+	activate(tic1);
+	activate(tic2);
+	activate(tic3);
+	tic3.setSelected(true);
+	h.add(tic1);
+	h.add(tic2);
+	h.add(tic3);
+	h.add(Box.createHorizontalGlue());
+	center.add(h);
+	h.setBackground(null);
+	center.add(new newline()); 
+	center.add(new newline()); 
+	easystuff = new JButton("Easy");
+	tsubmit = new JButton("Hard");
+	activate(easystuff);
+	center.add(easystuff);
+	activate(tsubmit);
+	center.add(tsubmit);
+	pt.add(center);
+	frame.add(pt, BorderLayout.CENTER);
+
+    }
     public void tictac(){
 	title.setText("Tic-Tac-Toe");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
@@ -519,10 +575,6 @@ public class GUI extends JFrame{
 
 	pt.setBackground(Color.magenta.darker());
 	frame.getContentPane().add(pt);
-
-	//backend tic
-	//	ticgame();
-	
     }
     public void updatetic(JButton[][] boardsq){
 	// to be only used in tictac
@@ -546,241 +598,380 @@ public class GUI extends JFrame{
 	}
     }
     public void ticmove(){
-	if (!winner() && !loser() && filled()){
-	    center.add(new newline());
-	    center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
-	    pt.revalidate();
-	}else if (!winner() && !loser()){
-	    int[] x;  // 2 item array is for row index and column for tictac
-	    if (easy){
-		x= OMoveEasy();
-	    }
-	    else{
-		x = OMove();
-	    }
-	    if (x != null){
-		boardsq[x[0]][x[1]].setIcon(oppo);
-		boardsq[x[0]][x[1]].setEnabled(false);
-		board[x[0]][x[1]]=opp;
-		if (loser()){
-		    loseAction();
-		}
-	    }
-	    
-	}else if (winner()){
-	    winAction();
-	}
-	else if (loser()){
-	    loseAction();
-	}	
-    }
-    public void winAction(){
-	for (int i =0; i<3; i++){
-	    for (JButton x: boardsq[i]){
-		x.setEnabled(false);
-	    }
-	}
-	center.add(new newline());
-	JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
-	activate(z);
-	center.add(z);
-	if (easy){
-	    ticscore += 5;
-	}
-	else{
-	    ticscore += 10;
-	} 
-	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
-    }
-    public void loseAction(){
-	for (int i =0; i<3; i++){
-	    for (JButton x: boardsq[i]){
-		x.setEnabled(false);
-	    }
-	}
-	center.add(new newline());
-	JTextArea z = new JTextArea("YOU LOSE!!");
-	JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
-	JTextArea q = new JTextArea("Press 'Restart' to play again");
-	activate(z);
-	activate(a);
-	activate(q);
-			
-	center.add(z);
-	center.add(a);
-	center.add(q);
-	tichs.add(new Profile(username,ticscore));
-	ticscore=0;	
-	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
-    }
+	 if (!winner() && !loser() && filled()){
+	     center.add(new newline());
+	     center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
+	     pt.revalidate();
+	 }else if (!winner() && !loser()){
+	     int[] x;  // 2 item array is for row index and column for tictac
+	     if (easy){				
 
-    public boolean filled(){
-	boolean ans = true;
-	for(int i = 0; i <board.length; i ++){
-	    for (int j = 0; j < board[i].length; j++){
-		if(board[i][j] == '\0'){
-		    ans = false;
-		}
-	    }
-	}
-	return ans;
+		 System.out.println("easy");
+		 x= OMoveEasy();
+	     }
+	     else{
+		 x = OMove();
+	     }
+	     if (x != null){
+		 boardsq[x[0]][x[1]].setIcon(oppo);
+		 boardsq[x[0]][x[1]].setEnabled(false);
+		 board[x[0]][x[1]]=opp;
+		 if (loser()){
+		     loseAction();
+		 }
+	     }
 
-    }
-    public int[] OMoveEasy(){
-	int[] ans = new int[2];
-	for(int i = 0; i <board.length; i ++){
-	    for (int j = 0; j < board[i].length; j++){
-		if(board[i][j] == '\0'){
-		    board[i][j] = opp;
-		    ans[0] = i;
-		    ans[1]=j;
-		    return ans;
-		}
-	    }
-	}
-	return null;
-    }
-    public int[] OMove(){
-	int[] ans = new int[2];
-	
-	for (int i = 0; i < board.length; i++){
-	    for(int j = 0; j <board[i].length; j++){
-		if(board[i][j] == sym){
-		    if(i + 1 < board.length){
-			if(board[i +1][j] == sym){
-			    if(i - 1 ==0){
-				if(board[i-1][j] == '\0'){
-				    board[i-1][j] = opp;
-				    ans[0] = i-1;
-				    ans[1] = j;
-				    return ans;
-				}
-			    }
-			    else{
-				if (i+2<board.length && board[i+2][j] =='\0'){
-				    board[i+2][j] = opp;
-				    ans[0] = i+2;
-				    ans[1] = j;
-				    return ans;
-				}
-			    }
-			}
-			else if( j + 1 <board[i].length && i+1 < board.length){
-			    if(board[i + 1][j+1] == sym){
-				if( i-1 >= 0 && j -1 >= 0){
-				    if(board[i-1][j-1] == '\0'){
-					board[i-1][j-1] = opp;
-					ans[0] = i-1;
-					ans[1] = j-1;
-					return ans;
-				    }
-				}
-				else{
-				    if(i+2< board.length && j+2 < 3){
-					if(board[i+2][j+2] == '\0'){
-					    board[i+2][j+2] = opp;
-					    ans[0] = i+2;
-					    ans[1] = j+2;
-					    return ans;
-					}
-				    }
-				}
-			    }
-			}
-			else if(j-1 == 0){
-			    if(board[i][j-1] == '\0'){
-				board[i][j-1] = opp;
-				ans[0] = i;
-				ans[1] = j-1;
-				return ans;
-				
-			    }
-			}
-			else{
-			    if (j+2<3){
-				if(board[i][j+2] == '\0'){
-				    board[i][j+2] = opp;
-				    ans[0] = i;
-				    ans[1] = j+2;
-				    return ans;
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}
-	for (int i = 0; i < board.length; i++){
-	    for(int j = 0; j <board[i].length; j++){
-		if(board[i][j] == opp){
-		    if(i + 1 < board.length){
-			if(board[i +1][j] == opp){
-			    if(i - 1 ==0){
-				if(board[i-1][j] == '\0'){
-				    board[i-1][j] = opp;
-				    ans[0] = i-1;
-				    ans[1] = j;
-				    return ans;
-				}
-			    }
-			    else{
-				if (i+2<board.length){
-				    if (board[i+2][j] =='\0'){
-					board[i+2][j] = opp;
-					ans[0] = i+2;
-					ans[1] = j;
-					return ans;
-				    }
-				}
-			    }
-			}
-			else if( j + 1 <board[i].length){
-			    if(board[i + 1][j+1] == opp){
-				if( i-1 >= 0 && j -1 >= 0){
-				    if(board[i-1][j-1] == '\0'){
-					board[i-1][j-1] = opp;
-					ans[0] = i-1;
-					ans[1] = j-1;
-					return ans;
-				    }
-				}
-				else{
-				    if(i+2< board.length && j+2<board.length){
-					if(board[i+2][j+2] == '\0'){
-					    board[i+2][j+2] =opp;
-					    ans[0] = i+2;
-					    ans[1] = j+2;
-					    return ans;
-					}
-				    }
-				}
-			    }
-			}
-			else if(j-1 == 0){
-			    if(board[i][j-1] == '\0'){
-				board[i][j-1] = opp;
-				ans[0] = i;
-				ans[1] = j-1;
-				return ans;
-			    }
-			}
-			else{
-			    if (j+2<board.length){
-				if(board[i][j+2] == '\0'){
-				    board[i][j+2] = opp;
-				    ans[0] = i;
-				    ans[1] = j+2;
-				    return ans;
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}
-	return OMoveEasy();
-    }
+	 }else if (winner()){
+	     winAction();
+	 }
+	 else if (loser()){
+	     loseAction();
+	 }	
+     }
+     public void winAction(){
+	 for (int i =0; i<3; i++){
+	     for (JButton x: boardsq[i]){
+		 x.setEnabled(false);
+	     }
+	 }
+	 center.add(new newline());
+	 JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
+	 activate(z);
+	 center.add(z);
+	 if (easy){
+	     ticscore += 5;
+	 }
+	 else{
+	     ticscore += 10;
+	 } 
+	 scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
+     }
+     public void loseAction(){
+	 for (int i =0; i<3; i++){
+	     for (JButton x: boardsq[i]){
+		 x.setEnabled(false);
+	     }
+	 }
+	 center.add(new newline());
+	 JTextArea z = new JTextArea("YOU LOSE!!");
+	 JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
+	 JTextArea q = new JTextArea("Press 'Restart' to play again");
+	 activate(z);
+	 activate(a);
+	 activate(q);
 
+	 center.add(z);
+	 center.add(a);
+	 center.add(q);
+	 tichs.add(new Profile(username,ticscore));
+	 ticscore=0;	
+	 scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
+     }
+
+     public boolean filled(){
+	 boolean ans = true;
+	 for(int i = 0; i <board.length; i ++){
+	     for (int j = 0; j < board[i].length; j++){
+		 if(board[i][j] == '\0'){
+		     ans = false;
+		 }
+	     }
+	 }
+	 return ans;
+
+     }
+     public int[] OMoveEasy(){
+	 ArrayList<Integer> x = new ArrayList<Integer>();
+	 ArrayList<Integer> y = new ArrayList<Integer>();
+	 int[] ans = new int[2];
+	 for(int i = 0; i <board.length; i ++){
+	     for (int j = 0; j < board[i].length; j++){
+		 if(board[i][j] == '\0'){
+		     x.add(i);
+		     y.add(j);
+		 }
+	     }
+	 }
+	 int rand = (int)(Math.random() * x.size());
+	 try{
+	     int i= x.get(rand);
+	     int j = y.get(rand);
+
+	     ans[0] =i;
+	     ans[1]=j;
+	     return ans;
+	 }
+	 catch(Exception e){
+	     return null;
+	 }
+     }
+     public int[] OMove(){
+	 int[] ans = new int[2];
+	 for (int i = 0; i < board.length; i++){
+	     for(int j = 0; j <board[i].length; j++){
+		 if(board[i][j] == sym){
+		     if(i + 1 < board.length && board[i +1][j] == sym){ 
+			     if(i + 1 ==0){
+				 if(board[i+1][j] == '\0'){
+				     board[i+1][j] = opp;
+				     ans[0] = i-1;
+				     ans[1] = j;
+				     return ans;
+				 }
+			     }
+			     else{
+				 if (i+2<board.length && board[i+2][j] =='\0'){
+				     board[i+2][j] = opp;
+				     ans[0] = i+2;
+				     ans[1] = j;
+				     return ans;
+				 }
+			     }
+		     }
+		     else if (i-2>=0){			
+			 if(board[i-2][j]== sym){
+			     if (board[i-1][j] =='\0'){
+				 ans[0]=i-1;
+				 ans[1]=j;
+				 return ans;
+			     }
+			 }
+			 else if (board[i-1][j]== sym){
+			     if (board[i-2][j] =='\0'){
+				 ans[0] = i-2;
+				 ans[1] = j;
+				 return ans;
+			     }
+			 }
+		     }
+		     //diagonal topleft corner to bottomright corner
+		     if(j + 1 <board[i].length && i+1 < board.length){
+			 if(board[i + 1][j+1] == sym){
+			     if(i-1 >= 0 && j-1 >= 0){
+				 if(board[i-1][j-1] == '\0'){
+				     board[i-1][j-1] = opp;
+				     ans[0] = i-1;
+				     ans[1] = j-1;
+				     return ans;
+				 }
+			     }
+			     else{ 
+				 if(i+2< board.length && j+2 < 3){
+				     if(board[i+2][j+2] == '\0'){
+					 board[i+2][j+2] = opp;
+					 ans[0] = i+2;
+					 ans[1] = j+2;
+					 return ans;
+				     }
+				 }
+			     }
+
+			 }
+		     }//same diagonal - two corners are filed
+		     if(i+2< board.length && j+2 < 3){
+			 if (board[i+2][j+2]==sym){
+			     if(board[i+1][j+1] == '\0'){
+				 board[i+1][j+1] = opp; //middle box
+				 ans[0] = i+1;
+				 ans[1] = j+1;
+				 return ans;
+			     }
+			 }
+		     } 
+		     //opposite diagonal
+		     if(j + 1 <board[i].length && i-1 >=0){
+			 if(board[i - 1][j+1] == sym){
+			     if(i+1 >= 0 && j-1 >= 0){
+				 if(board[i+1][j-1] == '\0'){
+				     board[i+1][j-1] = opp;
+				     ans[0] = i+1;
+				     ans[1] = j-1;
+				     return ans;
+				 }
+			     }
+			     else{ 
+				 if(i+2< board.length && j+2 < 3){
+				     if(board[i+2][j+2] == '\0'){
+					 board[i+2][j+2] = opp;
+					 ans[0] = i+2;
+					 ans[1] = j+2;
+					 return ans;
+				     }
+				 }
+			     }
+
+			 }
+		     }//same diagonal - two corners are filed
+		     if(i+2< board.length && j+2 < 3){
+			 if (board[i+2][j+2]==sym){
+			     if(board[i+1][j+1] == '\0'){
+				 board[i+1][j+1] = opp; //middle box
+				 ans[0] = i+1;
+				 ans[1] = j+1;
+				 return ans;
+			     }
+			 }
+		     }  
+		     
+
+
+		     //opposite diagonal
+		     if(i==2 && j+2<3 &&board[i-2][j+2]==sym){
+			 if(board[i-1][j+1] == '\0'){
+			     board[i-1][j+1] = opp;
+			     ans[0] = i-1;
+			     ans[1] = j+1;
+			     return ans;
+			 }
+		     }
+		     if (i-2>=0&& j==0){
+			 if (board[i][j]==sym){
+			     if (board[i][j+2]==sym){
+				 if(board[i][j+2] == '\0'){
+				     board[i][j+2] = opp;
+				     ans[0] = i;
+				     ans[1] = j+2;
+				     return ans;
+				 }
+			     }
+			 }   
+		     }
+		     if (i-1 >0 && j-1 >0 && board[i-1][j-1] ==sym){
+			 if(i+1 <3 && j+1<3){
+			     if(board[i+1][j+1] == '\0'){
+				 board[i+1][j+1] = opp;
+				 ans[0] = i+1;
+				 ans[1] = j+1;
+				 return ans;
+			     }
+			 }
+			 else{
+			     if(i-2>0 && j-2>0){
+				 if(board[i-2][j-2] == '\0'){
+				     board[i-2][j-2] = opp;
+				     ans[0] = i-2;
+				     ans[1] = j-2;
+				     return ans;
+				 }
+			     }
+			 }
+		     }
+		     if(j + 1 < board.length){
+			 if(board[i][j+1] == sym){ 
+			     if(j - 1 ==0){
+				 if(board[i][j-1] == '\0'){
+				     board[i][j-1] = opp;
+				     ans[0] = i;
+				     ans[1] = j-1;
+				     return ans;
+				 }
+			     }
+			 }
+			 else if (j-1 >=0 &&board[i][j-1]==sym){
+			     if (board[i][j-1]==sym){
+				 if (j-1 ==0){
+				     if (board[i][j+1]=='\0'){
+					 board[i][j+1] = opp;
+					 ans[0] = i;
+					 ans[1] = j+1;
+					 return ans;
+				     }
+				 }
+			     }
+			 }
+		     }
+		     else if(j==2 && board[i][j]==sym && board[i][j-2]==sym){
+			 if (board[i][j-1]=='\0'){	
+			     board[i][j-1] = opp;
+			     ans[0] = i;
+			     ans[1] = j-1;
+			     return ans;
+			 }
+		     }
+				     else{
+			 if (i+2<board.length && board[i+2][j] =='\0'){
+			     board[i+2][j] = opp;
+			     ans[0] = i+2;
+			     ans[1] = j;
+			     return ans;
+			 }
+		     }
+		 }
+ 
+	     }
+	 }
+     
+	 for (int i = 0; i < board.length; i++){
+	     for(int j = 0; j <board[i].length; j++){
+		 if(board[i][j] == opp){
+		     if(i + 1 < board.length){
+			 if(board[i +1][j] == opp){
+			     if(i - 1 ==0){
+				 if(board[i-1][j] == '\0'){
+				     board[i-1][j] = opp;
+				     ans[0] = i-1;
+				     ans[1] = j;
+				     return ans;
+				 }
+			     }
+			     else{
+				 if (i+2<board.length){
+				     if (board[i+2][j] =='\0'){
+					 board[i+2][j] = opp;
+					 ans[0] = i+2;
+					 ans[1] = j;
+					 return ans;
+				     }
+				 }
+			     }
+			 }
+		     }
+		     else if( j + 1 <board[i].length && i+1<3){
+			 if(board[i + 1][j+1] == opp){
+			     if( i-1 >= 0 && j -1 >= 0){
+				 if(board[i-1][j-1] == '\0'){
+				     board[i-1][j-1] = opp;
+				     ans[0] = i-1;
+				     ans[1] = j-1;
+				     return ans;
+				 }
+			     }
+			     else{
+				 if(i+2< board.length && j+2<board.length){
+				     if(board[i+2][j+2] == '\0'){
+					 board[i+2][j+2] =opp;
+					 ans[0] = i+2;
+					 ans[1] = j+2;
+					 return ans;
+				     }
+				 }
+			     }
+			 }
+		     }
+		     else if(j-1 == 0){
+			 if(board[i][j-1] == '\0'){
+			     board[i][j-1] = opp;
+			     ans[0] = i;
+			     ans[1] = j-1;
+			     return ans;
+			 }
+		     }
+		     else{
+			 if (j+2<board.length){
+			     if(board[i][j+2] == '\0'){
+				 board[i][j+2] = opp;
+				 ans[0] = i;
+				 ans[1] = j+2;
+				 return ans;
+			     }
+			 }
+		     }
+		 }
+	     }
+	 }
+	 return OMoveEasy();
+     }
+    
     public boolean checkWinner(int x, int y){
 	try{
 	    if (board[x][y] == sym){
@@ -808,7 +999,6 @@ public class GUI extends JFrame{
 	}
     }
     public boolean winner(){
-	boolean ans = false;
 	for(int i = 0; i < board.length; i++){
 	    for(int j = 0; j < board[i].length; j++){
 		if (board[i][j]==sym){  
@@ -844,8 +1034,7 @@ public class GUI extends JFrame{
     }
 		
     public boolean loser(){
-	boolean ans = false;
-	for (int i = 0; i < board.length; i ++){
+	for (int i = 0; i < board.length; i++){
 	    for (int j = 0; j < board[i].length; j++){
 		if(board[i][j]==opp){
 		    if(checkLoser(i+1, j) && checkLoser(i-1,j)){
@@ -854,10 +1043,22 @@ public class GUI extends JFrame{
 		    else if(checkLoser(i, j+1) && checkLoser(i, j-1)){
 			return true;
 		    }
-		    else if(checkLoser(i+1,j+1) && checkWinner(i-1, j-1)){
+		    else if(checkLoser(i+1,j+1) && checkLoser(i-1, j-1)){
 			return true;
 		    }
-		    else if(checkLoser(i-1, j+1) && checkWinner(i+1,j-1)){
+		    else if(checkLoser(i-1, j+1) && checkLoser(i+1,j-1)){
+			return true;
+		    }
+		    else if(checkLoser(i-2, j+2) && checkLoser(i-1, j+1)){
+			return true;
+		    }
+		    else if(checkLoser(i-1, j-1) && checkLoser(i-2, j-2)){
+			return true;
+		    }
+		    else if(checkLoser(i+2, j+2) && checkLoser(i+1, j+1)){
+			return true;
+		    }
+		    else if(checkLoser(i-1, j+1) && checkLoser(i+2, j-2)){
 			return true;
 		    }
 		}
@@ -865,9 +1066,13 @@ public class GUI extends JFrame{
 	}
 	return false;
     }
+    public void c4screen(){
+	pt=new JPanel();
+	
+    }
 	 
     public void connectfour(){
-	title.setText("Simplified ConnectFour");
+	title.setText("ConnectFour");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(Color.orange);
@@ -954,57 +1159,6 @@ public class GUI extends JFrame{
       
     }
 
-    public void choosetic(){
-	pt = new JPanel();
-	pt.setBackground(new Color(32,178,170));
-	tic1 = new JRadioButton("X");
-	tic2 = new JRadioButton("O");
-	tic3 = new JRadioButton("I don't care.");
-	XO = new ButtonGroup();
-	XO.add(tic1);
-	XO.add(tic2);
-	XO.add(tic3);
-	center = Box.createVerticalBox();
-
-	JTextArea blurb = new JTextArea("Choose your symbol: X or O.");
-	JTextArea blurb2 = new JTextArea("Whichever button you do not click will be the symbol of your opponent.");
-	activate(blurb);
-	blurb.setLineWrap(false);
-	activate(blurb2);
-	blurb2.setLineWrap(false);
-	center.add(new newline());    
-	center.add(blurb);
-	center.add(new newline()); 
-	center.add(blurb2);
-	center.add(new newline()); 
-	blurb.setFont(new Font("Serif", Font.BOLD, 15));
-	blurb2.setFont(new Font("Serif", Font.BOLD, 15));
-
-	center.add(Box.createVerticalGlue());
-	Box h = Box.createHorizontalBox();
-	h.add(Box.createHorizontalGlue());
-	activate(tic1);
-	activate(tic2);
-	activate(tic3);
-	tic3.setSelected(true);
-	h.add(tic1);
-	h.add(tic2);
-	h.add(tic3);
-	h.add(Box.createHorizontalGlue());
-	center.add(h);
-	h.setBackground(null);
-	center.add(new newline()); 
-	center.add(new newline()); 
-	easystuff = new JButton("Easy");
-	tsubmit = new JButton("Hard");
-	activate(easystuff);
-	center.add(easystuff);
-	activate(tsubmit);
-	center.add(tsubmit);
-	pt.add(center);
-	frame.add(pt, BorderLayout.CENTER);
-
-    }
     public void trivia(){
 	title.setText("Trivia");
 	trfa = new ButtonGroup();

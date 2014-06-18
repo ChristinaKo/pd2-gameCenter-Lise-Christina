@@ -768,7 +768,7 @@ public class GUI extends JFrame{
 
 			 }
 		     }//same diagonal - two corners are filed
-		     if(i+2< board.length && j+2 < 3){
+		     if(i+2==2 && j+2==2){
 			 if (board[i+2][j+2]==sym){
 			     if(board[i+1][j+1] == '\0'){
 				 board[i+1][j+1] = opp; //middle box
@@ -778,65 +778,35 @@ public class GUI extends JFrame{
 			     }
 			 }
 		     } 
-		     //opposite diagonal
-		     if(i + 1 <board[i].length && j-1 >=0){
-			 if(board[i - 1][j+1] == sym){
-			     if(i+1 >= 0 && j-1 >= 0){
-				 if(board[i+1][j-1] == '\0'){
-				     board[i+1][j-1] = opp;
-				     ans[0] = i+1;
-				     ans[1] = j-1;
-				     return ans;
-				 }
-			     }
-			     else{ 
-				 if(i+2< board.length && j+2 < 3){
-				     if(board[i+2][j+2] == '\0'){
-					 board[i+2][j+2] = opp;
-					 ans[0] = i+2;
-					 ans[1] = j+2;
-					 return ans;
-				     }
-				 }
-			     }
-
-			 }
-		     }//same diagonal - two corners are filed
-		     if(i+2< board.length && j+2 < 3){
-			 if (board[i+2][j+2]==sym){
-			     if(board[i+1][j+1] == '\0'){
-				 board[i+1][j+1] = opp; //middle box
-				 ans[0] = i+1;
+		     
+		     //topright diagonal - two corners are filed
+		     if(i-2>=0 && j+2<board.length){
+			 if (board[i-2][j+2]==sym){
+			     if(board[i-1][j+1] == '\0'){
+				 board[i-1][j+1] = opp; //middle box
+				 ans[0] = i-1;
 				 ans[1] = j+1;
 				 return ans;
 			     }
 			 }
 		     }  
-		     
-
-
 		     //opposite diagonal
-		     if(i==2 && j+2<3 &&board[i-2][j+2]==sym){
-			 if(board[i-1][j+1] == '\0'){
+		     if(i==1 && j==1){
+			 if(board[i-1][j+1]==sym){
+			     board[i+1][j-1] = opp;
+			     ans[0] = i+1;
+			     ans[1] = j-1;
+			     return ans;
+			 }
+			 else if(board[i+1][j-1]==sym){
 			     board[i-1][j+1] = opp;
 			     ans[0] = i-1;
 			     ans[1] = j+1;
 			     return ans;
 			 }
 		     }
-		     if (i-2>=0&& j==0){
-			 if (board[i][j]==sym){
-			     if (board[i][j+2]==sym){
-				 if(board[i][j+2] == '\0'){
-				     board[i][j+2] = opp;
-				     ans[0] = i;
-				     ans[1] = j+2;
-				     return ans;
-				 }
-			     }
-			 }   
-		     }
-		     if (i-1 >0 && j-1 >0 && board[i-1][j-1] ==sym){
+
+		     /* if (i-1 >0 && j-1 >0 && board[i-1][j-1] ==sym){
 			 if(i+1 <3 && j+1<3){
 			     if(board[i+1][j+1] == '\0'){
 				 board[i+1][j+1] = opp;
@@ -856,6 +826,8 @@ public class GUI extends JFrame{
 			     }
 			 }
 		     }
+		     */
+		     //horizontal checking
 		     if(j + 1 < board.length){
 			 if(board[i][j+1] == sym){ 
 			     if(j - 1 ==0){
@@ -888,14 +860,7 @@ public class GUI extends JFrame{
 			     return ans;
 			 }
 		     }
-				     else{
-			 if (i+2<board.length && board[i+2][j] =='\0'){
-			     board[i+2][j] = opp;
-			     ans[0] = i+2;
-			     ans[1] = j;
-			     return ans;
-			 }
-		     }
+		     
 		 }
  
 	     }

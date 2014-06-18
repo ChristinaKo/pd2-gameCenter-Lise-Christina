@@ -451,18 +451,17 @@ public class GUI extends JFrame{
 				if (redb){
 				    cboard[i][0]="r";
 				    boardsq[i][0].setBackground(Color.red);
-				    pt.revalidate();
 				}
 				else{
 				    cboard[i][0]="b";
 				    boardsq[i][0].setBackground(Color.black);
-				    pt.revalidate();
 				}
 				if (i==0)
 				    ct1.setEnabled(false);
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		
@@ -482,6 +481,7 @@ public class GUI extends JFrame{
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		    else if (e1.getSource()==ct3){

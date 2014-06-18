@@ -5,5 +5,5 @@ Description: This is our Game Center. It currently holds three games: Tic-Tac-To
 What works:
      Tic-Tac-Toe easy and hard levels both work. The Trivia also works. The High Score chart works with the exception of the ConnectFour column. Players are able to change their profiles as well via the high score screen.
 What does not work:
-     ConnectFour is not completely implemented as we hoped. <- We will go back and fix this even if you grade our project first. So if you want to see a complete version, run the game later, but all other functions of the game works besides connect four.
-Data structures used: We used priority queues in GUIs.java to store scores. We also used the maze type recursion we learned in class for the connect four/tic-tac-toe games.
+     ConnectFour is not completely implemented as we hoped. The algorithm behind the com player for connect four is weak.
+Data structures used: We used priority queues in GUIs.java to store the high scores. [max heaps]

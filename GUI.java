@@ -1232,14 +1232,17 @@ public class GUI extends JFrame{
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
 	pt.setBackground(null);
+	pt.setOpaque(true);
 	
 	connect4= new JPanel(new BorderLayout(3,3));
 	connect4.setBackground(null);
+	connect4.setOpaque(true);
 	connect4.setPreferredSize(new Dimension(500,300));
 	boardsq = new JButton[6][7];
 
 	Board = new JPanel(new GridLayout(6,7));
 	Board.setBackground(null);
+	Board.setOpaque(true);
 	Board.setBorder(new LineBorder(Color.BLACK));
 	cboard = new String[6][7];
 	
@@ -1279,6 +1282,7 @@ public class GUI extends JFrame{
 		boardsq[i][j]= new JButton();
 		boardsq[i][j].setBorder(new LineBorder(Color.BLACK));
 		boardsq[i][j].setBackground(Color.yellow);
+		boardsq[i][j].setForeground(Color.pink);
 		boardsq[i][j].setEnabled(false);
 		Board.add(boardsq[i][j]);
 	    }

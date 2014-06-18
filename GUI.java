@@ -13,7 +13,7 @@ public class GUI extends JFrame{
     
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4;
-    protected JButton t1, c1, cq2, p2, t3;
+    protected JButton t1, c1, cq2, cq3, p2, t3;
     
     protected JButton t2,w2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
@@ -428,6 +428,12 @@ public class GUI extends JFrame{
 		    pt.revalidate();
 		    frame.remove(pt);
 		    mainscreen();	
+		}
+		else if (e1.getSource() == cq3){
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    c4screen();
 		}
 		else if (e1.getSource() == co1){
 		    redb=true;
@@ -1198,6 +1204,7 @@ public class GUI extends JFrame{
 
 	JTextArea blurb = new JTextArea("Choose your color: Red or Black.");
 	JTextArea blurb2 = new JTextArea("Whichever color you do not choose will be the symbol of your opponent.");
+
 	activate(blurb);
 	blurb.setLineWrap(false);
 	activate(blurb2);
@@ -1231,18 +1238,16 @@ public class GUI extends JFrame{
 	title.setText("ConnectFour");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
-	pt.setBackground(null);
+	pt.setBackground(Color.orange);
 	pt.setOpaque(true);
 	
 	connect4= new JPanel(new BorderLayout(3,3));
-	connect4.setBackground(null);
-	connect4.setOpaque(true);
+	connect4.setBackground(Color.yellow);
 	connect4.setPreferredSize(new Dimension(500,300));
 	boardsq = new JButton[6][7];
 
 	Board = new JPanel(new GridLayout(6,7));
 	Board.setBackground(null);
-	Board.setOpaque(true);
 	Board.setBorder(new LineBorder(Color.BLACK));
 	cboard = new String[6][7];
 	
@@ -1269,8 +1274,7 @@ public class GUI extends JFrame{
 	boardsq[0][6] = ct7;
 	for (int j =0; j<7; j++){
 	    boardsq[0][j].setBorder(new LineBorder(Color.BLACK));
-	    boardsq[0][j].setBackground(Color.pink);
-	    boardsq[0][j].setForeground(Color.pink);
+	    boardsq[0][j].setBackground(Color.yellow.darker());
 	    Board.add(boardsq[0][j]);
     	    boardsq[0][j].setEnabled(true);
 	    boardsq[0][j].setOpaque(true);
@@ -1289,24 +1293,42 @@ public class GUI extends JFrame{
 		Board.add(boardsq[i][j]);
 	    }
 	}
-	
+
+	JTextArea blurb = new JTextArea("Click the top row in order to insert your playing piece; Please note, that the top darker row is also part of the Connect4 board.");	
+	activate (blurb);
+	JTextArea blurb2 = new JTextArea();
+	if (redb){
+	    blurb2.setText("You are RED.");
+	}
+	else{
+	    blurb2.setText("You are BLACK.");
+	}
+	activate(blurb2);
 	//buttons for connect4 screen
 	c1= new JButton("Restart");
 	cq2= new JButton("Quit");
+	cq3=new JButton("Change Color");
+	activate(cq3);
 	activate(c1);
 	activate(cq2);
-	connect4.add(Board);	
+	
+
 	pt.add(connect4);
 	center = Box.createVerticalBox();
+	center.add(blurb);	
+	center.add(new newline());	
+	center.add(blurb2);	
+	center.add(new newline());	
+	connect4.add(Board);
 	center.add(Box.createVerticalGlue());
 	center.add(connect4);
 	center.add(Box.createVerticalGlue());
-
 	center.add(new newline());
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
 	h.add(c1);
+	h.add(cq3);
 	h.add(cq2);
 	h.add(Box.createHorizontalGlue());
 	center.add(h);
@@ -1448,7 +1470,6 @@ public class GUI extends JFrame{
 	else{
 	    boardsq[a][s].setBackground(Color.red);
 	}
-	Board.revalidate();
 	pt.revalidate();
     }
 

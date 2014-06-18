@@ -14,7 +14,7 @@ public class GUI extends JFrame{
     
     private final JLabel spacelabel;
     protected JButton startb,b1,b2,b3,b4;
-    protected JButton t1, c1, cq2, p2;
+    protected JButton t1, c1, cq2, p2, t3;
     
     protected JButton t2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
@@ -233,6 +233,12 @@ public class GUI extends JFrame{
 		     mainscreen();	
 		     tichs.add(new Profile (username,ticscore));
 		     ticscore=0;
+		 }
+		 else if (e1.getSource() == t3){
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+		     choosetic();	
 		 }
 		 else if (e1.getSource() == prof){
 		     pt.removeAll();
@@ -608,6 +614,7 @@ public class GUI extends JFrame{
 
     public void choosetic(){
 	pt = new JPanel();
+	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
 	pt.setBackground(new Color(32,178,170));
 	tic1 = new JRadioButton("X");
 	tic2 = new JRadioButton("O");
@@ -685,8 +692,10 @@ public class GUI extends JFrame{
 	tic.add(Board);	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
+	t3 = new JButton("Change Level");
 	activate(t1);
 	activate(t2);
+	activate(t3);
 	center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
 	JTextArea y = new JTextArea("You are " + sym + ".");
@@ -701,6 +710,7 @@ public class GUI extends JFrame{
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
 	h.add(t1);
+	h.add(t3);
 	h.add(t2);
 	h.add(Box.createHorizontalGlue());
 	center.add(h);
@@ -736,6 +746,8 @@ public class GUI extends JFrame{
 	    center.add(new newline());
 	    JTextArea tie = new JTextArea("TIE!!!!!!!!!!!!! Please Restart for a new game");
 	    tie.setBackground(null);
+	    activate(tie);
+
 	    center.add(tie);
 	    pt.revalidate();
 	}else if (!winner() && !loser()){
@@ -972,9 +984,7 @@ public class GUI extends JFrame{
 				     return ans;
 				 }
 			     }
-			 }
-			 else if (j-1<0 && j+2<3){
-			     if (board[i][j+1]==sym){
+			     else if (j+2<3){
 				 if (board[i][j+2]=='\0'){
 				     board[i][j+2] = opp;
 				     ans[0] = i;
@@ -1387,6 +1397,7 @@ public class GUI extends JFrame{
 	    center.add(new newline());
 	    JTextArea tie = new JTextArea("TIE!!!!!!!!!!!!! Please Press Restart Game for a new game");
 	    tie.setBackground(null);
+	    activate(tie);
 	    center.add(tie);
 	}
 	ArrayList<Integer> q = new ArrayList<Integer>();

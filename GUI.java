@@ -231,8 +231,6 @@ public class GUI extends JFrame{
 		     pt.revalidate();
 		     frame.remove(pt);
 		     mainscreen();	
-		     tichs.add(new Profile (username,ticscore));
-		     ticscore=0;
 		 }
 		 else if (e1.getSource() == t3){
 		     pt.removeAll();
@@ -408,6 +406,8 @@ public class GUI extends JFrame{
 		    
 		}
 		else if (e1.getSource() == p2){
+		    tichs.add(new Profile(username,ticscore));
+		    ticscore =0;
 		    pt.removeAll();
 		    pt.revalidate();
 		    frame.remove(pt);
@@ -613,6 +613,7 @@ public class GUI extends JFrame{
     }
 
     public void choosetic(){
+	title.setText("Tic-Tac-Toe");
 	pt = new JPanel();
 	scorelabel.setText("Player: " + username +"        SCORE: "+ ticscore + "  ");
 	pt.setBackground(new Color(32,178,170));
@@ -692,7 +693,7 @@ public class GUI extends JFrame{
 	tic.add(Board);	
 	t1= new JButton("Restart");
 	t2= new JButton("Quit");
-	t3 = new JButton("Change Level");
+	t3 = new JButton("Change Level/Color");
 	activate(t1);
 	activate(t2);
 	activate(t3);
@@ -755,20 +756,17 @@ public class GUI extends JFrame{
 	    if (easy){				
 		x= OMoveEasy();
 	     }
-	     else{
-		 x = OMove();
-	     }
-	     if (x != null){
-		 boardsq[x[0]][x[1]].setIcon(oppo);
-		 boardsq[x[0]][x[1]].setEnabled(false);
-		 board[x[0]][x[1]]=opp;
-		 if (loser()){
-		     loseAction();
-		 }
-	     }
-
-	 }else if (winner()){
-	     winAction();
+	    else{
+		x = OMove();
+	    }
+	    boardsq[x[0]][x[1]].setIcon(oppo);
+	    boardsq[x[0]][x[1]].setEnabled(false);
+	    board[x[0]][x[1]]=opp;
+	    if (loser()){
+		loseAction();
+	    }	    
+	}else if (winner()){
+	    winAction();
 	 }
 	 else if (loser()){
 	     loseAction();
@@ -839,17 +837,12 @@ public class GUI extends JFrame{
 	     }
 	 }
 	 int rand = (int)(Math.random() * x.size());
-	 try{
-	     int i= x.get(rand);
-	     int j = y.get(rand);
-
-	     ans[0] =i;
-	     ans[1]=j;
-	     return ans;
-	 }
-	 catch(Exception e){
-	     return null;
-	 }
+	 int i= x.get(rand);
+	 int j = y.get(rand);
+	 
+	 ans[0]=i;
+	 ans[1]=j;
+	 return ans;
      }
      public int[] OMove(){
 	 int[] ans = new int[2];
@@ -877,6 +870,7 @@ public class GUI extends JFrame{
 		     else if (i-2>=0){			
 			 if(board[i-2][j]== sym){
 			     if (board[i-1][j] =='\0'){
+				 board[i-1][j] =opp;
 				 ans[0]=i-1;
 				 ans[1]=j;
 				 return ans;
@@ -884,6 +878,7 @@ public class GUI extends JFrame{
 			 }
 			 else if (board[i-1][j]== sym){
 			     if (board[i-2][j] =='\0'){
+				 board[i-2][j] = opp;
 				 ans[0] = i-2;
 				 ans[1] = j;
 				 return ans;
@@ -939,16 +934,20 @@ public class GUI extends JFrame{
 		     //opposite diagonal
 		     if(i==1 && j==1){
 			 if(board[i-1][j+1]==sym){
-			     board[i+1][j-1] = opp;
-			     ans[0] = i+1;
-			     ans[1] = j-1;
-			     return ans;
+			     if (board[i+1][j-1] =='\0'){
+				 board[i+1][j-1] = opp;
+				 ans[0] = i+1;
+				 ans[1] = j-1;
+				 return ans;
+			     }
 			 }
 			 else if(board[i+1][j-1]==sym){
-			     board[i-1][j+1] = opp;
-			     ans[0] = i-1;
-			     ans[1] = j+1;
-			     return ans;
+			     if (board[i-1][j+1] =='\0'){
+				 board[i-1][j+1] = opp;
+				 ans[0] = i-1;
+				 ans[1] = j+1;
+				 return ans;
+			     }
 			 }
 		     }
 
@@ -1174,6 +1173,7 @@ public class GUI extends JFrame{
 	return false;
     }
     public void c4screen(){
+	title.setText("Connect Four");
 	pt = new JPanel();
 	pt.setBackground(new Color(0,255,43));
 	co1 = new JButton("Red");
@@ -1501,7 +1501,7 @@ public class GUI extends JFrame{
 	h.add(Box.createHorizontalGlue());
 	h.add(submit);
 	h.add(Box.createHorizontalGlue());
-	h.add(t2);
+	h.add(p2);
 	h.add(Box.createHorizontalGlue());
 	center.add(h);
 	pt.add(center, BorderLayout.CENTER);
@@ -1545,7 +1545,7 @@ public class GUI extends JFrame{
 	}
 	
 	JLabel l =new JLabel("Tic-Tac-Toe");
-	JLabel k = new JLabel("Simplified Connect4");
+	JLabel k = new JLabel("Connect 4");
 	JLabel j = new JLabel("Trivia Questions");
 	hsboard.add(l);
 	hsboard.add(k);

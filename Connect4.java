@@ -90,7 +90,7 @@ public class Connect4{
 	for(int i = 0; i < cboard.length; i++){
 	    for(int j = 0; j < cboard[i].length; j++){
 		if (cboard[i][j]==getPColor()){
-		    //add the check winner methods that would decide if you had won or not
+		    
 		    if (checkCloser(i+2, j) && checkCloser(i+1,j) && checkCloser(i-1, j)){
 			return true;
 		    }
@@ -107,7 +107,6 @@ public class Connect4{
 	    }
 
 	}
-	// add score componentscore = score + ; 
 	return false;
     }
 

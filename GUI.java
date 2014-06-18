@@ -13,12 +13,14 @@ public class GUI extends JFrame{
     protected Container background,contentPane;
     
     private final JLabel spacelabel;
-    protected JButton startb,b1,b2,b3,b4,b5,b6,b7,b8,b9;
+    protected JButton startb,b1,b2,b3,b4;
     protected JButton t1, c1, cq2, p2;
-    protected JButton ct1,ct2,ct3,ct4,ct5,ct6,ct7;
+    
     protected JButton t2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
     protected JButton tac1,tac2,tac3,tac4,tac5,tac6,tac7,tac8, tac9;
+    protected JButton ct1,ct2,ct3,ct4,ct5,ct6,ct7;
+    protected JButton co1,co2;
     protected JFrame frame;
     protected JPanel menubar, scorebox;
     protected JMenuBar Title;
@@ -47,7 +49,7 @@ public class GUI extends JFrame{
     private final ImageIcon O = createImageIcon("o.gif");
     private ImageIcon pla,oppo;
  
-      
+    protected boolean redb;  
     //maxheaps of the high scores of each game
 
     //back end variables//
@@ -55,7 +57,7 @@ public class GUI extends JFrame{
     protected char[][] board;
     protected String[][] cboard;
     protected boolean easy;
-
+    
     protected TrueOrFalse tf;
 
 
@@ -165,7 +167,7 @@ public class GUI extends JFrame{
 			 
 			 JTextArea emptytxtfield = new JTextArea("Please Enter Valid Username.");
 			 activate(emptytxtfield);
-			 emptytxtfield.setBackground(Color.red);
+			 emptytxtfield.setBackground(Color.RED);
 			
 			 center.add(emptytxtfield);
 			 pt.revalidate();
@@ -192,12 +194,6 @@ public class GUI extends JFrame{
 		     gamep.revalidate();
 		     frame.remove(gamep);
 		     c4screen();
-		 }
-		 else if (e1.getSource() == b9){
-		     pt.removeAll();
-		     pt.revalidate();
-		     frame.remove(pt);
-		     connectfour();
 		 }
 		 else if (e1.getSource() == b3){
 		     triviascore = 0;
@@ -403,6 +399,7 @@ public class GUI extends JFrame{
 		    pt.revalidate();
 		    frame.remove(pt);
 		    trivia();
+		    
 		}
 		else if (e1.getSource() == p2){
 		    pt.removeAll();
@@ -418,26 +415,163 @@ public class GUI extends JFrame{
 		    c4hs.add(new Profile(username,c4score));
 		    c4score =0;
 		}
-		else if (e1.getSource() == ct1 || e1.getSource()== ct2  || e1.getSource()== ct3  || e1.getSource()== ct4  || e1.getSource()==ct5  || e1.getSource()== ct6  || e1.getSource()== ct7 ){
-		  
-			int d = (int)(Math.random() *6);
-			int j = (int)(Math.random() *7);
-			boardsq[d][j] = new JButton();
-			boardsq[d][j].setBackground(new Color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255)));
-			pt.revalidate();
-		  
+		else if (e1.getSource() == co1){
+		    redb=true;
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    connectfour();
 		}
-		      
+		else if (e1.getSource() == co2){
+		    redb=false;
+		    pt.removeAll();
+		    pt.revalidate();
+		    frame.remove(pt);
+		    connectfour();
+		}
 		 
-		 /* else if(cwinner()){
-			cwinAction();
+		else if (e1.getSource()== ct1 || e1.getSource()== ct2 || e1.getSource()== ct3 || e1.getSource()== ct4 || e1.getSource()== ct5 || e1.getSource()== ct6 || e1.getSource()== ct7 && !cwinner() && !closer()){
+		    if (e1.getSource()==ct1){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][0] ==null){
+				if (redb){
+				    cboard[i][0]="r";
+				    boardsq[i][0].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][0]="b";
+				    boardsq[i][0].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct1.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
 		    }
-		    else if (closer()){
+		
+		    else if (e1.getSource()==ct2){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][1] ==null){
+				if (redb){
+				    cboard[i][1]="r";
+				    boardsq[i][1].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][1]="b";
+				    boardsq[i][1].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct2.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    else if (e1.getSource()==ct3){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][2] ==null){
+				if (redb){
+				    cboard[i][2]="r";
+				    boardsq[i][2].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][2]="b";
+				    boardsq[i][2].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct3.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    else if (e1.getSource()==ct4){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][3] ==null){
+				if (redb){
+				    cboard[i][3]="r";
+				    boardsq[i][3].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][3]="b";
+				    boardsq[i][3].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct4.setEnabled(false);
+			     
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    else if (e1.getSource()==ct5){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][4] ==null){
+				if (redb){
+				    cboard[i][4]="r";
+				    boardsq[i][4].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][4]="b";
+				    boardsq[i][4].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct5.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    else if (e1.getSource()==ct6){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][5] ==null){
+				if (redb){
+				    cboard[i][5]="r";
+				    boardsq[i][5].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][5]="b";
+				    boardsq[i][5].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct6.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    else if (e1.getSource()==ct7){
+			for (int i =cboard.length-1; i>=0; i--){
+			    if (cboard[i][6] ==null){
+				if (redb){
+				    cboard[i][6]="r";
+				    boardsq[i][6].setBackground(Color.red);
+				}
+				else{
+				    cboard[i][6]="b";
+				    boardsq[i][6].setBackground(Color.black);
+				}
+				if (i==0)
+				    ct7.setEnabled(false);
+				break;
+			    }
+			}
+			pt.revalidate();
+		    }
+		    if (closer())
 			closeAction();
+		    else if (cwinner())
+			cwinAction();
+		    else{
+			comove();
+			pt.revalidate();
+			if (closer()){
+			    closeAction();
+			}
+			
 		    }
-		 */
-		   
-		    
+		}
 	     }
 	     catch(Exception e){
 		 e.printStackTrace();
@@ -598,16 +732,16 @@ public class GUI extends JFrame{
 	}
     }
     public void ticmove(){
-	 if (!winner() && !loser() && filled()){
-	     center.add(new newline());
-	     center.add(new JTextArea("TIE!!!!!  Press Restart for new game."));   
-	     pt.revalidate();
-	 }else if (!winner() && !loser()){
-	     int[] x;  // 2 item array is for row index and column for tictac
-	     if (easy){				
-
-		 System.out.println("easy");
-		 x= OMoveEasy();
+	if (!winner() && !loser() && filled()){
+	    center.add(new newline());
+	    JTextArea tie = new JTextArea("TIE!!!!!!!!!!!!! Please Restart for a new game");
+	    tie.setBackground(null);
+	    center.add(tie);
+	    pt.revalidate();
+	}else if (!winner() && !loser()){
+	    int[] x;  // 2 item array is for row index and column for tictac
+	    if (easy){				
+		x= OMoveEasy();
 	     }
 	     else{
 		 x = OMove();
@@ -635,7 +769,7 @@ public class GUI extends JFrame{
 	     }
 	 }
 	 center.add(new newline());
-	 JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again");
+	 JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again.");
 	 activate(z);
 	 center.add(z);
 	 if (easy){
@@ -654,8 +788,8 @@ public class GUI extends JFrame{
 	 }
 	 center.add(new newline());
 	 JTextArea z = new JTextArea("YOU LOSE!!");
-	 JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
-	 JTextArea q = new JTextArea("Press 'Restart' to play again");
+	 JTextArea a = new JTextArea("YOUR SCORE IS "+ ticscore);
+	 JTextArea q = new JTextArea("Press 'Restart' to play again.");
 	 activate(z);
 	 activate(a);
 	 activate(q);
@@ -1032,17 +1166,15 @@ public class GUI extends JFrame{
     public void c4screen(){
 	pt = new JPanel();
 	pt.setBackground(new Color(0,255,43));
-	tic1 = new JRadioButton("X");
-	tic2 = new JRadioButton("O");
-	tic3 = new JRadioButton("I don't care.");
-	XO = new ButtonGroup();
-	XO.add(tic1);
-	XO.add(tic2);
-	XO.add(tic3);
+	co1 = new JButton("Red");
+	co2 = new JButton("Black");
+	
+	co1.setBackground(Color.RED);
+	co2.setBackground(Color.BLACK);
 	center = Box.createVerticalBox();
 
-	JTextArea blurb = new JTextArea("Choose your symbol: X or O.");
-	JTextArea blurb2 = new JTextArea("Whichever button you do not click will be the symbol of your opponent.");
+	JTextArea blurb = new JTextArea("Choose your color: Red or Black.");
+	JTextArea blurb2 = new JTextArea("Whichever color you do not choose will be the symbol of your opponent.");
 	activate(blurb);
 	blurb.setLineWrap(false);
 	activate(blurb2);
@@ -1058,24 +1190,16 @@ public class GUI extends JFrame{
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
-	activate(tic1);
-	activate(tic2);
-	activate(tic3);
-	tic3.setSelected(true);
-	h.add(tic1);
-	h.add(tic2);
-	h.add(tic3);
+	activate(co1);
+	activate(co2);
+	h.add(co1);
+	h.add(co2);
 	h.add(Box.createHorizontalGlue());
 	center.add(h);
 	h.setBackground(null);
 	center.add(new newline()); 
 	center.add(new newline()); 
-	easystuff = new JButton("Easy");
-	tsubmit = new JButton("Hard");
-	activate(easystuff);
-	center.add(easystuff);
-	activate(tsubmit);
-	center.add(tsubmit);
+
 	pt.add(center);
 	frame.add(pt, BorderLayout.CENTER);
     }
@@ -1089,13 +1213,12 @@ public class GUI extends JFrame{
 	connect4= new JPanel(new BorderLayout(3,3));
 	connect4.setBackground(Color.yellow);
 	connect4.setPreferredSize(new Dimension(500,300));
-	JButton[][] boardsq = new JButton[6][7];
+	boardsq = new JButton[6][7];
 
 	Board = new JPanel(new GridLayout(6,7));
 	Board.setBackground(null);
 	Board.setBorder(new LineBorder(Color.BLACK));
 	cboard = new String[6][7];
-
 	
 	ct1= new JButton();
 	ct2= new JButton();
@@ -1111,7 +1234,7 @@ public class GUI extends JFrame{
 	activate(ct5);
 	activate(ct6);
 	activate(ct7);
-	boardsq[0][0] =ct1;
+	boardsq[0][0] = ct1;
 	boardsq[0][1] = ct2;
 	boardsq[0][2] = ct3;
 	boardsq[0][3] = ct4;
@@ -1123,24 +1246,20 @@ public class GUI extends JFrame{
 	    boardsq[0][j].setBackground(Color.yellow.darker());
 	    Board.add(boardsq[0][j]);
     	    boardsq[0][j].setEnabled(true);
+	    cboard[0][j]=null;
 	}	
     
 	for (int i = 1; i < 6; i++){
 	    for (int j =0; j<7; j++){
-	        cboard[i][j] = "";
-		JButton x = new JButton("");
-		x.setBorder(new LineBorder(Color.BLACK));
-		x.setBackground(Color.yellow);
-		Board.add(x);
-	
-		x.setEnabled(false);
-		boardsq[i][j] = x;
-	
+	        cboard[i][j] = null;
+		boardsq[i][j]= new JButton();
+		boardsq[i][j].setBorder(new LineBorder(Color.BLACK));
+		boardsq[i][j].setBackground(Color.yellow);
+		boardsq[i][j].setEnabled(false);
+		Board.add(boardsq[i][j]);
 	    }
 	}
 	
-    
-
 	//buttons for connect4 screen
 	c1= new JButton("Restart");
 	cq2= new JButton("Quit");
@@ -1163,10 +1282,176 @@ public class GUI extends JFrame{
 	center.add(h);
 	center.add(Box.createVerticalGlue());
 	pt.add(center);
-
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
       
     }
+      public boolean cfilled(){
+	 boolean ans = true;
+	 for(int i = 0; i <cboard.length; i ++){
+	     for (int j = 0; j < cboard[i].length; j++){
+		 if(cboard[i][j] != null){
+		     ans = false;
+		 }
+	     }
+	 }
+	 return ans;
+
+     }
+    public boolean cwinner(){ //checks for winner in connect4
+	for(int i = 0; i < cboard.length; i++){
+	    for(int j = 0; j < cboard[i].length; j++){
+		if (cboard[i][j]==getPColor()){
+		    if (checkCWinner(i+2, j) && checkCWinner(i+1,j) && checkCWinner(i-1, j)){
+			return true;
+		    }
+		    else if (checkCWinner(i, j+2) && checkCWinner(i, j+1) && checkCWinner(i, j-1)){
+			return true;
+		    }
+		    else if (checkCWinner(i+2, j+2) && checkCWinner(i+1, j+1) && checkCWinner(i-1, j-1)){
+			return true;
+		    }
+		    else if (checkCWinner(i-2, j+2) && checkCWinner(i-1, j+1) && checkCWinner(i+1,j-1)){
+			return true;
+		    }
+		}
+	    }
+
+	}
+	return false;
+    }
+    public boolean closer(){
+	for(int i = 0; i < cboard.length; i++){
+	    for(int j = 0; j < cboard[i].length; j++){
+		if (cboard[i][j]==getOColor()){
+		    if (checkCloser(i+2, j) && checkCloser(i+1,j) && checkCloser(i-1, j)){
+			return true;
+		    }
+		    else if (checkCloser(i, j+2) && checkCloser(i, j+1) && checkCloser(i, j-1)){
+			return true;
+		    }
+		    else if (checkCloser(i+2, j+2) && checkCloser(i+1, j+1) && checkCloser(i-1, j-1)){
+			return true;
+		    }
+		    else if (checkCloser(i-2, j+2) && checkCloser(i-1, j+1) && checkCloser(i+1,j-1)){
+			return true;
+		    }
+		}
+	    }
+
+	}
+	return false;
+    }
+
+    public boolean checkCWinner(int x, int y){
+	try{
+	    if (cboard[x][y] == getPColor()){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+	}
+	catch(IndexOutOfBoundsException e){
+	    return false;	    
+	}
+    }
+    public boolean checkCloser(int x, int y){
+	try{
+	    if (cboard[x][y] == getOColor()){
+		return true;
+	    }
+	    else{
+		return false;
+	    }
+	}
+	catch(IndexOutOfBoundsException e){
+	    return false;	    
+	}
+    }
+    private String getOColor(){
+	return getOColor(0);
+    }
+    private String getPColor(){
+	return getOColor(1);
+    }
+    public String getOColor(int x){
+	if ((!redb && x ==0) || (redb && x==1)){
+	    return "r"; //red
+	}
+	else{
+	    return "b";//black
+	}
+    }
+    public void comove(){
+	if (cfilled()){
+	    center.add(new newline());
+	    JTextArea tie = new JTextArea("TIE!!!!!!!!!!!!! Please Press Restart Game for a new game");
+	    tie.setBackground(null);
+	    center.add(tie);
+	}
+	ArrayList<Integer> q = new ArrayList<Integer>();
+	ArrayList<Integer> w = new ArrayList<Integer>();
+	    
+	for(int j = cboard[0].length-1; j>=0; j--){
+	    int i = cboard.length-1;
+	    while(i>=0){
+		if(cboard[i][j]== null){
+		    q.add(i);
+		    w.add(j);
+		    
+		    i = -1 ;
+		}
+		else
+		    i--;
+	    }
+	}
+	int rand = (int)(Math.random() *q.size());
+	int a= q.get(rand);
+	int s = w.get(rand);
+	cboard[a][s] = getOColor();
+	if (redb){
+	    boardsq[a][s].setBackground(Color.black);
+	}
+	else{
+	    boardsq[a][s].setBackground(Color.red);
+	}
+    }
+
+    public void cwinAction(){
+	 for (int i =0; i<3; i++){
+	     for (JButton x: boardsq[i]){
+		 x.setEnabled(false);
+	     }
+	 }
+	 center.add(new newline());
+	 JTextArea z = new JTextArea("YOU WIN!!! Press 'Restart' to play again.");
+	 activate(z);
+	 center.add(z);
+	 c4score += 15;
+	 scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
+     }
+     public void closeAction(){
+	 for (int i =0; i<3; i++){
+	     for (JButton x: boardsq[i]){
+		 x.setEnabled(false);
+	     }
+	 }
+	 center.add(new newline());
+	 JTextArea z = new JTextArea("YOU LOSE!!");
+	 JTextArea a = new JTextArea("YOUR SCORE IS "+ c4score);
+	 JTextArea q = new JTextArea("Press 'Restart' to play again.");
+	 activate(z);
+	 activate(a);
+	 activate(q);
+	
+	 center.add(z);
+	 center.add(a);
+	 center.add(q);
+	 c4hs.add(new Profile(username,c4score));
+	 c4score=0;	
+	 scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
+     }
+
 
     public void trivia(){
 	title.setText("Trivia");
@@ -1387,7 +1672,7 @@ public class GUI extends JFrame{
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
-            System.err.println("Couldn't find file: " + path);
+            System.out.println("Couldn't find file: " + path);
             return null;
         }
     }

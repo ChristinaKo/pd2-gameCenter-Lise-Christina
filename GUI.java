@@ -500,6 +500,7 @@ public class GUI extends JFrame{
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		    else if (e1.getSource()==ct4){
@@ -1262,7 +1263,7 @@ public class GUI extends JFrame{
 	boardsq[0][6] = ct7;
 	for (int j =0; j<7; j++){
 	    boardsq[0][j].setBorder(new LineBorder(Color.BLACK));
-	    boardsq[0][j].setBackground(Color.yellow.darker());
+	    boardsq[0][j].setBackground(Color.pink());
 	    Board.add(boardsq[0][j]);
     	    boardsq[0][j].setEnabled(true);
 	    cboard[0][j]=null;

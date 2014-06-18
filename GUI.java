@@ -1231,7 +1231,7 @@ public class GUI extends JFrame{
 	title.setText("ConnectFour");
 	scorelabel.setText("Player: " + username +"        SCORE: "+ c4score + "  ");
 	pt = new JPanel();
-	pt.setBackground(Color.orange);
+	pt.setBackground(null);
 	
 	connect4= new JPanel(new BorderLayout(3,3));
 	connect4.setBackground(null);

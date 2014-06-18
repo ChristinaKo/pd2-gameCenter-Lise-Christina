@@ -779,7 +779,7 @@ public class GUI extends JFrame{
 			 }
 		     } 
 		     //opposite diagonal
-		     if(j + 1 <board[i].length && i-1 >=0){
+		     if(i + 1 <board[i].length && j-1 >=0){
 			 if(board[i - 1][j+1] == sym){
 			     if(i+1 >= 0 && j-1 >= 0){
 				 if(board[i+1][j-1] == '\0'){

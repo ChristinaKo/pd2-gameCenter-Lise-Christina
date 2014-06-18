@@ -1234,7 +1234,7 @@ public class GUI extends JFrame{
 	pt.setBackground(Color.orange);
 	
 	connect4= new JPanel(new BorderLayout(3,3));
-	connect4.setBackground(Color.white);
+	connect4.setBackground(null);
 	connect4.setPreferredSize(new Dimension(500,300));
 	boardsq = new JButton[6][7];
 
@@ -1442,6 +1442,7 @@ public class GUI extends JFrame{
 	    boardsq[a][s].setBackground(Color.red);
 	}
 	Board.revalidate();
+	pt.revalidate();
     }
 
     public void cwinAction(){

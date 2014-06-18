@@ -5,5 +5,6 @@ Description: This is our Game Center. It currently holds three games: Tic-Tac-To
 What works:
      Tic-Tac-Toe easy and hard levels both work. The Trivia also works. The High Score chart works with the exception of the ConnectFour column. Players are able to change their profiles as well via the high score screen.
 What does not work:
-     ConnectFour is not completely implemented as we hoped. The algorithm behind the com player for connect four is weak.
+     The ConnectFour algorithm behind the com player for connect four is weak.
+     High Scores are temporary; when you rerun GUI, HS are defaulted back to anonymous.
 Data structures used: We used priority queues in GUIs.java to store the high scores. [max heaps]

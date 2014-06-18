@@ -516,10 +516,10 @@ public class GUI extends JFrame{
 				}
 				if (i==0)
 				    ct4.setEnabled(false);
-			     
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		    else if (e1.getSource()==ct5){
@@ -538,6 +538,7 @@ public class GUI extends JFrame{
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		    else if (e1.getSource()==ct6){
@@ -574,6 +575,7 @@ public class GUI extends JFrame{
 				break;
 			    }
 			}
+			Board.revalidate();
 			pt.revalidate();
 		    }
 		    if (closer())
@@ -582,6 +584,7 @@ public class GUI extends JFrame{
 			cwinAction();
 		    else{
 			comove();
+			Board.revalidate();
 			pt.revalidate();
 			if (closer()){
 			    closeAction();
@@ -1438,6 +1441,7 @@ public class GUI extends JFrame{
 	else{
 	    boardsq[a][s].setBackground(Color.red);
 	}
+	Board.revalidate();
     }
 
     public void cwinAction(){

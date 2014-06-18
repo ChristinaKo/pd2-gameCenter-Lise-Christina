@@ -5,7 +5,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.JPanel.*;
-import javax.swing.table.TableColumn;
 
 public class GUI extends JFrame{
 
@@ -29,7 +28,7 @@ public class GUI extends JFrame{
     protected JPanel panel;
     protected JPanel bp;
     protected JPanel gamep, pt,p; 
-    
+ 
     protected JPanel Board,tic,connect4;
     protected JTextField uname;
     protected String username;
@@ -452,10 +451,12 @@ public class GUI extends JFrame{
 				if (redb){
 				    cboard[i][0]="r";
 				    boardsq[i][0].setBackground(Color.red);
+				    pt.revalidate();
 				}
 				else{
 				    cboard[i][0]="b";
 				    boardsq[i][0].setBackground(Color.black);
+				    pt.revalidate();
 				}
 				if (i==0)
 				    ct1.setEnabled(false);
@@ -1300,6 +1301,7 @@ public class GUI extends JFrame{
 	center.add(h);
 	center.add(Box.createVerticalGlue());
 	pt.add(center);
+	pt.revalidate();
 	frame.getContentPane().add(pt,BorderLayout.CENTER);
       
     }

@@ -45,6 +45,9 @@ Christina: finished opponent for tic tac toe and connect four and also finished 
 
 June 16th:
 Both worked on debugging GUI
-Christina: fixed some minor errors in COnnect4.java
-Lise: Made games work
-CONNECT FOUR DOES NOT WORK PROPERLY
+Christina: fixed some minor errors in Connect4.java, found trivia questions, and added welcom text to gui panels
+Lise: Made tic-tac-toe, trivia, and score board work properly, fixed gui look abit
+
+
+June 17th: 
+Lise:made Connect Four work properly and fixed glitch in tic tac toe

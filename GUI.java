@@ -584,7 +584,6 @@ public class GUI extends JFrame{
 			if (closer()){
 			    closeAction();
 			}
-			
 		    }
 		}
 	     }

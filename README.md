@@ -11,5 +11,5 @@ What works:
 What does not work:
      The ConnectFour algorithm behind the com player for connect four is weak --> it just chooses random slots, but the game functions.
      High Scores are temporary; when you rerun GUI, HS are defaulted back to the default HS [all previous high scores are deleted].
-
+     On the Mac we are using, the colors for the connect4 game are distorted, but in a Ubuntu environment, the colors are working perfectly <- currently trying to resolve the issue.
 Data structures used: We used priority queues in GUIs.java to store the high scores. [max heaps]

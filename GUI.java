@@ -1267,6 +1267,7 @@ public class GUI extends JFrame{
 	for (int j =0; j<7; j++){
 	    boardsq[0][j].setBorder(new LineBorder(Color.BLACK));
 	    boardsq[0][j].setBackground(Color.pink);
+	    boardsq[0][j].setForeground(Color.pink);
 	    Board.add(boardsq[0][j]);
     	    boardsq[0][j].setEnabled(true);
 	    cboard[0][j]=null;

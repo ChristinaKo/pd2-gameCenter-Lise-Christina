@@ -1273,6 +1273,7 @@ public class GUI extends JFrame{
 	    boardsq[0][j].setForeground(Color.pink);
 	    Board.add(boardsq[0][j]);
     	    boardsq[0][j].setEnabled(true);
+	    boardsq[0][j].setOpaque(true);
 	    cboard[0][j]=null;
 	}	
     
@@ -1284,6 +1285,7 @@ public class GUI extends JFrame{
 		boardsq[i][j].setBackground(Color.yellow);
 		boardsq[i][j].setForeground(Color.pink);
 		boardsq[i][j].setEnabled(false);
+		boardsq[i][j].setOpaque(true);
 		Board.add(boardsq[i][j]);
 	    }
 	}

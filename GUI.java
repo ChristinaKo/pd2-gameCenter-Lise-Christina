@@ -16,7 +16,7 @@ public class GUI extends JFrame{
     protected JButton startb,b1,b2,b3,b4;
     protected JButton t1, c1, cq2, p2, t3;
     
-    protected JButton t2, prof; // return to mainscreen button
+    protected JButton t2,w2, prof; // return to mainscreen button
     protected JButton createprof, submit; // submitting new profile/name and trivia answer
     protected JButton tac1,tac2,tac3,tac4,tac5,tac6,tac7,tac8, tac9;
     protected JButton ct1,ct2,ct3,ct4,ct5,ct6,ct7;
@@ -227,6 +227,14 @@ public class GUI extends JFrame{
 
 		 }
 		 else if (e1.getSource() == t2){
+		     tichs.add(new Profile(username, ticscore));
+		     ticscore =0;
+		     pt.removeAll();
+		     pt.revalidate();
+		     frame.remove(pt);
+		     mainscreen();	
+		 }
+		 else if (e1.getSource() == w2){
 		     pt.removeAll();
 		     pt.revalidate();
 		     frame.remove(pt);
@@ -406,20 +414,21 @@ public class GUI extends JFrame{
 		    
 		}
 		else if (e1.getSource() == p2){
-		    tichs.add(new Profile(username,ticscore));
-		    ticscore =0;
+		    qhs.add(new Profile(username,triviascore));
+		    triviascore =0;
+
 		    pt.removeAll();
 		    pt.revalidate();
 		    frame.remove(pt);
 		    mainscreen();		    
 		}
 		else if (e1.getSource() == cq2){
+		    c4hs.add(new Profile(username,c4score));
+		    c4score =0;
 		    pt.removeAll();
 		    pt.revalidate();
 		    frame.remove(pt);
 		    mainscreen();	
-		    c4hs.add(new Profile(username,c4score));
-		    c4score =0;
 		}
 		else if (e1.getSource() == co1){
 		    redb=true;
@@ -1558,9 +1567,9 @@ public class GUI extends JFrame{
 	    hsboard.add(new JLabel(cf[i].toString()));
 	    hsboard.add(new JLabel(tq[i].toString()));
 	}
-	t2= new JButton("Main Menu");
+	w2= new JButton("Main Menu");
 	prof= new JButton("Change Profile");
-	activate(t2);
+	activate(w2);
 	activate(prof);
 	center = Box.createVerticalBox();
 	center.add(Box.createVerticalGlue());
@@ -1574,7 +1583,7 @@ public class GUI extends JFrame{
 	center.add(Box.createVerticalGlue());
 	Box h = Box.createHorizontalBox();
 	
-	h.add(t2);
+	h.add(w2);
 	h.add(prof);
  
 	pt.add(center);
@@ -1607,9 +1616,9 @@ public class GUI extends JFrame{
 	createprof = new JButton("Create Profile");
 	h.add(createprof);
 	activate(createprof);
-	t2 = new JButton("Quit");
-	activate(t2);
-	h.add(t2);
+	w2 = new JButton("Quit");
+	activate(w2);
+	h.add(w2);
 
 	center.add(h);
 	pt.add(center);

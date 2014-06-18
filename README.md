@@ -9,7 +9,8 @@ What works:
      Tic-Tac-Toe easy and hard levels both work. The Trivia also works. The High Score chart works with the exception of the ConnectFour column. Players are able to change their profiles as well via the high score screen.
 
 What does not work:
+     Everything should work, but these are some of our flawed game features:
      The ConnectFour algorithm behind the com player for connect four is weak --> it just chooses random slots, but the game functions.
      High Scores are temporary; when you rerun GUI, HS are defaulted back to the default HS [all previous high scores are deleted].
-     On the Mac we are using, the colors for the connect4 game are distorted, but in a Ubuntu environment, the colors are working perfectly <- currently trying to resolve the issue.
+     	  
 Data structures used: We used priority queues in GUIs.java to store the high scores. [max heaps]

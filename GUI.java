@@ -684,7 +684,7 @@ public class GUI extends JFrame{
 	 ArrayList<Integer> x = new ArrayList<Integer>();
 	 ArrayList<Integer> y = new ArrayList<Integer>();
 	 int[] ans = new int[2];
-	 for(int i = 0; i <board.length; i ++){
+	 for(int i = 0; i <board.length; i++){
 	     for (int j = 0; j < board[i].length; j++){
 		 if(board[i][j] == '\0'){
 		     x.add(i);
@@ -806,7 +806,7 @@ public class GUI extends JFrame{
 			 }
 		     }
 
-		     /* if (i-1 >0 && j-1 >0 && board[i-1][j-1] ==sym){
+		      if (i-1 >0 && j-1 >0 && board[i-1][j-1] ==sym){
 			 if(i+1 <3 && j+1<3){
 			     if(board[i+1][j+1] == '\0'){
 				 board[i+1][j+1] = opp;
@@ -826,7 +826,7 @@ public class GUI extends JFrame{
 			     }
 			 }
 		     }
-		     */
+		     
 		     //horizontal checking
 		     if(j + 1 < board.length){
 			 if(board[i][j+1] == sym){ 
@@ -839,15 +839,13 @@ public class GUI extends JFrame{
 				 }
 			     }
 			 }
-			 else if (j-1 >=0 &&board[i][j-1]==sym){
-			     if (board[i][j-1]==sym){
-				 if (j-1 ==0){
-				     if (board[i][j+1]=='\0'){
-					 board[i][j+1] = opp;
-					 ans[0] = i;
-					 ans[1] = j+1;
-					 return ans;
-				     }
+			 else if (j-1<0 && j+2<3){
+			     if (board[i][j+1]==sym){
+				 if (board[i][j+2]=='\0'){
+				     board[i][j+2] = opp;
+				     ans[0] = i;
+				     ans[1] = j+2;
+				     return ans;
 				 }
 			     }
 			 }
@@ -934,7 +932,7 @@ public class GUI extends JFrame{
 		 }
 	     }
 	 }
-	 return OMoveEasy();
+     	 return OMoveEasy();
      }
     
     public boolean checkWinner(int x, int y){
@@ -1032,8 +1030,54 @@ public class GUI extends JFrame{
 	return false;
     }
     public void c4screen(){
-	pt=new JPanel();
-	
+	pt = new JPanel();
+	pt.setBackground(new Color(0,255,43));
+	tic1 = new JRadioButton("X");
+	tic2 = new JRadioButton("O");
+	tic3 = new JRadioButton("I don't care.");
+	XO = new ButtonGroup();
+	XO.add(tic1);
+	XO.add(tic2);
+	XO.add(tic3);
+	center = Box.createVerticalBox();
+
+	JTextArea blurb = new JTextArea("Choose your symbol: X or O.");
+	JTextArea blurb2 = new JTextArea("Whichever button you do not click will be the symbol of your opponent.");
+	activate(blurb);
+	blurb.setLineWrap(false);
+	activate(blurb2);
+	blurb2.setLineWrap(false);
+	center.add(new newline());    
+	center.add(blurb);
+	center.add(new newline()); 
+	center.add(blurb2);
+	center.add(new newline()); 
+	blurb.setFont(new Font("Serif", Font.BOLD, 15));
+	blurb2.setFont(new Font("Serif", Font.BOLD, 15));
+
+	center.add(Box.createVerticalGlue());
+	Box h = Box.createHorizontalBox();
+	h.add(Box.createHorizontalGlue());
+	activate(tic1);
+	activate(tic2);
+	activate(tic3);
+	tic3.setSelected(true);
+	h.add(tic1);
+	h.add(tic2);
+	h.add(tic3);
+	h.add(Box.createHorizontalGlue());
+	center.add(h);
+	h.setBackground(null);
+	center.add(new newline()); 
+	center.add(new newline()); 
+	easystuff = new JButton("Easy");
+	tsubmit = new JButton("Hard");
+	activate(easystuff);
+	center.add(easystuff);
+	activate(tsubmit);
+	center.add(tsubmit);
+	pt.add(center);
+	frame.add(pt, BorderLayout.CENTER);
     }
 	 
     public void connectfour(){
@@ -1156,7 +1200,7 @@ public class GUI extends JFrame{
 	submit= new JButton("Submit");
 	p2= new JButton("Quit");
 	activate(submit);
-	activate(t2);
+	activate(p2);
 	Box h = Box.createHorizontalBox();
 	h.add(Box.createHorizontalGlue());
 	h.add(submit);
